@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dkjcxa2sf21b7"]
+
+[ext_resource type="ArrayMesh" uid="uid://bxgqaycmhooy2" path="res://prefabs/clotheshangers/clotheshanger_4_res/clotheshanger_4_mesh.res" id="1_bbojs"]
+[ext_resource type="Shape3D" uid="uid://5132ch13ucsk" path="res://prefabs/clotheshangers/clotheshanger_4_res/clotheshanger_4_shape.res" id="2_7ab5x"]
+
+[node name="clotheshanger4" type="RigidBody3D" unique_id=1125337239]
+
+[node name="clotheshanger-rigid" type="MeshInstance3D" parent="." unique_id=1788153995]
+mesh = ExtResource("1_bbojs")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1907575574]
+shape = ExtResource("2_7ab5x")

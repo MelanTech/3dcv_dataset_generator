@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://44jtwm42104l"]
+
+[ext_resource type="ArrayMesh" uid="uid://doveexvht2283" path="res://prefabs/oranges/orange_3_res/orange_3_mesh.res" id="1_0lqjk"]
+[ext_resource type="Shape3D" uid="uid://ckoegckj7l1my" path="res://prefabs/oranges/orange_3_res/orange_3_shape.res" id="2_yrwru"]
+
+[node name="orange3" type="RigidBody3D" unique_id=1944914182]
+
+[node name="orange-rigid" type="MeshInstance3D" parent="." unique_id=197661603]
+mesh = ExtResource("1_0lqjk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=188725160]
+shape = ExtResource("2_yrwru")

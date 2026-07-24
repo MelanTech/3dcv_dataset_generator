@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dr7navw782osw"]
+
+[ext_resource type="ArrayMesh" uid="uid://fy0sikvp6tqd" path="res://prefabs/cans/can_2_res/can_2_mesh.res" id="1_t6uom"]
+[ext_resource type="Shape3D" uid="uid://blo55jolsfuqj" path="res://prefabs/cans/can_2_res/can_2_shape.res" id="2_uudn2"]
+
+[node name="can2" type="RigidBody3D" unique_id=1884995287]
+
+[node name="can-rigid" type="MeshInstance3D" parent="." unique_id=140830887]
+mesh = ExtResource("1_t6uom")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=932788775]
+shape = ExtResource("2_uudn2")

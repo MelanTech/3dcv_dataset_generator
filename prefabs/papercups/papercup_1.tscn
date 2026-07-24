@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d3t6oqdgvwthe"]
+
+[ext_resource type="ArrayMesh" uid="uid://drxj7mjxr8htw" path="res://prefabs/papercups/papercup_1_res/papercup_1_mesh.res" id="1_j4034"]
+[ext_resource type="Shape3D" uid="uid://br5tr7d7ffofh" path="res://prefabs/papercups/papercup_1_res/papercup_1_shape.res" id="2_6cdsc"]
+
+[node name="papercup1" type="RigidBody3D" unique_id=1229662274]
+
+[node name="papercup-rigid" type="MeshInstance3D" parent="." unique_id=1242517062]
+mesh = ExtResource("1_j4034")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=543218767]
+shape = ExtResource("2_6cdsc")

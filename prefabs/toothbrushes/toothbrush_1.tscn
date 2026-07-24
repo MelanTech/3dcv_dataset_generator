@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://coe0chnea2y10"]
+
+[ext_resource type="ArrayMesh" uid="uid://v5yxys4plhww" path="res://prefabs/toothbrushes/toothbrush_1_res/toothbrush_1_mesh.res" id="1_ji8iq"]
+[ext_resource type="Shape3D" uid="uid://d3736qj8d1rie" path="res://prefabs/toothbrushes/toothbrush_1_res/toothbrush_1_shape.res" id="2_ho5dr"]
+
+[node name="toothbrush1" type="RigidBody3D" unique_id=856165787]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+
+[node name="toothbrush-rigid" type="MeshInstance3D" parent="." unique_id=1967530075]
+mesh = ExtResource("1_ji8iq")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1803923530]
+shape = ExtResource("2_ho5dr")

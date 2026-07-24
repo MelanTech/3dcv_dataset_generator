@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b3s15iksc36l7"]
+
+[ext_resource type="ArrayMesh" uid="uid://2om3jxe1q7do" path="res://prefabs/waters/water_2_res/water_2_mesh.res" id="1_qgasr"]
+[ext_resource type="Shape3D" uid="uid://dmkxctrede168" path="res://prefabs/waters/water_2_res/water_2_shape.res" id="2_yv6ph"]
+
+[node name="water2" type="RigidBody3D" unique_id=231130220]
+
+[node name="water-rigid" type="MeshInstance3D" parent="." unique_id=1545869413]
+mesh = ExtResource("1_qgasr")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1272204621]
+shape = ExtResource("2_yv6ph")

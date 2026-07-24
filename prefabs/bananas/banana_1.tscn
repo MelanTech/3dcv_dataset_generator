@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cr8g3b35oj38f"]
+
+[ext_resource type="ArrayMesh" uid="uid://cyhctxexpq8xy" path="res://prefabs/bananas/banana_1_res/banana_1_mesh.res" id="1_vojcg"]
+[ext_resource type="Shape3D" uid="uid://2wb8ifdkg1cn" path="res://prefabs/bananas/banana_1_res/banana_1_shape.res" id="2_7ucuh"]
+
+[node name="banana1" type="RigidBody3D" unique_id=1554936252]
+transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0)
+
+[node name="banana-rigid" type="MeshInstance3D" parent="." unique_id=84779509]
+mesh = ExtResource("1_vojcg")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=500621242]
+shape = ExtResource("2_7ucuh")

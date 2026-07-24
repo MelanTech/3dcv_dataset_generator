@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cut8pfc70q7wu"]
+
+[ext_resource type="ArrayMesh" uid="uid://b0ucre410vktp" path="res://prefabs/bottles/bottle_1_res/bottle_1_mesh.res" id="1_d6t7j"]
+[ext_resource type="Shape3D" uid="uid://hmk380ei6p42" path="res://prefabs/bottles/bottle_1_res/bottle_1_shape.res" id="2_umd13"]
+
+[node name="bottle1" type="RigidBody3D" unique_id=33750282]
+
+[node name="bottle-rigid" type="MeshInstance3D" parent="." unique_id=1883178518]
+mesh = ExtResource("1_d6t7j")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=644653812]
+shape = ExtResource("2_umd13")

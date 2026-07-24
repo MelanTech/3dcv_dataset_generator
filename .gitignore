@@ -1,0 +1,15 @@
+# Godot 4 编辑器生成的缓存/导入数据，可由源资源重新生成
+.godot/
+
+# macOS
+.DS_Store
+
+# Godot 导出产物
+export_presets.cfg
+*.translation
+
+# Mono/.NET 构建产物
+.mono/
+data_*/
+bin/
+obj/

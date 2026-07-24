@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cdveifqs8utww"]
+
+[ext_resource type="ArrayMesh" uid="uid://blxhlcudbhakf" path="res://prefabs/books/book_11_res/book_11_mesh.res" id="1_pqd33"]
+[ext_resource type="Shape3D" uid="uid://dt12k1vwadiiw" path="res://prefabs/books/book_11_res/book_11_shape.res" id="2_5mny8"]
+
+[node name="book11" type="RigidBody3D" unique_id=1421065697]
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:16108978",
+"MaxHandle": 37.0
+}
+
+[node name="book-rigid" type="MeshInstance3D" parent="." unique_id=220617866]
+mesh = ExtResource("1_pqd33")
+skeleton = NodePath("")
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:16108978",
+"MaxHandle": 37.0
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=187025038]
+shape = ExtResource("2_5mny8")

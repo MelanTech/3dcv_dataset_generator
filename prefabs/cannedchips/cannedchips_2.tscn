@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://rhy6rrq1hvji"]
+
+[ext_resource type="ArrayMesh" uid="uid://b2o20fa3r4jc3" path="res://prefabs/cannedchips/cannedchips_2_res/cannedchips_2_mesh.res" id="1_54ahd"]
+[ext_resource type="Shape3D" uid="uid://d3pfsgni1rwo7" path="res://prefabs/cannedchips/cannedchips_2_res/cannedchips_2_shape.res" id="2_qjwbw"]
+
+[node name="cannedchips2" type="RigidBody3D" unique_id=733896040]
+
+[node name="cannedchips-rigid" type="MeshInstance3D" parent="." unique_id=812913637]
+mesh = ExtResource("1_54ahd")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1838098335]
+shape = ExtResource("2_qjwbw")

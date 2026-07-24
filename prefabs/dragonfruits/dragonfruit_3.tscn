@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://civ6oof5uqu88"]
+
+[ext_resource type="ArrayMesh" uid="uid://c7ysll257kiwj" path="res://prefabs/dragonfruits/dragonfruit_3_res/dragonfruit_3_mesh.res" id="1_5j654"]
+[ext_resource type="Shape3D" uid="uid://ve6wbx2cnvat" path="res://prefabs/dragonfruits/dragonfruit_3_res/dragonfruit_3_shape.res" id="2_1hb6i"]
+
+[node name="dragonfruit3" type="RigidBody3D" unique_id=568509235]
+
+[node name="dragonfruit-rigid" type="MeshInstance3D" parent="." unique_id=701641278]
+mesh = ExtResource("1_5j654")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1767991558]
+shape = ExtResource("2_1hb6i")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d4gv0bdfuhkby"]
+
+[ext_resource type="ArrayMesh" uid="uid://bfumyhhps5mhy" path="res://prefabs/waters/water_7_res/water_7_mesh.res" id="1_i2iyd"]
+[ext_resource type="Shape3D" uid="uid://c87q4dyyi8i1" path="res://prefabs/waters/water_7_res/water_7_shape.res" id="2_nhs6y"]
+
+[node name="water7" type="RigidBody3D" unique_id=1492216790]
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:11951966",
+"MaxHandle": 289.0
+}
+
+[node name="water-rigid" type="MeshInstance3D" parent="." unique_id=1122053613]
+mesh = ExtResource("1_i2iyd")
+skeleton = NodePath("")
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:11951966",
+"MaxHandle": 289.0
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1077293002]
+shape = ExtResource("2_nhs6y")

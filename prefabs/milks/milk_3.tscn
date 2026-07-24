@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cl1wxrhvroxoq"]
+
+[ext_resource type="ArrayMesh" uid="uid://2q47t6fv5uec" path="res://prefabs/milks/milk_3_res/milk_3_mesh.res" id="1_xy40i"]
+[ext_resource type="Shape3D" uid="uid://cnqsk3gxbek7g" path="res://prefabs/milks/milk_3_res/milk_3_shape.res" id="2_o5xqv"]
+
+[node name="milk3" type="RigidBody3D" unique_id=1449861294]
+
+[node name="milk-rigid" type="MeshInstance3D" parent="." unique_id=2554014]
+mesh = ExtResource("1_xy40i")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1789932074]
+shape = ExtResource("2_o5xqv")

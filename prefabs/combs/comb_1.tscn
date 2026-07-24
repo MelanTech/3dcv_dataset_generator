@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dh05gm2x6ri37"]
+
+[ext_resource type="ArrayMesh" uid="uid://cl4rxu7pywqft" path="res://prefabs/combs/comb_1_res/comb_1_mesh.res" id="1_q8d04"]
+[ext_resource type="Shape3D" uid="uid://b6xjkk00y6t54" path="res://prefabs/combs/comb_1_res/comb_1_shape.res" id="2_xlxvh"]
+
+[node name="comb1" type="RigidBody3D" unique_id=1883611309]
+
+[node name="comb-rigid" type="MeshInstance3D" parent="." unique_id=1180938759]
+mesh = ExtResource("1_q8d04")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2035347717]
+shape = ExtResource("2_xlxvh")

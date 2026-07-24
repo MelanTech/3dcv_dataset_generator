@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d1cqoo30cndu0"]
+
+[ext_resource type="ArrayMesh" uid="uid://dut1by1wfiaae" path="res://prefabs/pomegranates/pomegranate_2_res/pomegranate_2_mesh.res" id="1_avjdx"]
+[ext_resource type="Shape3D" uid="uid://dk374b8obl3f" path="res://prefabs/pomegranates/pomegranate_2_res/pomegranate_2_shape.res" id="2_3jdxf"]
+
+[node name="pomegranate2" type="RigidBody3D" unique_id=933891234]
+
+[node name="pomegranate-rigid" type="MeshInstance3D" parent="." unique_id=1545770988]
+mesh = ExtResource("1_avjdx")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1513397858]
+shape = ExtResource("2_3jdxf")

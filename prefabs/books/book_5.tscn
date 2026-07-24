@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://u6lhloypl5up"]
+
+[ext_resource type="ArrayMesh" uid="uid://do325wx3v8a1o" path="res://prefabs/books/book_5_res/book_5_mesh.res" id="1_iui1c"]
+[ext_resource type="Shape3D" uid="uid://bbpyjmavwwn8d" path="res://prefabs/books/book_5_res/book_5_shape.res" id="2_2iee2"]
+
+[node name="book5" type="RigidBody3D" unique_id=1239378869]
+
+[node name="book-rigid" type="MeshInstance3D" parent="." unique_id=375593276]
+mesh = ExtResource("1_iui1c")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=406184016]
+shape = ExtResource("2_2iee2")

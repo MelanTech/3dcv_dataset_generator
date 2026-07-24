@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://7283h1swoad6"]
+
+[ext_resource type="ArrayMesh" uid="uid://bt4515hei2v32" path="res://prefabs/chips/chips_3_res/chips_3_mesh.res" id="1_qicvk"]
+[ext_resource type="Shape3D" uid="uid://d3027ywbt5uac" path="res://prefabs/chips/chips_3_res/chips_3_shape.res" id="2_kx1co"]
+
+[node name="chips3" type="RigidBody3D" unique_id=1163055906]
+
+[node name="chips-rigid" type="MeshInstance3D" parent="." unique_id=508112476]
+mesh = ExtResource("1_qicvk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1191799724]
+shape = ExtResource("2_kx1co")

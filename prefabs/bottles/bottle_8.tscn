@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dfkq6gn1w1cu6"]
+
+[ext_resource type="ArrayMesh" uid="uid://b2qwp6ds11uaf" path="res://prefabs/bottles/bottle_8_res/bottle_8_mesh.res" id="1_6cumi"]
+[ext_resource type="Shape3D" uid="uid://c8qol00ry2y6" path="res://prefabs/bottles/bottle_8_res/bottle_8_shape.res" id="2_3fu88"]
+
+[node name="bottle8" type="RigidBody3D" unique_id=943604315]
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:19228620",
+"MaxHandle": 14222.0
+}
+
+[node name="bottle-rigid" type="MeshInstance3D" parent="." unique_id=1659604951]
+mesh = ExtResource("1_6cumi")
+skeleton = NodePath("")
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:19228620",
+"MaxHandle": 14222.0
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2040476651]
+shape = ExtResource("2_3fu88")

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://7dnwg6h3e8cp"]
+
+[ext_resource type="ArrayMesh" uid="uid://cdd1do3ifuhyl" path="res://prefabs/biscuits/biscuit_4_res/biscuit_4_mesh.res" id="1_k7ic0"]
+[ext_resource type="Shape3D" uid="uid://b0yj8kw1ikh7v" path="res://prefabs/biscuits/biscuit_4_res/biscuit_4_shape.res" id="2_jyrpp"]
+
+[node name="biscuit4" type="RigidBody3D" unique_id=1154527336]
+
+[node name="biscuit-rigid" type="MeshInstance3D" parent="." unique_id=418275235]
+mesh = ExtResource("1_k7ic0")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=74428984]
+shape = ExtResource("2_jyrpp")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bjcoijhqajluc"]
+
+[ext_resource type="Script" uid="uid://cq8x5r780uk8n" path="res://scripts/table_color_transistion.gd" id="1_fsbg8"]
+[ext_resource type="ArrayMesh" uid="uid://dtqwwtk0n5olp" path="res://prefabs/table_disc_res/table_disc_mesh.res" id="1_tuu2x"]
+[ext_resource type="PackedScene" uid="uid://dm7fwn6cbgu8t" path="res://models/stool.blend" id="2_x4lqv"]
+[ext_resource type="Shape3D" uid="uid://dkytjv5orgo3h" path="res://prefabs/table_disc_res/table_disc_shape.res" id="3_247t7"]
+
+[node name="TableDisc" type="RigidBody3D" unique_id=138417308]
+
+[node name="disc-rigid" type="MeshInstance3D" parent="." unique_id=150435263]
+mesh = ExtResource("1_tuu2x")
+skeleton = NodePath("")
+script = ExtResource("1_fsbg8")
+transition_time = 0.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=372413752]
+shape = ExtResource("3_247t7")
+
+[node name="stool2" type="Node3D" parent="." unique_id=1538291426 instance=ExtResource("2_x4lqv")]
+transform = Transform3D(0.069, 0, 0, 0, 0.069, 0, 0, 0, 0.069, 0, -4.72869, 0)

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dkqem4r3q6ju7"]
+
+[ext_resource type="ArrayMesh" uid="uid://bsfu6f2jrby2h" path="res://prefabs/milks/milk_8_res/milk_8_mesh.res" id="1_unknc"]
+[ext_resource type="Shape3D" uid="uid://vviioaj0vpc0" path="res://prefabs/milks/milk_8_res/milk_8_shape.res" id="2_slml0"]
+
+[node name="milk8" type="RigidBody3D" unique_id=1270204550]
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:7840812",
+"MaxHandle": 427.0
+}
+
+[node name="milk-rigid" type="MeshInstance3D" parent="." unique_id=1666153727]
+mesh = ExtResource("1_unknc")
+skeleton = NodePath("")
+metadata/extras = {
+"3d66Models": "www.3d66.com-ID:7840812",
+"MaxHandle": 427.0
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1875620738]
+shape = ExtResource("2_slml0")
