@@ -123,26 +123,44 @@
 [ext_resource type="PackedScene" uid="uid://ct2ls861jr8cg" path="res://prefabs/books/book_9.tscn" id="120_tttfs"]
 [ext_resource type="PackedScene" uid="uid://svnnm8g1d7u7" path="res://prefabs/books/book_10.tscn" id="121_1iygd"]
 [ext_resource type="PackedScene" uid="uid://cdveifqs8utww" path="res://prefabs/books/book_11.tscn" id="122_g5xqc"]
+[ext_resource type="Texture2D" uid="uid://dmg3wx7nauf1s" path="res://hdri/brown_photostudio_02_2k.hdr" id="hdri_panorama"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSky_hdri"]
+panorama = ExtResource("hdri_panorama")
+energy_multiplier = 0.55
+
+[sub_resource type="Sky" id="Sky_hdri"]
+sky_material = SubResource("PanoramaSky_hdri")
 
 [sub_resource type="Environment" id="Environment_ig7tw"]
+background_mode = 2
+sky = SubResource("Sky_hdri")
+ambient_light_source = 3
 ambient_light_color = Color(0.875646, 0.90883, 0.940619, 1)
+ambient_light_energy = 0.7
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.8
+tonemap_white = 6.0
 ssr_enabled = true
 ssao_enabled = true
 sdfgi_use_occlusion = true
 
 [sub_resource type="Resource" id="Resource_uypp3"]
 script = ExtResource("52_abqjc")
-GrainPower = 20
+GrainPower = 3
 ColorCorrection = true
 ColorCorrectionTint = Color(1, 1, 1, 1)
-ColorCorrectionSaturation = -0.25
+ColorCorrectionSaturation = 0.05
 metadata/_custom_type_script = "uid://bs45b6eixrfy3"
+
+[sub_resource type="Environment" id="Environment_depth"]
+background_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
 render_priority = 0
 shader = ExtResource("6_7mycd")
-shader_parameter/depth_factor = 70.0
-shader_parameter/pixel_size = 2
+shader_parameter/world_scale = 0.0638
 
 [sub_resource type="QuadMesh" id="QuadMesh_5vw27"]
 material = SubResource("ShaderMaterial_272bh")
@@ -172,6 +190,7 @@ shadow_opacity = 0.48
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights" unique_id=757832671]
 transform = Transform3D(0.5, 0.612372, -0.612373, 0, 0.707107, 0.707107, 0.866026, -0.353553, 0.353553, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Lights" unique_id=1907433262]
@@ -179,6 +198,8 @@ transform = Transform3D(-0.582123, -0.574949, 0.574949, 0, 0.707107, 0.707107, -
 
 [node name="RotateLight" type="SpotLight3D" parent="Lights" unique_id=310283447 node_paths=PackedStringArray("target_marker")]
 transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 8.25355, -4.2896)
+visible = false
+light_energy = 0.2
 shadow_enabled = true
 spot_range = 20.0
 spot_attenuation = -0.5
@@ -211,6 +232,7 @@ script = ExtResource("2_272bh")
 
 [node name="Camera3DDepth" type="Camera3D" parent="DepthViewPort" unique_id=1040286652 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7)
+environment = SubResource("Environment_depth")
 script = ExtResource("3_5vw27")
 target = NodePath("../../Camera3D")
 
@@ -277,6 +299,8 @@ table = NodePath("../Tables/TableSquare")
 depth_view = NodePath("../DepthViewPort")
 object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
+auto_save = true
+save_depth = true
 occlusion_threshold = 80
 max_generate_frame = 200
 

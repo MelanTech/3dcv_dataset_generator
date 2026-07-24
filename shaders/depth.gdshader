@@ -1,29 +1,28 @@
 shader_type spatial;
 render_mode unshaded, depth_draw_never;
 
-uniform float depth_factor : hint_range(0.0, 256.0, 0.1) = 80.0;
-// 控制像素大小，值越大分辨率越低
-uniform int pixel_size : hint_range(2, 32, 1) = 4;
+// 世界单位 -> 真实米 的缩放系数（含 shader 反投影的系统放大修正）。
+// 由引擎内射线定标得出：中心命中桌面真实 11.75 世界单位(=1.175m)，反推系数 ≈0.0445。
+uniform float world_scale : hint_range(0.0001, 0.1, 0.0001) = 0.0445;
 
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture;
 
 void fragment() {
-    // 获取屏幕尺寸（纹素数量）
-    ivec2 texture_size_i = textureSize(DEPTH_TEXTURE, 0);
-    vec2 screen_size = vec2(texture_size_i);
+	// 读取当前像素的非线性深度（逐像素，不做降采样，保证与 RGB 对齐）
+	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
 
-    // 将当前 SCREEN_UV 转换为像素坐标
-    vec2 pixel_coord = SCREEN_UV * screen_size;
+	// Godot4 使用 reverse-Z。用投影矩阵把 [0,1] 深度还原为视图空间线性深度（米前的世界单位）。
+	// 视图空间线性深度 = 1 / (depth * INV[2].w + INV[3].w) 对应的 -z。
+	vec4 ndc = vec4(SCREEN_UV * 2.0 - 1.0, depth, 1.0);
+	vec4 view = INV_PROJECTION_MATRIX * ndc;
+	float linear_depth = -(view.z / view.w);
 
-    // 对像素坐标进行降采样和对齐：每 pixel_size 区域取左上角纹素
-    ivec2 snapped_coord_i = (ivec2(pixel_coord / float(pixel_size))) * pixel_size;
+	// 世界单位 -> 真实米 -> 毫米，并裁剪到 16-bit 范围
+	float depth_mm = clamp(linear_depth * world_scale * 1000.0, 0.0, 65535.0);
 
-    // 使用 texelFetch 精确获取该位置的深度值（nearest neighbor）
-    float depth = texelFetch(DEPTH_TEXTURE, snapped_coord_i, 0).r;
+	// 16-bit 拆成高/低字节，分别写入 R、G 通道（RGB8 PNG 无损承载）
+	float hi = floor(depth_mm / 256.0);
+	float lo = depth_mm - hi * 256.0;
 
-    // 计算线性深度
-    float linear_depth = 1.0 / (depth * INV_PROJECTION_MATRIX[2].w + INV_PROJECTION_MATRIX[3].w);
-
-    // 输出伪彩色深度
-    ALBEDO = vec3(linear_depth / depth_factor);
+	ALBEDO = vec3(hi / 255.0, lo / 255.0, 0.0);
 }

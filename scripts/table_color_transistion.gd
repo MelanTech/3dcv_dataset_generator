@@ -4,13 +4,16 @@ extends MeshInstance3D
 @export var transition_time: float = 2.0
 
 # 最小颜色亮度（0-1）
-@export var min_brightness: float = 0.5
+@export var min_brightness: float = 0.1
 
 # 最大颜色亮度（0-1）
-@export var max_brightness: float = 1.0
+@export var max_brightness: float = 0.75
 
 # 颜色差异限制（0-1，值越小差异越小，过渡越平滑）
 @export var color_variation_limit: float = 0.5
+
+# 最大颜色饱和度（0-1，限制随机色不要出现荧光/纯色，更接近真实表面）
+@export var max_saturation: float = 0.35
 
 # 当前颜色
 var current_color: Color
@@ -67,6 +70,10 @@ func generate_related_color(base_color: Color) -> Color:
 	color.r = clamp(color.r * scale, 0.0, 1.0)
 	color.g = clamp(color.g * scale, 0.0, 1.0)
 	color.b = clamp(color.b * scale, 0.0, 1.0)
+	
+	# 限制饱和度，避免荧光/纯色这类不真实的表面颜色
+	if color.s > max_saturation:
+		color.s = max_saturation
 	
 	return color
 

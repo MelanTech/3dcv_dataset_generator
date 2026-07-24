@@ -18,6 +18,11 @@ extends Node
 
 @export var max_generate_frame: int = 0
 
+# 深度图 16-bit 毫米编码时使用的世界单位->米系数（须与 depth.gdshader / 材质里的 world_scale 一致）
+@export var depth_world_scale: float = 0.0638
+# 是否在运行时自动标定 depth_world_scale（用射线取真值，打印建议值）
+@export var auto_calibrate_depth: bool = true
+
 var folder_name: StringName
 var rgb_image_path: StringName
 var depth_image_path: StringName
@@ -70,7 +75,12 @@ func save_image(file_name):
 	rgb_image.save_jpg(rgb_image_path.path_join(file_name))
 	if save_depth:
 		var depth_image = capture_viewport_image(depth_view)
-		depth_image.save_jpg(depth_image_path.path_join(file_name))
+		# 深度图为 16-bit 毫米编码（R:高字节, G:低字节），用无损 PNG 保存
+		var depth_name = file_name.get_basename() + ".png"
+		depth_image.save_png(depth_image_path.path_join(depth_name))
+		# 每次保存都标定一次（用于验证不同相机位置下建议值是否一致）
+		if auto_calibrate_depth:
+			calibrate_depth_scale()
 	print("已保存 %s" % file_name)
 	
 func save_labels(file_name:String, labels):
@@ -103,6 +113,57 @@ func save_classes():
 func capture_viewport_image(viewport: Viewport) -> Image:
 	var texture = viewport.get_texture()
 	return texture.get_image()
+
+# 从深度图某像素解码出毫米值：depth_mm = R*256 + G（8-bit 通道承载 16-bit）
+func decode_depth_mm(depth_image: Image, x: int, y: int) -> float:
+	var c: Color = depth_image.get_pixel(x, y)
+	return round(c.r * 255.0) * 256.0 + round(c.g * 255.0)
+
+# 解码为真实米：先还原毫米，再按 shader 未缩放前的量再乘系数已含在 shader 内，这里仅做 mm->m
+func decode_depth_meters(depth_image: Image, x: int, y: int) -> float:
+	return decode_depth_mm(depth_image, x, y) / 1000.0
+
+# 自动标定：从深度相机沿视线中心发射射线打到桌面，得到真实世界单位距离(真值)，
+# 与深度图中心像素解码出的深度对比，反推 depth_world_scale 的建议值。
+func calibrate_depth_scale() -> void:
+	var depth_cam: Camera3D = _get_depth_camera()
+	if depth_cam == null:
+		print("[calib] 未找到深度相机，跳过标定")
+		return
+	var depth_image: Image = capture_viewport_image(depth_view)
+	var w: int = depth_image.get_width()
+	var h: int = depth_image.get_height()
+	var cx: int = w / 2
+	var cy: int = h / 2
+
+	# 从深度相机中心像素反投影出射线，物理查询命中的真实距离（世界单位）
+	var from: Vector3 = depth_cam.project_ray_origin(Vector2(cx, cy))
+	var dir: Vector3 = depth_cam.project_ray_normal(Vector2(cx, cy))
+	var space := get_viewport().world_3d.direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(from, from + dir * 10000.0)
+	var hit := space.intersect_ray(query)
+	if hit.is_empty():
+		print("[calib] 中心射线未命中物体，跳过标定")
+		return
+
+	var true_units: float = depth_cam.global_position.distance_to(hit.position)
+	# 当前深度图中心解码出的深度（米），它 = 反投影世界单位深度 * 当前 depth_world_scale
+	var decoded_m: float = decode_depth_meters(depth_image, cx, cy)
+	if decoded_m <= 0.0:
+		print("[calib] 中心像素深度为0，跳过标定")
+		return
+	# 场景定标：桌面平面 5.5 世界单位 = 0.55m => 1 世界单位 = 0.1m
+	var unit_to_meter := 0.1
+	var target_m: float = true_units * unit_to_meter
+	var suggested_scale: float = depth_world_scale * target_m / decoded_m
+	print("[calib] 中心射线命中: 真实=%.3f世界单位(=%.3fm) 当前解码=%.3fm => 建议 depth_world_scale=%.6f" % [
+		true_units, target_m, decoded_m, suggested_scale])
+
+func _get_depth_camera() -> Camera3D:
+	for child in depth_view.get_children():
+		if child is Camera3D:
+			return child
+	return null
 
 func generate_time_based_folder_name() -> String:
 	var now = Time.get_datetime_dict_from_system()
