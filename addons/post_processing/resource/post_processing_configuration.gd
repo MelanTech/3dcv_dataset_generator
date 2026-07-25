@@ -124,9 +124,13 @@ class_name PostProcessingConfiguration extends Resource
 	set(value):
 		Grain = value
 		reload = true
-@export_range(0, 150, 0.1) var GrainPower = 75:
+@export_range(0.0, 1.0, 0.001) var GrainPower = 0.15:
 	set(value):
 		GrainPower = value
+		reload = true
+@export_range(1.0, 8.0, 0.1) var GrainSize = 2.5:
+	set(value):
+		GrainSize = value
 		reload = true
 @export_subgroup("Circular Waves")
 @export var CircularWaves: bool:

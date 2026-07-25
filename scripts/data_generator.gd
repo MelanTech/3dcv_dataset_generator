@@ -72,7 +72,8 @@ func _input(event: InputEvent) -> void:
 		
 func save_image(file_name):
 	var rgb_image = capture_viewport_image(get_viewport())
-	rgb_image.save_jpg(rgb_image_path.path_join(file_name))
+	# 用较低 JPEG 质量保存，制造真实照片放大后可见的 8x8 压缩块/锯齿
+	rgb_image.save_jpg(rgb_image_path.path_join(file_name), 0.6)
 	if save_depth:
 		var depth_image = capture_viewport_image(depth_view)
 		# 深度图为 16-bit 毫米编码（R:高字节, G:低字节），用无损 PNG 保存

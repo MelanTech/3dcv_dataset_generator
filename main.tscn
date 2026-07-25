@@ -127,7 +127,7 @@
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSky_hdri"]
 panorama = ExtResource("hdri_panorama")
-energy_multiplier = 0.55
+energy_multiplier = 0.4
 
 [sub_resource type="Sky" id="Sky_hdri"]
 sky_material = SubResource("PanoramaSky_hdri")
@@ -136,22 +136,37 @@ sky_material = SubResource("PanoramaSky_hdri")
 background_mode = 2
 sky = SubResource("Sky_hdri")
 ambient_light_source = 3
-ambient_light_color = Color(0.875646, 0.90883, 0.940619, 1)
-ambient_light_energy = 0.7
+ambient_light_color = Color(0.847059, 0.878431, 0.909804, 1)
+ambient_light_energy = 0.45
 reflected_light_source = 2
 tonemap_mode = 3
-tonemap_exposure = 0.8
+tonemap_exposure = 0.55
 tonemap_white = 6.0
 ssr_enabled = true
+ssr_max_steps = 32
+ssr_fade_in = 0.3
 ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 1.5
 sdfgi_use_occlusion = true
+adjustment_enabled = true
+adjustment_brightness = 0.95
+adjustment_contrast = 0.92
+adjustment_saturation = 0.8
 
 [sub_resource type="Resource" id="Resource_uypp3"]
 script = ExtResource("52_abqjc")
-GrainPower = 3
+ChromaticAberration = true
+StrenghtCA = 0.6
+Blur = true
+L_O_D = 0.5
+Grain = true
+GrainPower = 0.15
+GrainSize = 2.5
 ColorCorrection = true
-ColorCorrectionTint = Color(1, 1, 1, 1)
-ColorCorrectionSaturation = 0.05
+ColorCorrectionTint = Color(0.98, 0.99, 1, 1)
+ColorCorrectionBrightness = -0.02
+ColorCorrectionSaturation = -0.12
 metadata/_custom_type_script = "uid://bs45b6eixrfy3"
 
 [sub_resource type="Environment" id="Environment_depth"]
@@ -166,7 +181,7 @@ shader_parameter/world_scale = 0.0638
 material = SubResource("ShaderMaterial_272bh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-metallic = 0.6
+roughness = 0.85
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
 
@@ -299,8 +314,6 @@ table = NodePath("../Tables/TableSquare")
 depth_view = NodePath("../DepthViewPort")
 object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
-auto_save = true
-save_depth = true
 occlusion_threshold = 80
 max_generate_frame = 200
 

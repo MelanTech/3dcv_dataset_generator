@@ -7,13 +7,16 @@ extends MeshInstance3D
 @export var min_brightness: float = 0.1
 
 # 最大颜色亮度（0-1）
-@export var max_brightness: float = 0.75
+@export var max_brightness: float = 0.85
 
 # 颜色差异限制（0-1，值越小差异越小，过渡越平滑）
 @export var color_variation_limit: float = 0.5
 
-# 最大颜色饱和度（0-1，限制随机色不要出现荧光/纯色，更接近真实表面）
-@export var max_saturation: float = 0.35
+# 最大颜色饱和度（0-1）。真实桌面可以出现橙/黄这类鲜艳色，因此放宽上限
+@export var max_saturation: float = 0.85
+
+# 生成鲜艳暖色（橙/黄）的概率，模拟现实中常见的木质/彩色桌面
+@export var vibrant_warm_chance: float = 0.3
 
 # 当前颜色
 var current_color: Color
@@ -51,6 +54,13 @@ func _process(delta: float):
 func generate_related_color(base_color: Color) -> Color:
 	if randf() < 0.1:  # 10% 的概率直接生成白色
 		return Color(1, 1, 1)
+
+	# 一定概率生成鲜艳暖色（橙/黄），像参考照片里的橙色桌面
+	if randf() < vibrant_warm_chance:
+		var hue = randf_range(0.05, 0.16)  # 橙(~0.08)到黄(~0.15)
+		var sat = randf_range(0.6, max_saturation)
+		var val = randf_range(0.55, max_brightness)
+		return Color.from_hsv(hue, sat, val)
 	
 	# 在基础颜色附近随机微调，限制差异范围
 	var r = clamp(base_color.r + randf_range(-color_variation_limit, color_variation_limit), 0.0, 1.0)

@@ -84,6 +84,7 @@ func _update_shader_parameters( _type : EffectType, _material : Material) -> voi
 			_material.set_shader_parameter("res", configuration.AnalogMonitorResolution)
 		EffectType.GRAIN:
 			_material.set_shader_parameter("strength", configuration.GrainPower)
+			_material.set_shader_parameter("grain_size", configuration.GrainSize)
 		EffectType.CIRCULAR_WAVES:
 			_material.set_shader_parameter("amplitude", configuration.CircularWavesAmplitude)
 			_material.set_shader_parameter("frequency", configuration.CircularWavesFrequency)
