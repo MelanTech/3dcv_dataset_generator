@@ -314,6 +314,8 @@ table = NodePath("../Tables/TableSquare")
 depth_view = NodePath("../DepthViewPort")
 object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
+auto_save = true
+save_depth = true
 occlusion_threshold = 80
 max_generate_frame = 200
 

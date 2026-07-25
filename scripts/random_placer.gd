@@ -80,11 +80,20 @@ extends Node
 # 物品之间的最小距离（决定网格密度）
 @export var min_distance_between_items: float = 0.2
 
+# 桌面边距（世界单位）：物品会与桌沿保持这个距离，避免掉下去
+@export var edge_margin: float = 0.6
+
 # 物品Y轴偏移，防止穿模
 @export var y_offset: float = 0.05
 
 # 物品缩放范围（最小值, 最大值）
 @export var scale_range: Vector2 = Vector2(0.8, 1.2)
+
+# 是否随机化初始倾斜姿态（除了绕Y轴朝向外，额外在X/Z轴上倾斜）
+@export var random_tilt_enabled: bool = true
+
+# X/Z轴最大倾斜角度（度）。180 = 完全随机翻滚，物品可能侧躺/倒置
+@export_range(0.0, 180.0, 1.0) var max_tilt_degrees: float = 180.0
 
 # 类别与classes值的映射关系
 @onready var class_mapping = get_node("/root/ClassMap").class_mapping
@@ -112,13 +121,15 @@ func _ready():
 		place_items_on_grid(table_size, available_classes)
 
 
-# 获取桌子在XZ平面上的一半尺寸（基于AABB）
+# 获取桌子在XZ平面上的一半尺寸（基于AABB，并计入节点的全局缩放）
 func get_table_size() -> Vector2:
 	var mesh = table_mesh.mesh
 	if not mesh:
 		return Vector2.ZERO
 	var aabb = mesh.get_aabb()
-	return Vector2(aabb.size.x, aabb.size.z) / 2
+	# AABB 是网格本地尺寸，桌面网格实际带有缩放，需乘上全局缩放才是世界尺寸
+	var gscale = table_mesh.global_transform.basis.get_scale()
+	return Vector2(aabb.size.x * gscale.x, aabb.size.z * gscale.z) / 2
 
 
 # 收集所有启用且有物品场景的类别
@@ -156,8 +167,9 @@ func get_available_classes() -> Array:
 # 使用网格方式放置物品
 func place_items_on_grid(table_size: Vector2, available_classes: Array):
 	var cell_size = min_distance_between_items
-	var half_width = table_size.x  # 桌子X方向半长
-	var half_depth = table_size.y  # 桌子Z方向半宽
+	# 预留边距，物品在缩小后的可用区域内摆放，避免贴边掉落
+	var half_width = max(cell_size * 0.5, table_size.x - edge_margin)  # 桌子X方向半长
+	var half_depth = max(cell_size * 0.5, table_size.y - edge_margin)  # 桌子Z方向半宽
 
 	# 计算网格行列数
 	var cols = max(1, int(floor(half_width * 2 / cell_size)))
@@ -208,7 +220,16 @@ func place_items_on_grid(table_size: Vector2, available_classes: Array):
 
 		# 设置位置和旋转
 		item.global_position = table_mesh.global_position + position
-		item.global_rotation = Vector3(0, randf_range(0, PI * 2), 0)
+		if random_tilt_enabled:
+			# 完整的随机三轴姿态：先随机朝向(Y)，再在X/Z上随机倾斜/翻滚
+			var tilt := deg_to_rad(max_tilt_degrees)
+			item.global_rotation = Vector3(
+				randf_range(-tilt, tilt),
+				randf_range(0, PI * 2),
+				randf_range(-tilt, tilt)
+			)
+		else:
+			item.global_rotation = Vector3(0, randf_range(0, PI * 2), 0)
 
 		# 设置随机缩放
 		var scale_value = randf_range(scale_range.x, scale_range.y)
