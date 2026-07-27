@@ -148,8 +148,11 @@ ssr_fade_in = 0.3
 ssao_enabled = true
 ssao_radius = 1.5
 ssao_intensity = 1.5
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 1.15
 adjustment_enabled = true
-adjustment_brightness = 0.97
+adjustment_brightness = 1.0
 adjustment_contrast = 1.02
 adjustment_saturation = 0.95
 
@@ -160,8 +163,8 @@ StrenghtCA = 0.6
 Blur = true
 L_O_D = 0.5
 Grain = true
-GrainPower = 0.15
-GrainSize = 2.5
+GrainPower = 0.1
+GrainSize = 4.0
 ColorCorrection = true
 ColorCorrectionTint = Color(0.98, 0.99, 1, 1)
 ColorCorrectionBrightness = -0.02
@@ -180,7 +183,8 @@ shader_parameter/world_scale = 0.0638
 material = SubResource("ShaderMaterial_272bh")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-roughness = 0.85
+specular_mode = 1
+metallic_specular = 0.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
 
@@ -191,11 +195,11 @@ environment = SubResource("Environment_ig7tw")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="." unique_id=277174282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+update_mode = 1
+max_distance = 40.0
 size = Vector3(16, 10, 16)
 origin_offset = Vector3(0, -1, 0)
-max_distance = 40.0
-update_mode = 1
-ambient_mode = 1
+ambient_mode = 0
 
 [node name="PostProcess" type="CanvasLayer" parent="." unique_id=943148421]
 script = ExtResource("51_blkrb")
@@ -206,27 +210,26 @@ metadata/_custom_type_script = "uid://c1rb7xfqi70bw"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1735181356]
 transform = Transform3D(1, 0, 0, 0, -0.0733949, 0.997303, 0, -0.997303, -0.0733949, 0, 32.348, 0)
-visible = false
 shadow_enabled = true
 shadow_opacity = 0.48
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights" unique_id=757832671]
 transform = Transform3D(0.5, 0.612372, -0.612373, 0, 0.707107, 0.707107, 0.866026, -0.353553, 0.353553, 0, 0, 0)
-visible = false
 shadow_enabled = true
 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Lights" unique_id=1907433262]
 transform = Transform3D(-0.582123, -0.574949, 0.574949, 0, 0.707107, 0.707107, -0.813101, 0.411623, -0.411623, 0, 0, 0)
+visible = false
 light_energy = 1.1
 light_angular_distance = 1.5
 shadow_enabled = true
 shadow_opacity = 0.9
 shadow_blur = 1.5
-directional_shadow_mode = 2
 directional_shadow_blend_splits = true
 
 [node name="RotateLight" type="SpotLight3D" parent="Lights" unique_id=310283447 node_paths=PackedStringArray("target_marker")]
 transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 8.25355, -4.2896)
+visible = false
 light_energy = 0.2
 shadow_enabled = true
 spot_range = 20.0
@@ -239,7 +242,6 @@ energy_range = Vector2(0, 5)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=312585935 node_paths=PackedStringArray("target_marker")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7)
-visible = false
 cull_mask = 1048573
 fov = 37.8493
 script = ExtResource("1_1bvp3")
@@ -330,47 +332,35 @@ base_path = &"/Users/bytedance/Develop/生成数据集"
 auto_save = true
 save_depth = true
 occlusion_threshold = 80
-max_generate_frame = 200
+max_generate_frame = 10
 
 [node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
 script = ExtResource("10_4c57u")
 table_mesh = NodePath("../Tables/TableSquare/TableBG")
 objects_parent = NodePath("../Objects")
 camera = NodePath("../Camera3D")
-comb_enabled = false
 comb_scenes = Array[PackedScene]([ExtResource("19_facbu"), ExtResource("20_b1qrp"), ExtResource("21_come4"), ExtResource("24_f1p13"), ExtResource("25_4obbf"), ExtResource("26_ovcoh")])
 toothbrush_scenes = Array[PackedScene]([ExtResource("11_2cqfq"), ExtResource("23_hrvbo"), ExtResource("24_uypp3"), ExtResource("27_5dllo"), ExtResource("28_phcyf"), ExtResource("76_wy5fy")])
-paper_cup_enabled = false
 paper_cup_scenes = Array[PackedScene]([ExtResource("12_yaehf"), ExtResource("27_abqjc"), ExtResource("28_6iyjs"), ExtResource("36_l0gw7"), ExtResource("37_inymm")])
-clotheshanger_enabled = false
 clotheshanger_scenes = Array[PackedScene]([ExtResource("14_cegan"), ExtResource("25_0cp0l"), ExtResource("26_d2t1y"), ExtResource("27_gngh3"), ExtResource("28_0n3wm"), ExtResource("29_qnost"), ExtResource("42_4obbf")])
-jelly_enabled = false
 biscuit_scenes = Array[PackedScene]([ExtResource("15_82xsv"), ExtResource("36_34ol3"), ExtResource("71_0dhbp"), ExtResource("38_c2n8d"), ExtResource("39_wy5fy")])
 sausage_scenes = Array[PackedScene]([ExtResource("50_qwt6e")])
 chips_enabled = false
 chips_scenes = Array[PackedScene]([ExtResource("16_getpj"), ExtResource("37_vke2r"), ExtResource("38_uit24"), ExtResource("39_ruth0"), ExtResource("40_rm4vd"), ExtResource("41_pjyto")])
-canned_chips_enabled = false
 canned_chips_scenes = Array[PackedScene]([ExtResource("54_23xmf"), ExtResource("55_swlj1"), ExtResource("56_yysqy"), ExtResource("57_n5t1e"), ExtResource("58_h6isl"), ExtResource("59_53bls")])
-can_enabled = false
 can_scenes = Array[PackedScene]([ExtResource("17_ryguw"), ExtResource("43_ruth0"), ExtResource("44_rm4vd"), ExtResource("45_sm6fg"), ExtResource("46_b17eg"), ExtResource("47_ntx8l"), ExtResource("48_rqtf5"), ExtResource("49_1vm84"), ExtResource("50_wu3dr"), ExtResource("51_cyx1q")])
-bottle_enabled = false
 bottle_scenes = Array[PackedScene]([ExtResource("18_d13ii"), ExtResource("53_cyx1q"), ExtResource("54_0dhbp"), ExtResource("55_jx0wj"), ExtResource("76_cpm2s"), ExtResource("77_u81y6"), ExtResource("78_rt5wr"), ExtResource("79_mnw77"), ExtResource("80_vjgyh")])
-milk_enabled = false
 milk_scenes = Array[PackedScene]([ExtResource("19_1u8w0"), ExtResource("75_vieuh"), ExtResource("76_yjja3"), ExtResource("77_l0gw7"), ExtResource("78_inymm"), ExtResource("79_jcxqu"), ExtResource("80_0arob"), ExtResource("83_am8a1"), ExtResource("84_8dc3g"), ExtResource("85_htgcl")])
-water_enabled = false
 water_scenes = Array[PackedScene]([ExtResource("11_w48qg"), ExtResource("12_vivmo"), ExtResource("85_ywjan"), ExtResource("86_m74q3"), ExtResource("87_tko6h"), ExtResource("88_am8a1"), ExtResource("89_8dc3g"), ExtResource("90_htgcl"), ExtResource("91_smeu8")])
-pomegranate_enabled = false
 pomegranate_scenes = Array[PackedScene]([ExtResource("22_0odxb"), ExtResource("38_f6a44"), ExtResource("39_0cbny")])
-orange_enabled = false
 orange_scenes = Array[PackedScene]([ExtResource("23_a6jrf"), ExtResource("39_qnost"), ExtResource("40_wnkbs")])
-banana_enabled = false
 banana_scenes = Array[PackedScene]([ExtResource("11_efxa6"), ExtResource("12_dg77c"), ExtResource("13_ycdy4")])
-dragon_fruit_enabled = false
 dragon_fruit_scenes = Array[PackedScene]([ExtResource("27_xuqvo"), ExtResource("43_gngh3"), ExtResource("44_0n3wm")])
+book_enabled = false
 book_scenes = Array[PackedScene]([ExtResource("89_swlj1"), ExtResource("90_53bls"), ExtResource("91_lwnsi"), ExtResource("92_41lik"), ExtResource("93_jbvwl"), ExtResource("117_asu84"), ExtResource("118_qwt6e"), ExtResource("119_off2o"), ExtResource("120_tttfs"), ExtResource("121_1iygd"), ExtResource("122_g5xqc")])
 unknown_enabled = false
 item_script = ExtResource("7_kek77")
-item_count_range = Vector2i(3, 5)
+item_count_range = Vector2i(7, 15)
 min_distance_between_items = 0.8
 y_offset = 1.0
 scale_range = Vector2(0.9, 1.1)
