@@ -161,8 +161,6 @@ StrenghtCA = 0.6
 Blur = true
 L_O_D = 0.5
 Grain = true
-GrainPower = 0.15
-GrainSize = 2.5
 ColorCorrection = true
 ColorCorrectionTint = Color(0.98, 0.99, 1, 1)
 ColorCorrectionBrightness = -0.02
@@ -210,10 +208,16 @@ shadow_enabled = true
 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Lights" unique_id=1907433262]
 transform = Transform3D(-0.582123, -0.574949, 0.574949, 0, 0.707107, 0.707107, -0.813101, 0.411623, -0.411623, 0, 0, 0)
+light_energy = 1.1
+light_angular_distance = 1.5
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 1.5
+directional_shadow_mode = 2
+directional_shadow_blend_splits = true
 
 [node name="RotateLight" type="SpotLight3D" parent="Lights" unique_id=310283447 node_paths=PackedStringArray("target_marker")]
 transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 8.25355, -4.2896)
-visible = false
 light_energy = 0.2
 shadow_enabled = true
 spot_range = 20.0
