@@ -148,7 +148,9 @@ ssr_fade_in = 0.3
 ssao_enabled = true
 ssao_radius = 1.5
 ssao_intensity = 1.5
-sdfgi_use_occlusion = true
+ssil_enabled = true
+ssil_radius = 2.0
+ssil_intensity = 1.0
 adjustment_enabled = true
 adjustment_brightness = 0.95
 adjustment_contrast = 0.92
@@ -187,6 +189,14 @@ roughness = 0.85
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=277174281]
 environment = SubResource("Environment_ig7tw")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="." unique_id=277174282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+size = Vector3(16, 10, 16)
+origin_offset = Vector3(0, -1, 0)
+max_distance = 40.0
+update_mode = 1
+ambient_mode = 1
 
 [node name="PostProcess" type="CanvasLayer" parent="." unique_id=943148421]
 script = ExtResource("51_blkrb")
