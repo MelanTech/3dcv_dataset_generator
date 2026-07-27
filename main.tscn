@@ -140,7 +140,7 @@ ambient_light_color = Color(0.847059, 0.878431, 0.909804, 1)
 ambient_light_energy = 0.45
 reflected_light_source = 2
 tonemap_mode = 3
-tonemap_exposure = 0.55
+tonemap_exposure = 0.62
 tonemap_white = 6.0
 ssr_enabled = true
 ssr_max_steps = 32
@@ -152,9 +152,9 @@ ssil_enabled = true
 ssil_radius = 2.0
 ssil_intensity = 1.0
 adjustment_enabled = true
-adjustment_brightness = 0.95
-adjustment_contrast = 0.92
-adjustment_saturation = 0.8
+adjustment_brightness = 0.97
+adjustment_contrast = 1.02
+adjustment_saturation = 0.95
 
 [sub_resource type="Resource" id="Resource_uypp3"]
 script = ExtResource("52_abqjc")
@@ -163,10 +163,12 @@ StrenghtCA = 0.6
 Blur = true
 L_O_D = 0.5
 Grain = true
+GrainPower = 0.15
+GrainSize = 2.5
 ColorCorrection = true
 ColorCorrectionTint = Color(0.98, 0.99, 1, 1)
 ColorCorrectionBrightness = -0.02
-ColorCorrectionSaturation = -0.12
+ColorCorrectionSaturation = -0.05
 metadata/_custom_type_script = "uid://bs45b6eixrfy3"
 
 [sub_resource type="Environment" id="Environment_depth"]
