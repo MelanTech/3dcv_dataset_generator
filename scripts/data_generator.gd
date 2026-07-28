@@ -9,6 +9,7 @@ extends Node
 @export var auto_save: bool = false
 @export var save_interval: int = 30
 @export var save_depth: bool = false
+@export var save_without_bbox_layer: bool = true
 
 # 遮挡检测射线数量（越多越精确，性能消耗越大）
 @export var ray_count: int = 10  # 建议10-20个点平衡精度和性能
@@ -30,31 +31,32 @@ var label_path: StringName
 var frame_index: int = 0
 var frame_count: int = 0
 var labels: Array = []
+var _saving: bool = false
+var _capture_viewport: SubViewport
+var _capture_camera: Camera3D
+var _capture_post_process: CanvasLayer
 
 func _ready() -> void:
-	# Create Folder
-	if enable:
-		folder_name = generate_time_based_folder_name()
-		base_path = base_path.path_join(folder_name)
-		rgb_image_path = base_path.path_join("images")
-		depth_image_path = base_path.path_join("images_depth")
-		label_path = base_path.path_join("labels")
-		DirAccess.make_dir_recursive_absolute(rgb_image_path)
-		if save_depth:
-			DirAccess.make_dir_recursive_absolute(depth_image_path)
-		DirAccess.make_dir_recursive_absolute(label_path)
-		
-		save_classes()
+	_setup_capture_viewport()
+
+	if enable and auto_save:
+		ensure_output_dirs()
 		
 func _process(delta: float) -> void:
+	if _saving:
+		frame_index += 1
+		return
+
 	if enable and frame_index % save_interval == 0:
 		if frame_index > 0:
 			var file_name = generate_filename(frame_count)
-			labels = get_all_labels()
 			if auto_save:
-				save_image("{0}.{1}" .format([file_name, "jpg"]))
+				_saving = true
+				await save_image("{0}.{1}" .format([file_name, "jpg"]))
+				refresh_labels()
 				save_labels("{0}.{1}".format([file_name, "txt"]), labels)
 				frame_count += 1
+				_saving = false
 				
 			if max_generate_frame > 0 and frame_count >= max_generate_frame:
 				get_tree().quit()
@@ -62,16 +64,48 @@ func _process(delta: float) -> void:
 	frame_index += 1
 
 func _input(event: InputEvent) -> void:
+	if _saving:
+		return
+
 	if enable and not auto_save and event is InputEventKey and event.is_action_pressed("ui_screenshot"):
 		var file_name = generate_filename(frame_count)
-		save_image("{0}.{1}" .format([file_name, "jpg"]))
-		var labels = get_all_labels()
+		_saving = true
+		await save_image("{0}.{1}" .format([file_name, "jpg"]))
+		refresh_labels()
 		save_labels("{0}.{1}".format([file_name, "txt"]), labels)
 		frame_count += 1
+		_saving = false
 	frame_index += 1
+
+func refresh_labels() -> void:
+	labels = get_all_labels()
+
+func ensure_output_dirs() -> void:
+	if not rgb_image_path.is_empty() and not label_path.is_empty():
+		return
+
+	folder_name = generate_time_based_folder_name()
+	base_path = base_path.path_join(folder_name)
+	rgb_image_path = base_path.path_join("images")
+	depth_image_path = base_path.path_join("images_depth")
+	label_path = base_path.path_join("labels")
+	DirAccess.make_dir_recursive_absolute(rgb_image_path)
+	if save_depth:
+		DirAccess.make_dir_recursive_absolute(depth_image_path)
+	DirAccess.make_dir_recursive_absolute(label_path)
+	save_classes()
 		
-func save_image(file_name):
-	var rgb_image = capture_viewport_image(get_viewport())
+func save_image(file_name) -> void:
+	ensure_output_dirs()
+
+	var capture_viewport := get_viewport()
+	if save_without_bbox_layer:
+		_prepare_clean_capture_viewport()
+		capture_viewport = _capture_viewport
+		await RenderingServer.frame_post_draw
+
+	var rgb_image = capture_viewport_image(capture_viewport)
+
 	# 用较低 JPEG 质量保存，制造真实照片放大后可见的 8x8 压缩块/锯齿
 	rgb_image.save_jpg(rgb_image_path.path_join(file_name), 0.6)
 	if save_depth:
@@ -83,6 +117,66 @@ func save_image(file_name):
 		if auto_calibrate_depth:
 			calibrate_depth_scale()
 	print("已保存 %s" % file_name)
+
+func _setup_capture_viewport() -> void:
+	_capture_viewport = SubViewport.new()
+	_capture_viewport.name = "CleanCaptureViewport"
+	_capture_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
+	_capture_viewport.world_3d = get_viewport().world_3d
+	_capture_viewport.size = get_viewport().size
+	add_child(_capture_viewport)
+
+	_capture_camera = Camera3D.new()
+	_capture_camera.name = "CleanCaptureCamera"
+	_capture_viewport.add_child(_capture_camera)
+
+	var source_post_process := get_node_or_null("../PostProcess") as CanvasLayer
+	if source_post_process != null:
+		_capture_post_process = CanvasLayer.new()
+		_capture_post_process.name = "CleanCapturePostProcess"
+		_capture_post_process.set_script(load("res://addons/post_processing/node/post_process.gd"))
+		_capture_post_process.set("configuration", source_post_process.get("configuration"))
+		_capture_post_process.set("dynamically_update", source_post_process.get("dynamically_update"))
+		_capture_post_process.layer = source_post_process.layer
+		_capture_post_process.custom_viewport = _capture_viewport
+		_capture_viewport.add_child(_capture_post_process)
+
+func _prepare_clean_capture_viewport() -> void:
+	if _capture_viewport == null:
+		_setup_capture_viewport()
+
+	_capture_viewport.size = get_viewport().size
+	_capture_viewport.world_3d = get_viewport().world_3d
+	_sync_capture_camera()
+	_capture_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+func _sync_capture_camera() -> void:
+	if camera == null or _capture_camera == null:
+		return
+
+	_capture_camera.global_transform = camera.global_transform
+	_capture_camera.keep_aspect = camera.keep_aspect
+	_capture_camera.cull_mask = camera.cull_mask
+	_capture_camera.environment = camera.environment
+	_capture_camera.attributes = camera.attributes
+	_capture_camera.doppler_tracking = camera.doppler_tracking
+	_capture_camera.projection = camera.projection
+	_capture_camera.current = true
+
+	match camera.projection:
+		Camera3D.PROJECTION_PERSPECTIVE:
+			_capture_camera.fov = camera.fov
+			_capture_camera.near = camera.near
+			_capture_camera.far = camera.far
+		Camera3D.PROJECTION_ORTHOGONAL:
+			_capture_camera.size = camera.size
+			_capture_camera.near = camera.near
+			_capture_camera.far = camera.far
+		Camera3D.PROJECTION_FRUSTUM:
+			_capture_camera.size = camera.size
+			_capture_camera.frustum_offset = camera.frustum_offset
+			_capture_camera.near = camera.near
+			_capture_camera.far = camera.far
 	
 func save_labels(file_name:String, labels):
 	var window_size = get_viewport().size

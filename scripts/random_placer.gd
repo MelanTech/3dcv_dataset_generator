@@ -10,65 +10,52 @@ extends Node
 
 @export var camera: Camera3D
 
-# 物品类别场景和启用状态 - 按类别分别管理
-@export_category("Scenes")
+# 物品类别启用状态
+@export_category("Items")
+@export_group("Enable")
 @export var comb_enabled: bool = true
-@export var comb_scenes: Array[PackedScene] = []
-
 @export var toothbrush_enabled: bool = true
-@export var toothbrush_scenes: Array[PackedScene] = []
-
 @export var paper_cup_enabled: bool = true
-@export var paper_cup_scenes: Array[PackedScene] = []
-
 @export var clotheshanger_enabled: bool = true
-@export var clotheshanger_scenes: Array[PackedScene] = []
-
 @export var jelly_enabled: bool = true
-@export var jelly_scenes: Array[PackedScene] = []
-
 @export var biscuit_enabled: bool = true
-@export var biscuit_scenes: Array[PackedScene] = []
-
 @export var sausage_enabled: bool = true
-@export var sausage_scenes: Array[PackedScene] = []
-
 @export var chips_enabled: bool = true
-@export var chips_scenes: Array[PackedScene] = []
-
 @export var canned_chips_enabled: bool = true
-@export var canned_chips_scenes: Array[PackedScene] = []
-
 @export var can_enabled: bool = true
-@export var can_scenes: Array[PackedScene] = []
-
 @export var bottle_enabled: bool = true
-@export var bottle_scenes: Array[PackedScene] = []
-
 @export var milk_enabled: bool = true
-@export var milk_scenes: Array[PackedScene] = []
-
 @export var water_enabled: bool = true
-@export var water_scenes: Array[PackedScene] = []
-
 @export var pomegranate_enabled: bool = true
-@export var pomegranate_scenes: Array[PackedScene] = []
-
 @export var orange_enabled: bool = true
-@export var orange_scenes: Array[PackedScene] = []
-
 @export var banana_enabled: bool = true
-@export var banana_scenes: Array[PackedScene] = []
-
 @export var dragon_fruit_enabled: bool = true
-@export var dragon_fruit_scenes: Array[PackedScene] = []
-
 @export var book_enabled: bool = true
-@export var book_scenes: Array[PackedScene] = []
-
 @export var unknown_enabled: bool = true
+
+# 物品类别场景列表
+@export_group("Scenes")
+@export var comb_scenes: Array[PackedScene] = []
+@export var toothbrush_scenes: Array[PackedScene] = []
+@export var paper_cup_scenes: Array[PackedScene] = []
+@export var clotheshanger_scenes: Array[PackedScene] = []
+@export var jelly_scenes: Array[PackedScene] = []
+@export var biscuit_scenes: Array[PackedScene] = []
+@export var sausage_scenes: Array[PackedScene] = []
+@export var chips_scenes: Array[PackedScene] = []
+@export var canned_chips_scenes: Array[PackedScene] = []
+@export var can_scenes: Array[PackedScene] = []
+@export var bottle_scenes: Array[PackedScene] = []
+@export var milk_scenes: Array[PackedScene] = []
+@export var water_scenes: Array[PackedScene] = []
+@export var pomegranate_scenes: Array[PackedScene] = []
+@export var orange_scenes: Array[PackedScene] = []
+@export var banana_scenes: Array[PackedScene] = []
+@export var dragon_fruit_scenes: Array[PackedScene] = []
+@export var book_scenes: Array[PackedScene] = []
 @export var unknown_scenes: Array[PackedScene] = []
 
+@export_group("")
 @export_category("Options")
 
 # 要挂载到物品上的脚本
