@@ -73,6 +73,36 @@ extends Node
 @export var pomegranate_scenes: Array[PackedScene] = []
 @export var jelly_scenes: Array[PackedScene] = []
 
+# —— 各类别采样概率权重（相对权重，越大越容易被抽到；0 = 不采样）——
+# 每次放置物品时按权重从"已启用且有场景"的类别中加权随机选取。
+@export_group("Official Weights")
+@export_range(0.0, 10.0, 0.1) var brush_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var earphone_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var cup_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var hanger_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var chocolate_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var sunflower_seeds_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var sausage_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var chips_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var canned_chips_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var can_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var bottle_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var milk_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var water_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var peach_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var apple_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var banana_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var pear_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var book_weight: float = 1.0
+
+@export_group("Unknown Weights")
+@export_range(0.0, 10.0, 0.1) var comb_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var biscuit_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var dragon_fruit_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var orange_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var pomegranate_weight: float = 1.0
+@export_range(0.0, 10.0, 0.1) var jelly_weight: float = 1.0
+
 @export_group("")
 @export_category("Options")
 
@@ -99,6 +129,8 @@ extends Node
 
 # X/Z轴最大倾斜角度（度）。180 = 完全随机翻滚，物品可能侧躺/倒置
 @export_range(0.0, 180.0, 1.0) var max_tilt_degrees: float = 180.0
+
+@export_group("")
 
 # 类别与classes值的映射关系
 @onready var class_mapping = get_node("/root/ClassMap").class_mapping
@@ -141,39 +173,57 @@ func get_table_size() -> Vector2:
 func get_available_classes() -> Array:
 	var classes = [
 		# —— 正式类别 ——
-		{"name": "Brush", "enabled": brush_enabled, "scenes": brush_scenes},
-		{"name": "Earphone", "enabled": earphone_enabled, "scenes": earphone_scenes},
-		{"name": "Cup", "enabled": cup_enabled, "scenes": cup_scenes},
-		{"name": "Hanger", "enabled": hanger_enabled, "scenes": hanger_scenes},
-		{"name": "Chocolate", "enabled": chocolate_enabled, "scenes": chocolate_scenes},
-		{"name": "SunflowerSeeds", "enabled": sunflower_seeds_enabled, "scenes": sunflower_seeds_scenes},
-		{"name": "Sausage", "enabled": sausage_enabled, "scenes": sausage_scenes},
-		{"name": "Chips", "enabled": chips_enabled, "scenes": chips_scenes},
-		{"name": "CannedChips", "enabled": canned_chips_enabled, "scenes": canned_chips_scenes},
-		{"name": "Can", "enabled": can_enabled, "scenes": can_scenes},
-		{"name": "Bottle", "enabled": bottle_enabled, "scenes": bottle_scenes},
-		{"name": "Milk", "enabled": milk_enabled, "scenes": milk_scenes},
-		{"name": "Water", "enabled": water_enabled, "scenes": water_scenes},
-		{"name": "Peach", "enabled": peach_enabled, "scenes": peach_scenes},
-		{"name": "Apple", "enabled": apple_enabled, "scenes": apple_scenes},
-		{"name": "Banana", "enabled": banana_enabled, "scenes": banana_scenes},
-		{"name": "Pear", "enabled": pear_enabled, "scenes": pear_scenes},
-		{"name": "Book", "enabled": book_enabled, "scenes": book_scenes},
+		{"name": "Brush", "enabled": brush_enabled, "scenes": brush_scenes, "weight": brush_weight},
+		{"name": "Earphone", "enabled": earphone_enabled, "scenes": earphone_scenes, "weight": earphone_weight},
+		{"name": "Cup", "enabled": cup_enabled, "scenes": cup_scenes, "weight": cup_weight},
+		{"name": "Hanger", "enabled": hanger_enabled, "scenes": hanger_scenes, "weight": hanger_weight},
+		{"name": "Chocolate", "enabled": chocolate_enabled, "scenes": chocolate_scenes, "weight": chocolate_weight},
+		{"name": "SunflowerSeeds", "enabled": sunflower_seeds_enabled, "scenes": sunflower_seeds_scenes, "weight": sunflower_seeds_weight},
+		{"name": "Sausage", "enabled": sausage_enabled, "scenes": sausage_scenes, "weight": sausage_weight},
+		{"name": "Chips", "enabled": chips_enabled, "scenes": chips_scenes, "weight": chips_weight},
+		{"name": "CannedChips", "enabled": canned_chips_enabled, "scenes": canned_chips_scenes, "weight": canned_chips_weight},
+		{"name": "Can", "enabled": can_enabled, "scenes": can_scenes, "weight": can_weight},
+		{"name": "Bottle", "enabled": bottle_enabled, "scenes": bottle_scenes, "weight": bottle_weight},
+		{"name": "Milk", "enabled": milk_enabled, "scenes": milk_scenes, "weight": milk_weight},
+		{"name": "Water", "enabled": water_enabled, "scenes": water_scenes, "weight": water_weight},
+		{"name": "Peach", "enabled": peach_enabled, "scenes": peach_scenes, "weight": peach_weight},
+		{"name": "Apple", "enabled": apple_enabled, "scenes": apple_scenes, "weight": apple_weight},
+		{"name": "Banana", "enabled": banana_enabled, "scenes": banana_scenes, "weight": banana_weight},
+		{"name": "Pear", "enabled": pear_enabled, "scenes": pear_scenes, "weight": pear_weight},
+		{"name": "Book", "enabled": book_enabled, "scenes": book_scenes, "weight": book_weight},
 		# —— Unknown 大类下的子类别（标签统一映射到 Unknown）——
-		{"name": "Comb", "enabled": comb_enabled, "scenes": comb_scenes},
-		{"name": "Biscuit", "enabled": biscuit_enabled, "scenes": biscuit_scenes},
-		{"name": "DragonFruit", "enabled": dragon_fruit_enabled, "scenes": dragon_fruit_scenes},
-		{"name": "Orange", "enabled": orange_enabled, "scenes": orange_scenes},
-		{"name": "Pomegranate", "enabled": pomegranate_enabled, "scenes": pomegranate_scenes},
-		{"name": "Jelly", "enabled": jelly_enabled, "scenes": jelly_scenes},
+		{"name": "Comb", "enabled": comb_enabled, "scenes": comb_scenes, "weight": comb_weight},
+		{"name": "Biscuit", "enabled": biscuit_enabled, "scenes": biscuit_scenes, "weight": biscuit_weight},
+		{"name": "DragonFruit", "enabled": dragon_fruit_enabled, "scenes": dragon_fruit_scenes, "weight": dragon_fruit_weight},
+		{"name": "Orange", "enabled": orange_enabled, "scenes": orange_scenes, "weight": orange_weight},
+		{"name": "Pomegranate", "enabled": pomegranate_enabled, "scenes": pomegranate_scenes, "weight": pomegranate_weight},
+		{"name": "Jelly", "enabled": jelly_enabled, "scenes": jelly_scenes, "weight": jelly_weight},
 	]
 
-	# 过滤掉未启用或没有场景的类别
+	# 过滤掉未启用、没有场景、或权重<=0 的类别
 	var available = []
 	for cls in classes:
-		if cls.enabled and not cls.scenes.is_empty():
+		if cls.enabled and not cls.scenes.is_empty() and cls.weight > 0.0:
 			available.append(cls)
 	return available
+
+
+# 按权重从可用类别中加权随机选取一个类别
+func pick_weighted_class(available_classes: Array) -> Dictionary:
+	var total_weight = 0.0
+	for cls in available_classes:
+		total_weight += cls.weight
+	# 权重总和异常时退化为均匀随机
+	if total_weight <= 0.0:
+		return available_classes[randi() % available_classes.size()]
+
+	var roll = randf() * total_weight
+	var acc = 0.0
+	for cls in available_classes:
+		acc += cls.weight
+		if roll < acc:
+			return cls
+	return available_classes[available_classes.size() - 1]
 
 
 # 使用网格方式放置物品
@@ -221,8 +271,8 @@ func place_items_on_grid(table_size: Vector2, available_classes: Array):
 
 		var position = Vector3(x, y_offset, z)
 
-		# 随机选择一个可用类别
-		var selected_class = available_classes[randi() % available_classes.size()]
+		# 按采样权重随机选择一个可用类别
+		var selected_class = pick_weighted_class(available_classes)
 		# 从选中类别中随机选择一个物品场景
 		var item_scene = selected_class.scenes[randi() % selected_class.scenes.size()]
 		
