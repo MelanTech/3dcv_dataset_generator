@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://ct8s8qu1mnluk" path="res://scripts/scenes_picker.gd" id="6_htxhm"]
 [ext_resource type="Script" uid="uid://dpdwjjk8v25ap" path="res://scripts/class_indent.gd" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://dh02yiufx7o7n" path="res://models/envs/office2/office2.blend" id="7_qsp4k"]
+[ext_resource type="Script" uid="uid://cvc26eyfhnext" path="res://scripts/table_selector.gd" id="7_tselect"]
 [ext_resource type="PackedScene" uid="uid://c2xyg4odjxor4" path="res://models/envs/lab1/lab1.blend" id="8_kq58d"]
 [ext_resource type="PackedScene" uid="uid://inwj2d360ypa" path="res://models/envs/room1/room1.blend" id="9_kq58d"]
 [ext_resource type="Script" uid="uid://kht1taxe4y4r" path="res://scripts/random_placer.gd" id="10_4c57u"]
@@ -308,7 +309,14 @@ visible = false
 transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0, -0.468148, 0)
 visible = false
 
-[node name="Tables" type="Node" parent="." unique_id=1789543958]
+[node name="Tables" type="Node" parent="." unique_id=1789543958 node_paths=PackedStringArray("square_table", "square_table_mesh", "disc_table", "disc_table_mesh", "data_generator", "random_placer")]
+script = ExtResource("7_tselect")
+square_table = NodePath("TableSquare")
+square_table_mesh = NodePath("TableSquare/TableBG")
+disc_table = NodePath("TableDisc")
+disc_table_mesh = NodePath("TableDisc/disc-rigid")
+data_generator = NodePath("../DataGenerator")
+random_placer = NodePath("../RandomPlacer")
 
 [node name="TableSquare" parent="Tables" unique_id=2138597908 instance=ExtResource("1_h2yge")]
 script = ExtResource("7_kek77")
@@ -336,7 +344,6 @@ table = NodePath("../Tables/TableSquare")
 depth_view = NodePath("../DepthViewPort")
 object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
-auto_save = true
 save_depth = true
 occlusion_threshold = 80
 max_generate_frame = 10
@@ -347,13 +354,15 @@ script = ExtResource("10_4c57u")
 table_mesh = NodePath("../Tables/TableSquare/TableBG")
 objects_parent = NodePath("../Objects")
 camera = NodePath("../Camera3D")
+chips_enabled = false
+book_enabled = false
+unknown_enabled = false
 comb_scenes = Array[PackedScene]([ExtResource("19_facbu"), ExtResource("20_b1qrp"), ExtResource("21_come4"), ExtResource("24_f1p13"), ExtResource("25_4obbf"), ExtResource("26_ovcoh")])
 toothbrush_scenes = Array[PackedScene]([ExtResource("11_2cqfq"), ExtResource("23_hrvbo"), ExtResource("24_uypp3"), ExtResource("27_5dllo"), ExtResource("28_phcyf"), ExtResource("76_wy5fy")])
 paper_cup_scenes = Array[PackedScene]([ExtResource("12_yaehf"), ExtResource("27_abqjc"), ExtResource("28_6iyjs"), ExtResource("36_l0gw7"), ExtResource("37_inymm")])
 clotheshanger_scenes = Array[PackedScene]([ExtResource("14_cegan"), ExtResource("25_0cp0l"), ExtResource("26_d2t1y"), ExtResource("27_gngh3"), ExtResource("28_0n3wm"), ExtResource("29_qnost"), ExtResource("42_4obbf")])
 biscuit_scenes = Array[PackedScene]([ExtResource("15_82xsv"), ExtResource("36_34ol3"), ExtResource("71_0dhbp"), ExtResource("38_c2n8d"), ExtResource("39_wy5fy")])
 sausage_scenes = Array[PackedScene]([ExtResource("50_qwt6e")])
-chips_enabled = false
 chips_scenes = Array[PackedScene]([ExtResource("16_getpj"), ExtResource("37_vke2r"), ExtResource("38_uit24"), ExtResource("39_ruth0"), ExtResource("40_rm4vd"), ExtResource("41_pjyto")])
 canned_chips_scenes = Array[PackedScene]([ExtResource("54_23xmf"), ExtResource("55_swlj1"), ExtResource("56_yysqy"), ExtResource("57_n5t1e"), ExtResource("58_h6isl"), ExtResource("59_53bls")])
 can_scenes = Array[PackedScene]([ExtResource("17_ryguw"), ExtResource("43_ruth0"), ExtResource("44_rm4vd"), ExtResource("45_sm6fg"), ExtResource("46_b17eg"), ExtResource("47_ntx8l"), ExtResource("48_rqtf5"), ExtResource("49_1vm84"), ExtResource("50_wu3dr"), ExtResource("51_cyx1q")])
@@ -364,9 +373,7 @@ pomegranate_scenes = Array[PackedScene]([ExtResource("22_0odxb"), ExtResource("3
 orange_scenes = Array[PackedScene]([ExtResource("23_a6jrf"), ExtResource("39_qnost"), ExtResource("40_wnkbs")])
 banana_scenes = Array[PackedScene]([ExtResource("11_efxa6"), ExtResource("12_dg77c"), ExtResource("13_ycdy4")])
 dragon_fruit_scenes = Array[PackedScene]([ExtResource("27_xuqvo"), ExtResource("43_gngh3"), ExtResource("44_0n3wm")])
-book_enabled = false
 book_scenes = Array[PackedScene]([ExtResource("89_swlj1"), ExtResource("90_53bls"), ExtResource("91_lwnsi"), ExtResource("92_41lik"), ExtResource("93_jbvwl"), ExtResource("117_asu84"), ExtResource("118_qwt6e"), ExtResource("119_off2o"), ExtResource("120_tttfs"), ExtResource("121_1iygd"), ExtResource("122_g5xqc")])
-unknown_enabled = false
 item_script = ExtResource("7_kek77")
 item_count_range = Vector2i(7, 15)
 min_distance_between_items = 0.8
