@@ -1,13 +1,14 @@
 extends Node
 
 var class_mapping = {
+	# —— 正式类别（Table=0，1-18）——
 	"Table": 0,
-	"Comb": 1,
-	"Toothbrush": 2,
-	"PaperCup": 3,
-	"Clotheshanger": 4,
-	"Jelly": 5,
-	"Biscuit": 6,
+	"Brush": 1,
+	"Earphone": 2,
+	"Cup": 3,
+	"Hanger": 4,
+	"Chocolate": 5,
+	"SunflowerSeeds": 6,
 	"Sausage": 7,
 	"Chips": 8,
 	"CannedChips": 9,
@@ -15,10 +16,19 @@ var class_mapping = {
 	"Bottle": 11,
 	"Milk": 12,
 	"Water": 13,
-	"Pomegranate": 14,
-	"Orange": 15,
+	"Peach": 14,
+	"Apple": 15,
 	"Banana": 16,
-	"DragonFruit": 17,
+	"Pear": 17,
 	"Book": 18,
+	# —— Unknown 大类 ——
 	"Unknown": 19,
+	# —— Unknown 大类下的子类别：可在 RandomPlacer 中独立管理，
+	#    但类别值统一映射到 Unknown(19)，仅作干扰物不写入标签 ——
+	"Comb": 19,
+	"Biscuit": 19,
+	"DragonFruit": 19,
+	"Orange": 19,
+	"Pomegranate": 19,
+	"Jelly": 19,
 }

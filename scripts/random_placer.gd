@@ -12,13 +12,15 @@ extends Node
 
 # 物品类别启用状态
 @export_category("Items")
-@export_group("Enable")
-@export var comb_enabled: bool = true
-@export var toothbrush_enabled: bool = true
-@export var paper_cup_enabled: bool = true
-@export var clotheshanger_enabled: bool = true
-@export var jelly_enabled: bool = true
-@export var biscuit_enabled: bool = true
+
+# —— 正式类别启用开关 ——
+@export_group("Official Enable")
+@export var brush_enabled: bool = true
+@export var earphone_enabled: bool = true
+@export var cup_enabled: bool = true
+@export var hanger_enabled: bool = true
+@export var chocolate_enabled: bool = true
+@export var sunflower_seeds_enabled: bool = true
 @export var sausage_enabled: bool = true
 @export var chips_enabled: bool = true
 @export var canned_chips_enabled: bool = true
@@ -26,21 +28,20 @@ extends Node
 @export var bottle_enabled: bool = true
 @export var milk_enabled: bool = true
 @export var water_enabled: bool = true
-@export var pomegranate_enabled: bool = true
-@export var orange_enabled: bool = true
+@export var peach_enabled: bool = true
+@export var apple_enabled: bool = true
 @export var banana_enabled: bool = true
-@export var dragon_fruit_enabled: bool = true
+@export var pear_enabled: bool = true
 @export var book_enabled: bool = true
-@export var unknown_enabled: bool = true
 
-# 物品类别场景列表
-@export_group("Scenes")
-@export var comb_scenes: Array[PackedScene] = []
-@export var toothbrush_scenes: Array[PackedScene] = []
-@export var paper_cup_scenes: Array[PackedScene] = []
-@export var clotheshanger_scenes: Array[PackedScene] = []
-@export var jelly_scenes: Array[PackedScene] = []
-@export var biscuit_scenes: Array[PackedScene] = []
+# —— 正式类别场景列表 ——
+@export_group("Official Scenes")
+@export var brush_scenes: Array[PackedScene] = []
+@export var earphone_scenes: Array[PackedScene] = []
+@export var cup_scenes: Array[PackedScene] = []
+@export var hanger_scenes: Array[PackedScene] = []
+@export var chocolate_scenes: Array[PackedScene] = []
+@export var sunflower_seeds_scenes: Array[PackedScene] = []
 @export var sausage_scenes: Array[PackedScene] = []
 @export var chips_scenes: Array[PackedScene] = []
 @export var canned_chips_scenes: Array[PackedScene] = []
@@ -48,12 +49,29 @@ extends Node
 @export var bottle_scenes: Array[PackedScene] = []
 @export var milk_scenes: Array[PackedScene] = []
 @export var water_scenes: Array[PackedScene] = []
-@export var pomegranate_scenes: Array[PackedScene] = []
-@export var orange_scenes: Array[PackedScene] = []
+@export var peach_scenes: Array[PackedScene] = []
+@export var apple_scenes: Array[PackedScene] = []
 @export var banana_scenes: Array[PackedScene] = []
-@export var dragon_fruit_scenes: Array[PackedScene] = []
+@export var pear_scenes: Array[PackedScene] = []
 @export var book_scenes: Array[PackedScene] = []
-@export var unknown_scenes: Array[PackedScene] = []
+
+# —— Unknown 大类下的子类别启用开关（可单独管理，标签统一为 Unknown）——
+@export_group("Unknown Enable")
+@export var comb_enabled: bool = true
+@export var biscuit_enabled: bool = true
+@export var dragon_fruit_enabled: bool = true
+@export var orange_enabled: bool = true
+@export var pomegranate_enabled: bool = true
+@export var jelly_enabled: bool = true
+
+# —— Unknown 大类下的子类别场景列表 ——
+@export_group("Unknown Scenes")
+@export var comb_scenes: Array[PackedScene] = []
+@export var biscuit_scenes: Array[PackedScene] = []
+@export var dragon_fruit_scenes: Array[PackedScene] = []
+@export var orange_scenes: Array[PackedScene] = []
+@export var pomegranate_scenes: Array[PackedScene] = []
+@export var jelly_scenes: Array[PackedScene] = []
 
 @export_group("")
 @export_category("Options")
@@ -122,12 +140,13 @@ func get_table_size() -> Vector2:
 # 收集所有启用且有物品场景的类别
 func get_available_classes() -> Array:
 	var classes = [
-		{"name": "Comb", "enabled": comb_enabled, "scenes": comb_scenes},
-		{"name": "Toothbrush", "enabled": toothbrush_enabled, "scenes": toothbrush_scenes},
-		{"name": "PaperCup", "enabled": paper_cup_enabled, "scenes": paper_cup_scenes},
-		{"name": "Clotheshanger", "enabled": clotheshanger_enabled, "scenes": clotheshanger_scenes},
-		{"name": "Jelly", "enabled": jelly_enabled, "scenes": jelly_scenes},
-		{"name": "Biscuit", "enabled": biscuit_enabled, "scenes": biscuit_scenes},
+		# —— 正式类别 ——
+		{"name": "Brush", "enabled": brush_enabled, "scenes": brush_scenes},
+		{"name": "Earphone", "enabled": earphone_enabled, "scenes": earphone_scenes},
+		{"name": "Cup", "enabled": cup_enabled, "scenes": cup_scenes},
+		{"name": "Hanger", "enabled": hanger_enabled, "scenes": hanger_scenes},
+		{"name": "Chocolate", "enabled": chocolate_enabled, "scenes": chocolate_scenes},
+		{"name": "SunflowerSeeds", "enabled": sunflower_seeds_enabled, "scenes": sunflower_seeds_scenes},
 		{"name": "Sausage", "enabled": sausage_enabled, "scenes": sausage_scenes},
 		{"name": "Chips", "enabled": chips_enabled, "scenes": chips_scenes},
 		{"name": "CannedChips", "enabled": canned_chips_enabled, "scenes": canned_chips_scenes},
@@ -135,12 +154,18 @@ func get_available_classes() -> Array:
 		{"name": "Bottle", "enabled": bottle_enabled, "scenes": bottle_scenes},
 		{"name": "Milk", "enabled": milk_enabled, "scenes": milk_scenes},
 		{"name": "Water", "enabled": water_enabled, "scenes": water_scenes},
-		{"name": "Pomegranate", "enabled": pomegranate_enabled, "scenes": pomegranate_scenes},
-		{"name": "Orange", "enabled": orange_enabled, "scenes": orange_scenes},
+		{"name": "Peach", "enabled": peach_enabled, "scenes": peach_scenes},
+		{"name": "Apple", "enabled": apple_enabled, "scenes": apple_scenes},
 		{"name": "Banana", "enabled": banana_enabled, "scenes": banana_scenes},
-		{"name": "DragonFruit", "enabled": dragon_fruit_enabled, "scenes": dragon_fruit_scenes},
+		{"name": "Pear", "enabled": pear_enabled, "scenes": pear_scenes},
 		{"name": "Book", "enabled": book_enabled, "scenes": book_scenes},
-		{"name": "Unknown", "enabled": unknown_enabled, "scenes": unknown_scenes}
+		# —— Unknown 大类下的子类别（标签统一映射到 Unknown）——
+		{"name": "Comb", "enabled": comb_enabled, "scenes": comb_scenes},
+		{"name": "Biscuit", "enabled": biscuit_enabled, "scenes": biscuit_scenes},
+		{"name": "DragonFruit", "enabled": dragon_fruit_enabled, "scenes": dragon_fruit_scenes},
+		{"name": "Orange", "enabled": orange_enabled, "scenes": orange_scenes},
+		{"name": "Pomegranate", "enabled": pomegranate_enabled, "scenes": pomegranate_scenes},
+		{"name": "Jelly", "enabled": jelly_enabled, "scenes": jelly_scenes},
 	]
 
 	# 过滤掉未启用或没有场景的类别

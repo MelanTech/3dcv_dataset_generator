@@ -198,11 +198,21 @@ func save_labels(file_name:String, labels):
 func save_classes():
 	var class_map = get_node("/root/ClassMap").class_mapping
 	var file = FileAccess.open(base_path.path_join("classes.txt"), FileAccess.WRITE)
+	var unknown_id = class_map["Unknown"]
+	# 按类别 ID 顺序取每个 ID 的规范名称；Unknown 及其下属子类别（值都等于
+	# unknown_id）不写入，避免子类别把标签文件行号打乱
+	var id_to_name = {}
 	for key in class_map.keys():
-		if key == "Unknown":
+		var id = class_map[key]
+		if id == unknown_id:
 			continue
-		file.store_line(key)
-		
+		if not id_to_name.has(id):
+			id_to_name[id] = key
+	var ids = id_to_name.keys()
+	ids.sort()
+	for id in ids:
+		file.store_line(id_to_name[id])
+
 	file.close()
 
 func capture_viewport_image(viewport: Viewport) -> Image:
