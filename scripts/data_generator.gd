@@ -44,6 +44,7 @@ var running: bool = false
 var save_enabled: bool = false
 
 func _ready() -> void:
+	_sync_depth_viewport_world()
 	_setup_capture_viewport()
 
 # 进入运行：重置计数，若开启保存则准备新文件夹
@@ -111,6 +112,7 @@ func save_image(file_name) -> void:
 	# 用较低 JPEG 质量保存，制造真实照片放大后可见的 8x8 压缩块/锯齿
 	rgb_image.save_jpg(rgb_image_path.path_join(file_name), 0.6)
 	if save_depth:
+		_sync_depth_viewport_world()
 		var depth_image = capture_viewport_image(depth_view)
 		# 深度图为 16-bit 毫米编码（R:高字节, G:低字节），用无损 PNG 保存
 		var depth_name = file_name.get_basename() + ".png"
@@ -232,6 +234,13 @@ func _get_active_world_3d() -> World3D:
 		return viewport.get_world_3d()
 
 	return null
+
+func _sync_depth_viewport_world() -> void:
+	if depth_view == null:
+		return
+	var world := _get_active_world_3d()
+	if world != null:
+		depth_view.world_3d = world
 
 # 从深度图某像素解码出毫米值：depth_mm = R*256 + G（8-bit 通道承载 16-bit）
 func decode_depth_mm(depth_image: Image, x: int, y: int) -> float:
