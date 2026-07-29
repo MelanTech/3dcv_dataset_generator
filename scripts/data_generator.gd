@@ -10,6 +10,8 @@ extends Node
 @export var save_interval: int = 30
 @export var save_depth: bool = false
 @export var save_without_bbox_layer: bool = true
+# RGB 保存分辨率（固定，不随窗口大小变化）
+@export var rgb_capture_size: Vector2i = Vector2i(640, 480)
 
 # 遮挡检测射线数量（越多越精确，性能消耗越大）
 @export var ray_count: int = 10  # 建议10-20个点平衡精度和性能
@@ -36,45 +38,45 @@ var _capture_viewport: SubViewport
 var _capture_camera: Camera3D
 var _capture_post_process: CanvasLayer
 
+# 会话状态：由 SessionController 控制
+var running: bool = false
+# 实时保存开关：运行中也可切换。false = 只预览不写盘
+var save_enabled: bool = false
+
 func _ready() -> void:
 	_setup_capture_viewport()
 
-	if enable and auto_save:
-		ensure_output_dirs()
-		
+# 进入运行：重置计数，若开启保存则准备新文件夹
+func begin() -> void:
+	frame_index = 0
+	frame_count = 0
+	# 每次启动都开新文件夹：清空上次路径，交给 ensure_output_dirs 重建
+	rgb_image_path = &""
+	label_path = &""
+	depth_image_path = &""
+	running = true
+
+# 停止运行
+func halt() -> void:
+	running = false
+
 func _process(delta: float) -> void:
+	if not running:
+		return
+
 	if _saving:
 		frame_index += 1
 		return
 
-	if enable and frame_index % save_interval == 0:
-		if frame_index > 0:
-			var file_name = generate_filename(frame_count)
-			if auto_save:
-				_saving = true
-				await save_image("{0}.{1}" .format([file_name, "jpg"]))
-				refresh_labels()
-				save_labels("{0}.{1}".format([file_name, "txt"]), labels)
-				frame_count += 1
-				_saving = false
-				
-			if max_generate_frame > 0 and frame_count >= max_generate_frame:
-				get_tree().quit()
-			
-	frame_index += 1
-
-func _input(event: InputEvent) -> void:
-	if _saving:
-		return
-
-	if enable and not auto_save and event is InputEventKey and event.is_action_pressed("ui_screenshot"):
+	if save_enabled and frame_index % save_interval == 0 and frame_index > 0:
 		var file_name = generate_filename(frame_count)
 		_saving = true
-		await save_image("{0}.{1}" .format([file_name, "jpg"]))
+		await save_image("{0}.{1}".format([file_name, "jpg"]))
 		refresh_labels()
 		save_labels("{0}.{1}".format([file_name, "txt"]), labels)
 		frame_count += 1
 		_saving = false
+
 	frame_index += 1
 
 func refresh_labels() -> void:
@@ -85,15 +87,15 @@ func ensure_output_dirs() -> void:
 		return
 
 	folder_name = generate_time_based_folder_name()
-	base_path = base_path.path_join(folder_name)
-	rgb_image_path = base_path.path_join("images")
-	depth_image_path = base_path.path_join("images_depth")
-	label_path = base_path.path_join("labels")
+	var session_path = str(base_path).path_join(folder_name)
+	rgb_image_path = session_path.path_join("images")
+	depth_image_path = session_path.path_join("images_depth")
+	label_path = session_path.path_join("labels")
 	DirAccess.make_dir_recursive_absolute(rgb_image_path)
 	if save_depth:
 		DirAccess.make_dir_recursive_absolute(depth_image_path)
 	DirAccess.make_dir_recursive_absolute(label_path)
-	save_classes()
+	save_classes(session_path)
 		
 func save_image(file_name) -> void:
 	ensure_output_dirs()
@@ -122,8 +124,8 @@ func _setup_capture_viewport() -> void:
 	_capture_viewport = SubViewport.new()
 	_capture_viewport.name = "CleanCaptureViewport"
 	_capture_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
-	_capture_viewport.world_3d = get_viewport().world_3d
-	_capture_viewport.size = get_viewport().size
+	_capture_viewport.world_3d = _get_active_world_3d()
+	_capture_viewport.size = rgb_capture_size
 	add_child(_capture_viewport)
 
 	_capture_camera = Camera3D.new()
@@ -145,8 +147,8 @@ func _prepare_clean_capture_viewport() -> void:
 	if _capture_viewport == null:
 		_setup_capture_viewport()
 
-	_capture_viewport.size = get_viewport().size
-	_capture_viewport.world_3d = get_viewport().world_3d
+	_capture_viewport.size = rgb_capture_size
+	_capture_viewport.world_3d = _get_active_world_3d()
 	_sync_capture_camera()
 	_capture_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 
@@ -195,9 +197,9 @@ func save_labels(file_name:String, labels):
 		
 	file.close()
 	
-func save_classes():
+func save_classes(session_path: String):
 	var class_map = get_node("/root/ClassMap").class_mapping
-	var file = FileAccess.open(base_path.path_join("classes.txt"), FileAccess.WRITE)
+	var file = FileAccess.open(session_path.path_join("classes.txt"), FileAccess.WRITE)
 	var unknown_id = class_map["Unknown"]
 	# 按类别 ID 顺序取每个 ID 的规范名称；Unknown 及其下属子类别（值都等于
 	# unknown_id）不写入，避免子类别把标签文件行号打乱
@@ -218,6 +220,18 @@ func save_classes():
 func capture_viewport_image(viewport: Viewport) -> Image:
 	var texture = viewport.get_texture()
 	return texture.get_image()
+
+func _get_active_world_3d() -> World3D:
+	if camera != null:
+		var camera_world := camera.get_world_3d()
+		if camera_world != null:
+			return camera_world
+
+	var viewport := get_viewport()
+	if viewport != null:
+		return viewport.get_world_3d()
+
+	return null
 
 # 从深度图某像素解码出毫米值：depth_mm = R*256 + G（8-bit 通道承载 16-bit）
 func decode_depth_mm(depth_image: Image, x: int, y: int) -> float:
@@ -244,7 +258,11 @@ func calibrate_depth_scale() -> void:
 	# 从深度相机中心像素反投影出射线，物理查询命中的真实距离（世界单位）
 	var from: Vector3 = depth_cam.project_ray_origin(Vector2(cx, cy))
 	var dir: Vector3 = depth_cam.project_ray_normal(Vector2(cx, cy))
-	var space := get_viewport().world_3d.direct_space_state
+	var world := _get_active_world_3d()
+	if world == null:
+		print("[calib] 未找到 3D world，跳过标定")
+		return
+	var space := world.direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(from, from + dir * 10000.0)
 	var hit := space.intersect_ray(query)
 	if hit.is_empty():
@@ -449,7 +467,10 @@ func is_point_occluded(point: Vector3, self_object: Node3D) -> bool:
 		return false  # 点与相机重合，不视为遮挡
 	
 	# 创建射线查询
-	var space_state = get_viewport().get_world_3d().direct_space_state
+	var world := _get_active_world_3d()
+	if world == null:
+		return false
+	var space_state = world.direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end)
 	
 	# 排除自身（避免检测到自己的碰撞体）

@@ -64,7 +64,21 @@ var start_distance: float = distance
 var start_height: float = height
 var start_rotation_offset: Vector3 = rotation_offset
 
+# 会话状态：false=待命（不转、不过渡，停在当前姿态），true=运行
+var active: bool = false
+# 记录 _ready 时的初值，用于停止时复位
+var _initial_rotation_angle: float = 0.0
+var _initial_distance: float = distance
+var _initial_height: float = height
+var _initial_rotation_offset: Vector3 = rotation_offset
+
 func _ready():
+	# 记录初值快照（复位用）
+	_initial_rotation_angle = rotation_angle
+	_initial_distance = distance
+	_initial_height = height
+	_initial_rotation_offset = rotation_offset
+
 	if look_at_on_start and is_instance_valid(target_marker):
 		update_camera_position_and_rotation()
 	
@@ -80,10 +94,44 @@ func _ready():
 	if enable_random_transitions:
 		start_new_transition()
 
+# 进入运行：从初值角度开始转圈+过渡
+func begin() -> void:
+	rotation_angle = _initial_rotation_angle
+	distance = _initial_distance
+	height = _initial_height
+	rotation_offset = _initial_rotation_offset
+	previous_rotation_angle = rotation_angle
+	completed_rotations = 0
+	is_transitioning = false
+	transition_timer = 0.0
+	target_distance = distance
+	target_height = height
+	target_rotation_offset = rotation_offset
+	if enable_random_transitions:
+		start_new_transition()
+	update_camera_position_and_rotation()
+	active = true
+
+# 停止运行：复位到初值姿态并冻结
+func halt() -> void:
+	active = false
+	rotation_angle = _initial_rotation_angle
+	distance = _initial_distance
+	height = _initial_height
+	rotation_offset = _initial_rotation_offset
+	previous_rotation_angle = rotation_angle
+	is_transitioning = false
+	transition_timer = 0.0
+	update_camera_position_and_rotation()
+
 func _process(delta):
 	if not is_instance_valid(target_marker):
 		return
-	
+
+	# 待命状态：保持当前姿态，不转、不过渡
+	if not active:
+		return
+
 	# 保存当前角度用于后续比较
 	var old_angle = rotation_angle
 	

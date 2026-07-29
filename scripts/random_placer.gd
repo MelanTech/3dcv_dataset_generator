@@ -140,22 +140,39 @@ var table_size
 
 func _ready():
 	camera.rotation_complete.connect(_on_complete_rotation)
-	
-	# 收集所有可用的物品类别
-	available_classes = get_available_classes()
-	if available_classes.is_empty():
-		print("错误：所有类别中都没有添加启用的物品场景")
-		return
 
 	# 获取桌子尺寸
 	table_size = get_table_size()
 	if table_size == Vector2.ZERO:
 		print("无法获取桌子尺寸")
-		return
 
-	# 开始放置物品
-	if enable:
-		place_items_on_grid(table_size, available_classes)
+	# 由 SessionController 控制何时开始摆放，_ready 不再自动放置
+
+
+# 进入运行：清掉残留并摆一批
+func begin() -> void:
+	clear_items()
+	# 桌子形状可能在 Idle 期间被切换，重新取一次尺寸
+	table_size = get_table_size()
+	available_classes = get_available_classes()
+	if available_classes.is_empty():
+		print("错误：所有类别中都没有添加启用的物品场景")
+		return
+	if table_size == Vector2.ZERO:
+		print("无法获取桌子尺寸")
+		return
+	place_items_on_grid(table_size, available_classes)
+
+
+# 停止运行：清空桌面
+func halt() -> void:
+	clear_items()
+
+
+# 清空已放置的物品
+func clear_items() -> void:
+	for obj in objects_parent.get_children():
+		obj.queue_free()
 
 
 # 获取桌子在XZ平面上的一半尺寸（基于AABB，并计入节点的全局缩放）
@@ -306,11 +323,15 @@ func place_items_on_grid(table_size: Vector2, available_classes: Array):
 	print("成功放置 ", placed_count, " 个物品")
 	
 func _on_complete_rotation(rotation):
+	# 相机待命时不响应（正常情况下 Idle 相机不会转、不会发信号，这里做防御）
+	if not camera.active:
+		return
+
 	for obj in objects_parent.get_children():
 		obj.queue_free()
 	
 	# 重新获取可用类别（可能有变动）
 	available_classes = get_available_classes()
 	
-	if enable and not available_classes.is_empty():
+	if not available_classes.is_empty():
 		place_items_on_grid(table_size, available_classes)

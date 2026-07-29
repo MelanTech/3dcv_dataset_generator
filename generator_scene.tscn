@@ -1,0 +1,380 @@
+[gd_scene format=3 uid="uid://kkdqolpw35hy"]
+
+[ext_resource type="Script" uid="uid://bh2k0ppcetyf4" path="res://scripts/camera.gd" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://lc7x11n0ydse" path="res://prefabs/table.tscn" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://bu5ufm45ow7oj" path="res://scripts/spot_light.gd" id="1_jq2sk"]
+[ext_resource type="Script" uid="uid://b4oym31s66a7l" path="res://scripts/data_generator.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://wumaxjugjqwg" path="res://scripts/sub_viewport.gd" id="2_272bh"]
+[ext_resource type="Script" uid="uid://cq8x5r780uk8n" path="res://scripts/table_color_transistion.gd" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://nthd0tta3vex" path="res://scripts/copy_transform.gd" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://cp2fwijv5fqm" path="res://scripts/draw_bbox.gd" id="5_074og"]
+[ext_resource type="Shader" uid="uid://ukaqx5k8ej35" path="res://shaders/depth.gdshader" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://ct8s8qu1mnluk" path="res://scripts/scenes_picker.gd" id="6_htxhm"]
+[ext_resource type="Script" uid="uid://dpdwjjk8v25ap" path="res://scripts/class_indent.gd" id="7_kek77"]
+[ext_resource type="PackedScene" uid="uid://dh02yiufx7o7n" path="res://models/envs/office2/office2.blend" id="7_qsp4k"]
+[ext_resource type="Script" uid="uid://cvc26eyfhnext" path="res://scripts/table_selector.gd" id="7_tselect"]
+[ext_resource type="PackedScene" uid="uid://c2xyg4odjxor4" path="res://models/envs/lab1/lab1.blend" id="8_kq58d"]
+[ext_resource type="PackedScene" uid="uid://inwj2d360ypa" path="res://models/envs/room1/room1.blend" id="9_kq58d"]
+[ext_resource type="Script" uid="uid://kht1taxe4y4r" path="res://scripts/random_placer.gd" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bvceplppf6qds" path="res://models/envs/room2/room2.blend" id="10_seu75"]
+[ext_resource type="PackedScene" uid="uid://coe0chnea2y10" path="res://prefabs/toothbrushes/toothbrush_1.tscn" id="11_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://cr8g3b35oj38f" path="res://prefabs/bananas/banana_1.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://bgnmocs6nc743" path="res://prefabs/waters/water_1.tscn" id="11_w48qg"]
+[ext_resource type="PackedScene" uid="uid://b27de8lo25taq" path="res://prefabs/bananas/banana_2.tscn" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://b3s15iksc36l7" path="res://prefabs/waters/water_2.tscn" id="12_vivmo"]
+[ext_resource type="PackedScene" uid="uid://d3t6oqdgvwthe" path="res://prefabs/papercups/papercup_1.tscn" id="12_yaehf"]
+[ext_resource type="PackedScene" uid="uid://ceigwj7h2oj23" path="res://prefabs/bananas/banana_3.tscn" id="13_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://8hn2io3xkv3b" path="res://prefabs/clotheshangers/clotheshanger_1.tscn" id="14_cegan"]
+[ext_resource type="PackedScene" uid="uid://4evlvhkpf8v0" path="res://prefabs/biscuits/biscuit_1.tscn" id="15_82xsv"]
+[ext_resource type="PackedScene" uid="uid://bm6roqmfi6ciq" path="res://prefabs/chips/chips_1.tscn" id="16_getpj"]
+[ext_resource type="PackedScene" uid="uid://b0yi006r13jfm" path="res://prefabs/cans/can_1.tscn" id="17_ryguw"]
+[ext_resource type="PackedScene" uid="uid://2eyrtsi1vc0p" path="res://models/envs/office1/office1.blend" id="18_074og"]
+[ext_resource type="PackedScene" uid="uid://bjcoijhqajluc" path="res://prefabs/table_disc.tscn" id="18_c2n8d"]
+[ext_resource type="PackedScene" uid="uid://cut8pfc70q7wu" path="res://prefabs/bottles/bottle_1.tscn" id="18_d13ii"]
+[ext_resource type="PackedScene" uid="uid://hn3rkljsifvp" path="res://prefabs/milks/milk_1.tscn" id="19_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://dh05gm2x6ri37" path="res://prefabs/combs/comb_1.tscn" id="19_facbu"]
+[ext_resource type="PackedScene" uid="uid://cnu3vx7uwwii7" path="res://prefabs/combs/comb_2.tscn" id="20_b1qrp"]
+[ext_resource type="PackedScene" uid="uid://6ktx8ukp3jod" path="res://prefabs/combs/comb_3.tscn" id="21_come4"]
+[ext_resource type="PackedScene" uid="uid://dnbwqbi5xsgov" path="res://prefabs/pomegranates/pomegranate_1.tscn" id="22_0odxb"]
+[ext_resource type="PackedScene" uid="uid://cg78hmrp2ut7" path="res://prefabs/oranges/orange_1.tscn" id="23_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://ddj5nfbygg77d" path="res://prefabs/toothbrushes/toothbrush_2.tscn" id="23_hrvbo"]
+[ext_resource type="PackedScene" uid="uid://b6x3a2fcxj0jb" path="res://prefabs/combs/comb_4.tscn" id="24_f1p13"]
+[ext_resource type="PackedScene" uid="uid://de2jyaq7o3360" path="res://prefabs/toothbrushes/toothbrush_3.tscn" id="24_uypp3"]
+[ext_resource type="PackedScene" uid="uid://c4s1umf3rj2hq" path="res://prefabs/clotheshangers/clotheshanger_2.tscn" id="25_0cp0l"]
+[ext_resource type="PackedScene" uid="uid://bj7pww7hpj3dr" path="res://prefabs/combs/comb_5.tscn" id="25_4obbf"]
+[ext_resource type="PackedScene" uid="uid://bttdd6g7qy5vu" path="res://prefabs/clotheshangers/clotheshanger_3.tscn" id="26_d2t1y"]
+[ext_resource type="PackedScene" uid="uid://bgsqrtqwdqsjr" path="res://prefabs/combs/comb_6.tscn" id="26_ovcoh"]
+[ext_resource type="PackedScene" uid="uid://bm6blyq8u2gq5" path="res://prefabs/toothbrushes/toothbrush_4.tscn" id="27_5dllo"]
+[ext_resource type="PackedScene" uid="uid://crnp212dpj5u1" path="res://prefabs/papercups/papercup_2.tscn" id="27_abqjc"]
+[ext_resource type="PackedScene" uid="uid://dkjcxa2sf21b7" path="res://prefabs/clotheshangers/clotheshanger_4.tscn" id="27_gngh3"]
+[ext_resource type="PackedScene" uid="uid://bc71feb1f3mi8" path="res://prefabs/dragonfruits/dragonfruit_1.tscn" id="27_xuqvo"]
+[ext_resource type="PackedScene" uid="uid://dlaxtrqijbsa7" path="res://prefabs/clotheshangers/clotheshanger_5.tscn" id="28_0n3wm"]
+[ext_resource type="PackedScene" uid="uid://cf1hek5r5il12" path="res://prefabs/papercups/papercup_3.tscn" id="28_6iyjs"]
+[ext_resource type="PackedScene" uid="uid://bdrnf73hha8ed" path="res://prefabs/toothbrushes/toothbrush_5.tscn" id="28_phcyf"]
+[ext_resource type="PackedScene" uid="uid://qh6cdky6v36x" path="res://prefabs/clotheshangers/clotheshanger_6.tscn" id="29_qnost"]
+[ext_resource type="PackedScene" uid="uid://djkiyobuik5xl" path="res://prefabs/biscuits/biscuit_2.tscn" id="36_34ol3"]
+[ext_resource type="PackedScene" uid="uid://cq158vuhbqg6v" path="res://prefabs/papercups/papercup_4.tscn" id="36_l0gw7"]
+[ext_resource type="PackedScene" uid="uid://dgjblut5nbxlo" path="res://prefabs/papercups/papercup_5.tscn" id="37_inymm"]
+[ext_resource type="PackedScene" uid="uid://bdpq4egesqo4e" path="res://prefabs/chips/chips_2.tscn" id="37_vke2r"]
+[ext_resource type="PackedScene" uid="uid://7dnwg6h3e8cp" path="res://prefabs/biscuits/biscuit_4.tscn" id="38_c2n8d"]
+[ext_resource type="PackedScene" uid="uid://d1cqoo30cndu0" path="res://prefabs/pomegranates/pomegranate_2.tscn" id="38_f6a44"]
+[ext_resource type="PackedScene" uid="uid://7283h1swoad6" path="res://prefabs/chips/chips_3.tscn" id="38_uit24"]
+[ext_resource type="PackedScene" uid="uid://bdi0x7nx08b1d" path="res://prefabs/pomegranates/pomegranate_3.tscn" id="39_0cbny"]
+[ext_resource type="PackedScene" uid="uid://djdqw7jfqfh8i" path="res://prefabs/oranges/orange_2.tscn" id="39_qnost"]
+[ext_resource type="PackedScene" uid="uid://bfsa6ww4wpfy0" path="res://prefabs/chips/chips_4.tscn" id="39_ruth0"]
+[ext_resource type="PackedScene" uid="uid://dgsu764p2f867" path="res://prefabs/biscuits/biscuit_5.tscn" id="39_wy5fy"]
+[ext_resource type="PackedScene" uid="uid://bevsnywn50b86" path="res://prefabs/chips/chips_5.tscn" id="40_rm4vd"]
+[ext_resource type="PackedScene" uid="uid://44jtwm42104l" path="res://prefabs/oranges/orange_3.tscn" id="40_wnkbs"]
+[ext_resource type="PackedScene" uid="uid://t1vtdjjrpll7" path="res://prefabs/chips/chips_6.tscn" id="41_pjyto"]
+[ext_resource type="PackedScene" uid="uid://2tgmxqwlege" path="res://prefabs/clotheshangers/clotheshanger_7.tscn" id="42_4obbf"]
+[ext_resource type="PackedScene" uid="uid://b1j5nx8tmcst1" path="res://prefabs/dragonfruits/dragonfruit_2.tscn" id="43_gngh3"]
+[ext_resource type="PackedScene" uid="uid://dr7navw782osw" path="res://prefabs/cans/can_2.tscn" id="43_ruth0"]
+[ext_resource type="PackedScene" uid="uid://civ6oof5uqu88" path="res://prefabs/dragonfruits/dragonfruit_3.tscn" id="44_0n3wm"]
+[ext_resource type="PackedScene" uid="uid://clahpebgx7yyk" path="res://prefabs/cans/can_3.tscn" id="44_rm4vd"]
+[ext_resource type="PackedScene" uid="uid://dn5fc3g82lpu1" path="res://prefabs/cans/can_4.tscn" id="45_sm6fg"]
+[ext_resource type="PackedScene" uid="uid://dnsvlmyb52km0" path="res://prefabs/cans/can_5.tscn" id="46_b17eg"]
+[ext_resource type="PackedScene" uid="uid://xk0i6dra566o" path="res://prefabs/cans/can_6.tscn" id="47_ntx8l"]
+[ext_resource type="PackedScene" uid="uid://p6bydn8qf4l2" path="res://prefabs/cans/can_7.tscn" id="48_rqtf5"]
+[ext_resource type="PackedScene" uid="uid://cvv4qnroy0h07" path="res://prefabs/cans/can_8.tscn" id="49_1vm84"]
+[ext_resource type="PackedScene" uid="uid://cgwf8unnu2bym" path="res://prefabs/sausages/sausage_1.tscn" id="50_qwt6e"]
+[ext_resource type="PackedScene" uid="uid://c0d8b1fb58jvf" path="res://prefabs/cans/can_9.tscn" id="50_wu3dr"]
+[ext_resource type="Script" uid="uid://c1rb7xfqi70bw" path="res://addons/post_processing/node/post_process.gd" id="51_blkrb"]
+[ext_resource type="PackedScene" uid="uid://cst1kpxfungor" path="res://prefabs/cans/can_10.tscn" id="51_cyx1q"]
+[ext_resource type="Script" uid="uid://bs45b6eixrfy3" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="52_abqjc"]
+[ext_resource type="PackedScene" uid="uid://c4pxargcc4ri5" path="res://prefabs/bottles/bottle_2.tscn" id="53_cyx1q"]
+[ext_resource type="PackedScene" uid="uid://72h2mn44e4ya" path="res://prefabs/bottles/bottle_3.tscn" id="54_0dhbp"]
+[ext_resource type="PackedScene" uid="uid://bvbosnjt22x72" path="res://prefabs/cannedchips/cannedchips_1.tscn" id="54_23xmf"]
+[ext_resource type="PackedScene" uid="uid://eflv81qiktr0" path="res://prefabs/bottles/bottle_4.tscn" id="55_jx0wj"]
+[ext_resource type="PackedScene" uid="uid://rhy6rrq1hvji" path="res://prefabs/cannedchips/cannedchips_2.tscn" id="55_swlj1"]
+[ext_resource type="PackedScene" uid="uid://dbigr7eakcqdh" path="res://prefabs/cannedchips/cannedchips_3.tscn" id="56_yysqy"]
+[ext_resource type="PackedScene" uid="uid://cjlsresjqbxhr" path="res://prefabs/cannedchips/cannedchips_4.tscn" id="57_n5t1e"]
+[ext_resource type="PackedScene" uid="uid://2yy3v1yhh3g0" path="res://prefabs/cannedchips/cannedchips_5.tscn" id="58_h6isl"]
+[ext_resource type="PackedScene" uid="uid://fqtpxcd5njd3" path="res://prefabs/cannedchips/cannedchips_6.tscn" id="59_53bls"]
+[ext_resource type="PackedScene" uid="uid://cvena0qtmubjl" path="res://prefabs/biscuits/biscuit_3.tscn" id="71_0dhbp"]
+[ext_resource type="PackedScene" uid="uid://cfc8jbyi7g2jh" path="res://prefabs/milks/milk_2.tscn" id="75_vieuh"]
+[ext_resource type="PackedScene" uid="uid://by5phodyfh222" path="res://prefabs/bottles/bottle_5.tscn" id="76_cpm2s"]
+[ext_resource type="PackedScene" uid="uid://foenkodhxd0d" path="res://prefabs/toothbrushes/toothbrush_6.tscn" id="76_wy5fy"]
+[ext_resource type="PackedScene" uid="uid://cl1wxrhvroxoq" path="res://prefabs/milks/milk_3.tscn" id="76_yjja3"]
+[ext_resource type="PackedScene" uid="uid://crg6ceal0uv6r" path="res://prefabs/milks/milk_4.tscn" id="77_l0gw7"]
+[ext_resource type="PackedScene" uid="uid://bvhyospo0l2vp" path="res://prefabs/bottles/bottle_6.tscn" id="77_u81y6"]
+[ext_resource type="PackedScene" uid="uid://cn6vea7g5f6xx" path="res://prefabs/milks/milk_5.tscn" id="78_inymm"]
+[ext_resource type="PackedScene" uid="uid://ci27awjwn0edr" path="res://prefabs/bottles/bottle_7.tscn" id="78_rt5wr"]
+[ext_resource type="PackedScene" uid="uid://cok1qrcvmwvxi" path="res://prefabs/milks/milk_6.tscn" id="79_jcxqu"]
+[ext_resource type="PackedScene" uid="uid://dfkq6gn1w1cu6" path="res://prefabs/bottles/bottle_8.tscn" id="79_mnw77"]
+[ext_resource type="PackedScene" uid="uid://bwy0b3b0ompgp" path="res://prefabs/milks/milk_7.tscn" id="80_0arob"]
+[ext_resource type="PackedScene" uid="uid://cbef0td3lvm2i" path="res://prefabs/bottles/bottle_9.tscn" id="80_vjgyh"]
+[ext_resource type="PackedScene" uid="uid://dkqem4r3q6ju7" path="res://prefabs/milks/milk_8.tscn" id="83_am8a1"]
+[ext_resource type="PackedScene" uid="uid://bmaup05kkj5lb" path="res://prefabs/milks/milk_9.tscn" id="84_8dc3g"]
+[ext_resource type="PackedScene" uid="uid://cvdahfsdg6tr2" path="res://prefabs/milks/milk_10.tscn" id="85_htgcl"]
+[ext_resource type="PackedScene" uid="uid://k8e0a31gktor" path="res://prefabs/waters/water_3.tscn" id="85_ywjan"]
+[ext_resource type="PackedScene" uid="uid://bm61vkkaoi3yk" path="res://prefabs/waters/water_4.tscn" id="86_m74q3"]
+[ext_resource type="PackedScene" uid="uid://dm4sq287wettr" path="res://prefabs/waters/water_5.tscn" id="87_tko6h"]
+[ext_resource type="PackedScene" uid="uid://c8jcbtybfcplp" path="res://prefabs/waters/water_6.tscn" id="88_am8a1"]
+[ext_resource type="PackedScene" uid="uid://d4gv0bdfuhkby" path="res://prefabs/waters/water_7.tscn" id="89_8dc3g"]
+[ext_resource type="PackedScene" uid="uid://dgmkprl7rvv8g" path="res://prefabs/books/book_1.tscn" id="89_swlj1"]
+[ext_resource type="PackedScene" uid="uid://b5gk5v32uurq1" path="res://prefabs/books/book_2.tscn" id="90_53bls"]
+[ext_resource type="PackedScene" uid="uid://fqf5rl32r82m" path="res://prefabs/waters/water_8.tscn" id="90_htgcl"]
+[ext_resource type="PackedScene" uid="uid://dqqqua68e1ag8" path="res://prefabs/books/book_3.tscn" id="91_lwnsi"]
+[ext_resource type="PackedScene" uid="uid://dg83fv7p8fys3" path="res://prefabs/waters/water_9.tscn" id="91_smeu8"]
+[ext_resource type="PackedScene" uid="uid://cihfynt4247dh" path="res://prefabs/books/book_4.tscn" id="92_41lik"]
+[ext_resource type="PackedScene" uid="uid://u6lhloypl5up" path="res://prefabs/books/book_5.tscn" id="93_jbvwl"]
+[ext_resource type="PackedScene" uid="uid://cmgwr7v21b5ht" path="res://prefabs/books/book_6.tscn" id="117_asu84"]
+[ext_resource type="PackedScene" uid="uid://b2vn56bxberhb" path="res://prefabs/books/book_7.tscn" id="118_qwt6e"]
+[ext_resource type="PackedScene" uid="uid://cqj2mrhtwn14u" path="res://prefabs/books/book_8.tscn" id="119_off2o"]
+[ext_resource type="PackedScene" uid="uid://ct2ls861jr8cg" path="res://prefabs/books/book_9.tscn" id="120_tttfs"]
+[ext_resource type="PackedScene" uid="uid://svnnm8g1d7u7" path="res://prefabs/books/book_10.tscn" id="121_1iygd"]
+[ext_resource type="PackedScene" uid="uid://cdveifqs8utww" path="res://prefabs/books/book_11.tscn" id="122_g5xqc"]
+[ext_resource type="Texture2D" uid="uid://dmg3wx7nauf1s" path="res://hdri/brown_photostudio_02_2k.hdr" id="hdri_panorama"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSky_hdri"]
+panorama = ExtResource("hdri_panorama")
+energy_multiplier = 0.32
+
+[sub_resource type="Sky" id="Sky_hdri"]
+sky_material = SubResource("PanoramaSky_hdri")
+
+[sub_resource type="Environment" id="Environment_ig7tw"]
+background_mode = 2
+sky = SubResource("Sky_hdri")
+ambient_light_source = 3
+ambient_light_color = Color(0.847059, 0.878431, 0.909804, 1)
+ambient_light_energy = 0.3
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.68
+tonemap_white = 6.0
+ssr_enabled = true
+ssr_max_steps = 32
+ssr_fade_in = 0.3
+ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 1.5
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_energy = 1.25
+adjustment_enabled = true
+adjustment_contrast = 1.02
+adjustment_saturation = 0.95
+
+[sub_resource type="Resource" id="Resource_uypp3"]
+script = ExtResource("52_abqjc")
+ChromaticAberration = true
+StrenghtCA = 0.6
+Blur = true
+L_O_D = 0.1
+Grain = true
+GrainPower = 0.1
+GrainSize = 1.0
+ColorCorrection = true
+ColorCorrectionTint = Color(0.98, 0.99, 1, 1)
+ColorCorrectionBrightness = -0.02
+ColorCorrectionSaturation = -0.05
+metadata/_custom_type_script = "uid://bs45b6eixrfy3"
+
+[sub_resource type="Environment" id="Environment_depth"]
+background_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_272bh"]
+render_priority = 0
+shader = ExtResource("6_7mycd")
+shader_parameter/world_scale = 0.0638
+
+[sub_resource type="QuadMesh" id="QuadMesh_5vw27"]
+material = SubResource("ShaderMaterial_272bh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+specular_mode = 1
+metallic_specular = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+
+[node name="Node3D" type="Node3D" unique_id=45182444]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=277174281]
+environment = SubResource("Environment_ig7tw")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="." unique_id=277174282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+update_mode = 1
+max_distance = 40.0
+size = Vector3(16, 10, 16)
+origin_offset = Vector3(0, -1, 0)
+ambient_mode = 0
+
+[node name="PostProcess" type="CanvasLayer" parent="." unique_id=943148421]
+script = ExtResource("51_blkrb")
+configuration = SubResource("Resource_uypp3")
+metadata/_custom_type_script = "uid://c1rb7xfqi70bw"
+
+[node name="Lights" type="Node" parent="." unique_id=1901610759]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights" unique_id=1735181356]
+transform = Transform3D(1, 0, 0, 0, -0.0733949, 0.997303, 0, -0.997303, -0.0733949, 0, 32.348, 0)
+visible = false
+shadow_enabled = true
+shadow_opacity = 0.48
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Lights" unique_id=757832671]
+transform = Transform3D(0.5, 0.612372, -0.612373, 0, 0.707107, 0.707107, 0.866026, -0.353553, 0.353553, 0, 0, 0)
+shadow_enabled = true
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="Lights" unique_id=1907433262]
+transform = Transform3D(-0.582123, -0.574949, 0.574949, 0, 0.707107, 0.707107, -0.813101, 0.411623, -0.411623, 0, 0, 0)
+light_color = Color(1, 0.93, 0.84, 1)
+light_energy = 0.85
+light_indirect_energy = 0.8
+light_angular_distance = 4.0
+shadow_enabled = true
+shadow_opacity = 0.78
+shadow_blur = 2.5
+directional_shadow_blend_splits = true
+
+[node name="RotateLight" type="SpotLight3D" parent="Lights" unique_id=310283447 node_paths=PackedStringArray("target_marker")]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 8.25355, -4.2896)
+light_energy = 0.2
+shadow_enabled = true
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 60.0
+script = ExtResource("1_jq2sk")
+target_marker = NodePath("../../Tables/Marker3D")
+rotation_speed = -180.0
+energy_range = Vector2(0, 5)
+
+[node name="RoomFillLight" type="OmniLight3D" parent="Lights" unique_id=1901610760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 8, 4)
+light_color = Color(1, 0.86, 0.68, 1)
+light_energy = 0.12
+omni_range = 14.0
+omni_attenuation = 1.8
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=312585935 node_paths=PackedStringArray("target_marker")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7)
+cull_mask = 1048573
+fov = 37.8493
+script = ExtResource("1_1bvp3")
+target_marker = NodePath("../Tables/Marker3D")
+rotation_offset = Vector3(-8, 0, 0)
+distance = 8.0
+height = 6.0
+auto_rotate = true
+rotation_speed = 90.0
+transition_duration = 1.0
+distance_range = Vector2(15, 20)
+height_range = Vector2(5, 15)
+
+[node name="DepthViewPort" type="SubViewport" parent="." unique_id=963643382]
+size = Vector2i(640, 480)
+render_target_update_mode = 4
+script = ExtResource("2_272bh")
+
+[node name="Camera3DDepth" type="Camera3D" parent="DepthViewPort" unique_id=1040286652 node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7)
+environment = SubResource("Environment_depth")
+script = ExtResource("3_5vw27")
+target = NodePath("../../Camera3D")
+
+[node name="DepthView" type="MeshInstance3D" parent="DepthViewPort/Camera3DDepth" unique_id=1766719545]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.108429, -1.32092)
+layers = 2
+mesh = SubResource("QuadMesh_5vw27")
+skeleton = NodePath("../../..")
+
+[node name="BBoxLayer" type="Node2D" parent="." unique_id=308544432 node_paths=PackedStringArray("data_generator")]
+script = ExtResource("5_074og")
+data_generator = NodePath("../DataGenerator")
+
+[node name="Scenes" type="Node" parent="." unique_id=1061650007 node_paths=PackedStringArray("camera")]
+script = ExtResource("6_htxhm")
+camera = NodePath("../Camera3D")
+
+[node name="office1" parent="Scenes" unique_id=128703367 instance=ExtResource("18_074og")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -14.2632, 8.65273, 0)
+visible = false
+
+[node name="office2" parent="Scenes" unique_id=128108702 instance=ExtResource("7_qsp4k")]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 12, 0, 18.3851, 0)
+visible = false
+
+[node name="lab1" parent="Scenes" unique_id=395443715 instance=ExtResource("8_kq58d")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 4.76837e-07, 0)
+visible = false
+
+[node name="room1" parent="Scenes" unique_id=792850137 instance=ExtResource("9_kq58d")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0.0189774, 0)
+visible = false
+
+[node name="room2" parent="Scenes" unique_id=523210099 instance=ExtResource("10_seu75")]
+transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0, -0.468148, 0)
+visible = false
+
+[node name="Tables" type="Node" parent="." unique_id=1789543958 node_paths=PackedStringArray("square_table", "square_table_mesh", "disc_table", "disc_table_mesh", "data_generator", "random_placer")]
+script = ExtResource("7_tselect")
+square_table = NodePath("TableSquare")
+square_table_mesh = NodePath("TableSquare/TableBG")
+disc_table = NodePath("TableDisc")
+disc_table_mesh = NodePath("TableDisc/disc-rigid")
+data_generator = NodePath("../DataGenerator")
+random_placer = NodePath("../RandomPlacer")
+
+[node name="TableSquare" parent="Tables" unique_id=2138597908 instance=ExtResource("1_h2yge")]
+script = ExtResource("7_kek77")
+
+[node name="TableBG" type="MeshInstance3D" parent="Tables/TableSquare" unique_id=1115394079]
+transform = Transform3D(2.75, 0, 0, 0, 2.75, 0, 0, 0, 2.75, 0, 4.75104, 0)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("PlaneMesh_1bvp3")
+script = ExtResource("3_1bvp3")
+transition_time = 0.5
+
+[node name="TableDisc" parent="Tables" unique_id=907463718 instance=ExtResource("18_c2n8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.72869, 0)
+visible = false
+script = ExtResource("7_kek77")
+
+[node name="Marker3D" type="Marker3D" parent="Tables" unique_id=195222286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76107, 0)
+
+[node name="DataGenerator" type="Node" parent="." unique_id=404970568 node_paths=PackedStringArray("camera", "table", "depth_view", "object_container")]
+script = ExtResource("2_0xm2m")
+enable = true
+camera = NodePath("../Camera3D")
+table = NodePath("../Tables/TableSquare")
+depth_view = NodePath("../DepthViewPort")
+object_container = NodePath("../Objects")
+base_path = &"/Users/bytedance/Develop/生成数据集"
+save_depth = true
+occlusion_threshold = 80
+max_generate_frame = 10
+auto_calibrate_depth = false
+
+[node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
+script = ExtResource("10_4c57u")
+table_mesh = NodePath("../Tables/TableSquare/TableBG")
+objects_parent = NodePath("../Objects")
+camera = NodePath("../Camera3D")
+book_enabled = false
+brush_scenes = Array[PackedScene]([ExtResource("11_2cqfq"), ExtResource("23_hrvbo"), ExtResource("24_uypp3"), ExtResource("27_5dllo"), ExtResource("28_phcyf"), ExtResource("76_wy5fy")])
+cup_scenes = Array[PackedScene]([ExtResource("12_yaehf"), ExtResource("27_abqjc"), ExtResource("28_6iyjs"), ExtResource("36_l0gw7"), ExtResource("37_inymm")])
+hanger_scenes = Array[PackedScene]([ExtResource("14_cegan"), ExtResource("25_0cp0l"), ExtResource("26_d2t1y"), ExtResource("27_gngh3"), ExtResource("28_0n3wm"), ExtResource("29_qnost"), ExtResource("42_4obbf")])
+sausage_scenes = Array[PackedScene]([ExtResource("50_qwt6e")])
+chips_scenes = Array[PackedScene]([ExtResource("16_getpj"), ExtResource("37_vke2r"), ExtResource("38_uit24"), ExtResource("39_ruth0"), ExtResource("40_rm4vd"), ExtResource("41_pjyto")])
+canned_chips_scenes = Array[PackedScene]([ExtResource("54_23xmf"), ExtResource("55_swlj1"), ExtResource("56_yysqy"), ExtResource("57_n5t1e"), ExtResource("58_h6isl"), ExtResource("59_53bls")])
+can_scenes = Array[PackedScene]([ExtResource("17_ryguw"), ExtResource("43_ruth0"), ExtResource("44_rm4vd"), ExtResource("45_sm6fg"), ExtResource("46_b17eg"), ExtResource("47_ntx8l"), ExtResource("48_rqtf5"), ExtResource("49_1vm84"), ExtResource("50_wu3dr"), ExtResource("51_cyx1q")])
+bottle_scenes = Array[PackedScene]([ExtResource("18_d13ii"), ExtResource("53_cyx1q"), ExtResource("54_0dhbp"), ExtResource("55_jx0wj"), ExtResource("76_cpm2s"), ExtResource("77_u81y6"), ExtResource("78_rt5wr"), ExtResource("79_mnw77"), ExtResource("80_vjgyh")])
+milk_scenes = Array[PackedScene]([ExtResource("19_1u8w0"), ExtResource("75_vieuh"), ExtResource("76_yjja3"), ExtResource("77_l0gw7"), ExtResource("78_inymm"), ExtResource("79_jcxqu"), ExtResource("80_0arob"), ExtResource("83_am8a1"), ExtResource("84_8dc3g"), ExtResource("85_htgcl")])
+water_scenes = Array[PackedScene]([ExtResource("11_w48qg"), ExtResource("12_vivmo"), ExtResource("85_ywjan"), ExtResource("86_m74q3"), ExtResource("87_tko6h"), ExtResource("88_am8a1"), ExtResource("89_8dc3g"), ExtResource("90_htgcl"), ExtResource("91_smeu8")])
+banana_scenes = Array[PackedScene]([ExtResource("11_efxa6"), ExtResource("12_dg77c"), ExtResource("13_ycdy4")])
+book_scenes = Array[PackedScene]([ExtResource("89_swlj1"), ExtResource("90_53bls"), ExtResource("91_lwnsi"), ExtResource("92_41lik"), ExtResource("93_jbvwl"), ExtResource("117_asu84"), ExtResource("118_qwt6e"), ExtResource("119_off2o"), ExtResource("120_tttfs"), ExtResource("121_1iygd"), ExtResource("122_g5xqc")])
+comb_scenes = Array[PackedScene]([ExtResource("19_facbu"), ExtResource("20_b1qrp"), ExtResource("21_come4"), ExtResource("24_f1p13"), ExtResource("25_4obbf"), ExtResource("26_ovcoh")])
+biscuit_scenes = Array[PackedScene]([ExtResource("15_82xsv"), ExtResource("36_34ol3"), ExtResource("71_0dhbp"), ExtResource("38_c2n8d"), ExtResource("39_wy5fy")])
+dragon_fruit_scenes = Array[PackedScene]([ExtResource("27_xuqvo"), ExtResource("43_gngh3"), ExtResource("44_0n3wm")])
+orange_scenes = Array[PackedScene]([ExtResource("23_a6jrf"), ExtResource("39_qnost"), ExtResource("40_wnkbs")])
+pomegranate_scenes = Array[PackedScene]([ExtResource("22_0odxb"), ExtResource("38_f6a44"), ExtResource("39_0cbny")])
+item_script = ExtResource("7_kek77")
+item_count_range = Vector2i(7, 15)
+min_distance_between_items = 0.8
+y_offset = 1.0
+scale_range = Vector2(0.9, 1.1)
+
+[node name="Objects" type="Node" parent="." unique_id=284703767]
