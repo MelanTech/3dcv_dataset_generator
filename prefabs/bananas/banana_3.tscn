@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ceigwj7h2oj23"]
 
-[ext_resource type="ArrayMesh" uid="uid://cf8vh8ufx0e2j" path="res://prefabs/bananas/banana_3_res/banana_3_mesh.res" id="1_fk3kd"]
+[ext_resource type="ArrayMesh" uid="uid://2l65445ysdku" path="res://prefabs/bananas/banana_3_res/banana_3_mesh.res" id="1_fk3kd"]
 [ext_resource type="Shape3D" uid="uid://cb62beiyu7bqg" path="res://prefabs/bananas/banana_3_res/banana_3_shape.res" id="2_qd5qj"]
 
 [node name="banana3" type="RigidBody3D" unique_id=318776378]

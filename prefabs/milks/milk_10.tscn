@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cvdahfsdg6tr2"]
 
-[ext_resource type="ArrayMesh" uid="uid://chvwgulbp7fmn" path="res://prefabs/milks/milk_10_res/milk_10_mesh.res" id="1_0eljs"]
+[ext_resource type="ArrayMesh" uid="uid://dtatojgsah2hm" path="res://prefabs/milks/milk_10_res/milk_10_mesh.res" id="1_0eljs"]
 [ext_resource type="Shape3D" uid="uid://k5622rexgkqj" path="res://prefabs/milks/milk_10_res/milk_10_shape.res" id="2_b650t"]
 
 [node name="milk10" type="RigidBody3D" unique_id=1803292822]

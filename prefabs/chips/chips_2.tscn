@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdpq4egesqo4e"]
 
-[ext_resource type="ArrayMesh" uid="uid://c0olm1xtiejk6" path="res://prefabs/chips/chips_2_res/chips_2_mesh.res" id="1_dv001"]
+[ext_resource type="ArrayMesh" uid="uid://dgwgltvw7xhee" path="res://prefabs/chips/chips_2_res/chips_2_mesh.res" id="1_dv001"]
 [ext_resource type="Shape3D" uid="uid://c50hnajxwit1i" path="res://prefabs/chips/chips_2_res/chips_2_shape.res" id="2_uedp5"]
 
 [node name="chips2" type="RigidBody3D" unique_id=98731841]

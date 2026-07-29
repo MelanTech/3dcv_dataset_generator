@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cqj2mrhtwn14u"]
 
-[ext_resource type="ArrayMesh" uid="uid://crv88xg84dr7k" path="res://prefabs/books/book_8_res/book_8_mesh.res" id="1_p1x0f"]
+[ext_resource type="ArrayMesh" uid="uid://dt3hwxwwasllk" path="res://prefabs/books/book_8_res/book_8_mesh.res" id="1_p1x0f"]
 [ext_resource type="Shape3D" uid="uid://didpcfudfk4rm" path="res://prefabs/books/book_8_res/book_8_shape.res" id="2_vdlvm"]
 
 [node name="book8" type="RigidBody3D" unique_id=424202239]

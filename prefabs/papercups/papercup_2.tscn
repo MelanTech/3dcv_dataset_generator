@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crnp212dpj5u1"]
 
-[ext_resource type="ArrayMesh" uid="uid://b7o7n2xfm0ara" path="res://prefabs/papercups/papercup_2_res/papercup_2_mesh.res" id="1_p0nbn"]
+[ext_resource type="ArrayMesh" uid="uid://jbgotw7g1l1x" path="res://prefabs/papercups/papercup_2_res/papercup_2_mesh.res" id="1_p0nbn"]
 [ext_resource type="Shape3D" uid="uid://b505hvg0hi1ks" path="res://prefabs/papercups/papercup_2_res/papercup_2_shape.res" id="2_1vnge"]
 
 [node name="papercup2" type="RigidBody3D" unique_id=634476882]

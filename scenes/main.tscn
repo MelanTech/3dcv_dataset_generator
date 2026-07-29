@@ -1,9 +1,9 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://generator_scene.tscn" id="1_generator"]
-[ext_resource type="Script" uid="uid://dgw8adhglx57r" path="res://scripts/session_controller.gd" id="2_session"]
-[ext_resource type="Script" path="res://scripts/preview_scaler.gd" id="3_preview_scaler"]
-[ext_resource type="Script" path="res://scripts/viewport_texture_rect.gd" id="4_viewport_texture_rect"]
+[ext_resource type="PackedScene" path="res://scenes/generator_scene.tscn" id="1_generator"]
+[ext_resource type="Script" uid="uid://dgw8adhglx57r" path="res://scripts/ui/session_controller.gd" id="2_session"]
+[ext_resource type="Script" path="res://scripts/ui/preview_scaler.gd" id="3_preview_scaler"]
+[ext_resource type="Script" path="res://scripts/ui/viewport_texture_rect.gd" id="4_viewport_texture_rect"]
 [ext_resource type="Shader" path="res://shaders/depth_preview.gdshader" id="5_depth_preview"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_depth_preview"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qh6cdky6v36x"]
 
-[ext_resource type="ArrayMesh" uid="uid://csvia6l2vtow3" path="res://prefabs/clotheshangers/clotheshanger_6_res/clotheshanger_6_mesh.res" id="1_pyf1r"]
+[ext_resource type="ArrayMesh" uid="uid://k2i1rv3wms6b" path="res://prefabs/clotheshangers/clotheshanger_6_res/clotheshanger_6_mesh.res" id="1_pyf1r"]
 [ext_resource type="Shape3D" uid="uid://dr30mui1x53ib" path="res://prefabs/clotheshangers/clotheshanger_6_res/clotheshanger_6_shape.res" id="2_2vbsc"]
 
 [node name="clotheshanger6" type="RigidBody3D" unique_id=1995442013]

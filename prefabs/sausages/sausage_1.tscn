@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgwf8unnu2bym"]
 
-[ext_resource type="ArrayMesh" uid="uid://ei8ckjv6txhs" path="res://prefabs/sausages/sausage_1_res/sausage_1_mesh.res" id="1_hhnpo"]
+[ext_resource type="ArrayMesh" uid="uid://ccloanojxhqp2" path="res://prefabs/sausages/sausage_1_res/sausage_1_mesh.res" id="1_hhnpo"]
 [ext_resource type="Shape3D" uid="uid://grodl1hqi08n" path="res://prefabs/sausages/sausage_1_res/sausage_1_shape.res" id="2_ff0mb"]
 
 [node name="sausage1" type="RigidBody3D" unique_id=1175161310]

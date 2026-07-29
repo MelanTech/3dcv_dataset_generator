@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://by5phodyfh222"]
 
-[ext_resource type="ArrayMesh" uid="uid://dbrord8lm6udg" path="res://prefabs/bottles/bottle_5_res/bottle_5_mesh.res" id="1_4xyan"]
+[ext_resource type="ArrayMesh" uid="uid://baees7nkotlh3" path="res://prefabs/bottles/bottle_5_res/bottle_5_mesh.res" id="1_4xyan"]
 [ext_resource type="Shape3D" uid="uid://da5kv7j72falq" path="res://prefabs/bottles/bottle_5_res/bottle_5_shape.res" id="2_042gy"]
 
 [node name="bottle5" type="RigidBody3D" unique_id=709664556]

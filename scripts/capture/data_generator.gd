@@ -384,7 +384,7 @@ func is_occluded_above_threshold(object: Node3D) -> bool:
 	# 对每个点发射射线检测遮挡
 	var occluded_count = 0
 	for point in points:
-		if is_point_occluded(point, object):
+		if is_point_occluded(point):
 			occluded_count += 1
 	
 	# 计算遮挡百分比并与阈值比较
@@ -420,7 +420,7 @@ func get_detection_points(object: Node3D, aabb: AABB) -> Array:
 	return points.slice(0, ray_count)
 
 # 检测单个点是否被遮挡
-func is_point_occluded(point: Vector3, self_object: Node3D) -> bool:
+func is_point_occluded(point: Vector3) -> bool:
 	# 射线起点：相机位置
 	var ray_start = camera.global_position
 	# 射线终点：物体上的检测点
@@ -438,11 +438,7 @@ func is_point_occluded(point: Vector3, self_object: Node3D) -> bool:
 		return false
 	var space_state = world.direct_space_state
 	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end)
-	
-	# 排除自身（避免检测到自己的碰撞体）
-	#var collision_object = self_object.get_node_or_null("CollisionShape3D")
-	#query.exclude = [collision_object.get_rid()]
-	
+
 	# 执行射线检测
 	var result = space_state.intersect_ray(query)
 	

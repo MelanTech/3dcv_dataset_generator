@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://lc7x11n0ydse"]
 
 [ext_resource type="PackedScene" uid="uid://cn161ckn34stw" path="res://models/table.fbx" id="1_ik73a"]
-[ext_resource type="Shape3D" uid="uid://bagmamba73lju" path="res://prefabs/table_res/table_shape.res" id="2_0sl77"]
+[ext_resource type="Shape3D" uid="uid://bagmamba73lju" path="res://prefabs/tables/table_res/table_shape.res" id="2_0sl77"]
 
 [node name="TableRigidBody3D" type="RigidBody3D" unique_id=1941787752]
 freeze = true

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgsu764p2f867"]
 
-[ext_resource type="ArrayMesh" uid="uid://b73jogapiyc74" path="res://prefabs/biscuits/biscuit_5_res/biscuit_5_mesh.res" id="1_3f78x"]
+[ext_resource type="ArrayMesh" uid="uid://dnxt5a7dh0q0n" path="res://prefabs/biscuits/biscuit_5_res/biscuit_5_mesh.res" id="1_3f78x"]
 [ext_resource type="Shape3D" uid="uid://bjluwqgqfjw3u" path="res://prefabs/biscuits/biscuit_5_res/biscuit_5_shape.res" id="2_s1bpt"]
 
 [node name="biscuit5" type="RigidBody3D" unique_id=496841810]

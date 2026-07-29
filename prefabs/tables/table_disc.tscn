@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bjcoijhqajluc"]
 
-[ext_resource type="Script" uid="uid://cq8x5r780uk8n" path="res://scripts/table_color_transistion.gd" id="1_fsbg8"]
+[ext_resource type="Script" uid="uid://cq8x5r780uk8n" path="res://scripts/environment/table_color_transistion.gd" id="1_fsbg8"]
 [ext_resource type="PackedScene" uid="uid://dm7fwn6cbgu8t" path="res://models/stool.blend" id="2_x4lqv"]
-[ext_resource type="Shape3D" uid="uid://dkytjv5orgo3h" path="res://prefabs/table_disc_res/table_disc_shape.res" id="3_247t7"]
+[ext_resource type="Shape3D" uid="uid://dkytjv5orgo3h" path="res://prefabs/tables/table_disc_res/table_disc_shape.res" id="3_247t7"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_x4lqv"]
 top_radius = 3.3

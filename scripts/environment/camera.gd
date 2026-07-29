@@ -222,7 +222,3 @@ func start_new_transition():
 	# 开始过渡
 	is_transitioning = true
 	transition_timer = 0.0
-
-# 手动触发一次随机过渡
-func trigger_transition():
-	start_new_transition()

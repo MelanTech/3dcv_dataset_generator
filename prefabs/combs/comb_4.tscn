@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b6x3a2fcxj0jb"]
 
-[ext_resource type="ArrayMesh" uid="uid://cxjs53ulixvv3" path="res://prefabs/combs/comb_4_res/comb_4_mesh.res" id="1_2aueu"]
+[ext_resource type="ArrayMesh" uid="uid://cyjvegwts32o3" path="res://prefabs/combs/comb_4_res/comb_4_mesh.res" id="1_2aueu"]
 [ext_resource type="Shape3D" uid="uid://c3psxxumoqxoe" path="res://prefabs/combs/comb_4_res/comb_4_shape.res" id="2_figry"]
 
 [node name="comb4" type="RigidBody3D" unique_id=1884525047]

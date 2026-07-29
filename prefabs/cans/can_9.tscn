@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0d8b1fb58jvf"]
 
-[ext_resource type="ArrayMesh" uid="uid://cbh6pqqcnlgad" path="res://prefabs/cans/can_9_res/can_9_mesh.res" id="1_x7xub"]
+[ext_resource type="ArrayMesh" uid="uid://btydl187uahht" path="res://prefabs/cans/can_9_res/can_9_mesh.res" id="1_x7xub"]
 [ext_resource type="Shape3D" uid="uid://derfal1pd2jxl" path="res://prefabs/cans/can_9_res/can_9_shape.res" id="2_1s6tx"]
 
 [node name="can9" type="RigidBody3D" unique_id=1399994460]

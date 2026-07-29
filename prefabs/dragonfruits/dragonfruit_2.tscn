@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b1j5nx8tmcst1"]
 
-[ext_resource type="ArrayMesh" uid="uid://v8gtop8d3wuh" path="res://prefabs/dragonfruits/dragonfruit_2_res/dragonfruit_2_mesh.res" id="1_b8hed"]
+[ext_resource type="ArrayMesh" uid="uid://eewtwrjv7a2i" path="res://prefabs/dragonfruits/dragonfruit_2_res/dragonfruit_2_mesh.res" id="1_b8hed"]
 [ext_resource type="Shape3D" uid="uid://bol2bf3yj7dk4" path="res://prefabs/dragonfruits/dragonfruit_2_res/dragonfruit_2_shape.res" id="2_i3a83"]
 
 [node name="dragonfruit2" type="RigidBody3D" unique_id=1691398808]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dm4sq287wettr"]
 
-[ext_resource type="ArrayMesh" uid="uid://b653qr0bsdy25" path="res://prefabs/waters/water_5_res/water_5_mesh.res" id="1_brrfy"]
+[ext_resource type="ArrayMesh" uid="uid://b5yr7cgbxv11s" path="res://prefabs/waters/water_5_res/water_5_mesh.res" id="1_brrfy"]
 [ext_resource type="Shape3D" uid="uid://doel2eqcufi2f" path="res://prefabs/waters/water_5_res/water_5_shape.res" id="2_74e28"]
 
 [node name="water5" type="RigidBody3D" unique_id=1549544164]

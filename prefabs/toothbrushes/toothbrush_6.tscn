@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://foenkodhxd0d"]
 
-[ext_resource type="ArrayMesh" uid="uid://cgkaydadjrn51" path="res://prefabs/toothbrushes/toothbrush_6_res/toothbrush_6_mesh.res" id="1_wq5fb"]
+[ext_resource type="ArrayMesh" uid="uid://4fftpiy28225" path="res://prefabs/toothbrushes/toothbrush_6_res/toothbrush_6_mesh.res" id="1_wq5fb"]
 [ext_resource type="Shape3D" uid="uid://b6cww66s7g4w" path="res://prefabs/toothbrushes/toothbrush_6_res/toothbrush_6_shape.res" id="2_uppfi"]
 
 [node name="toothbrush6" type="RigidBody3D" unique_id=1415702029]

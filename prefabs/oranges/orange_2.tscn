@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://djdqw7jfqfh8i"]
 
-[ext_resource type="ArrayMesh" uid="uid://b48x66cvm1qkd" path="res://prefabs/oranges/orange_2_res/orange_2_mesh.res" id="1_5lb6g"]
+[ext_resource type="ArrayMesh" uid="uid://4hso7gaoh2ma" path="res://prefabs/oranges/orange_2_res/orange_2_mesh.res" id="1_5lb6g"]
 [ext_resource type="Shape3D" uid="uid://b14drdd85mpfd" path="res://prefabs/oranges/orange_2_res/orange_2_shape.res" id="2_xxo20"]
 
 [node name="orange2" type="RigidBody3D" unique_id=1626500342]

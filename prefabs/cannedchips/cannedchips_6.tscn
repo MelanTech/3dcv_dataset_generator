@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fqtpxcd5njd3"]
 
-[ext_resource type="ArrayMesh" uid="uid://bf530ye81xd0u" path="res://prefabs/cannedchips/cannedchips_6_res/cannedchips_6_mesh.res" id="1_v867r"]
+[ext_resource type="ArrayMesh" uid="uid://biodhwsxwsbj1" path="res://prefabs/cannedchips/cannedchips_6_res/cannedchips_6_mesh.res" id="1_v867r"]
 [ext_resource type="Shape3D" uid="uid://c65pgu0img0hy" path="res://prefabs/cannedchips/cannedchips_6_res/cannedchips_6_shape.res" id="2_uts70"]
 
 [node name="cannedchips6" type="RigidBody3D" unique_id=1958116662]
