@@ -271,6 +271,8 @@ script = ExtResource("2_272bh")
 [node name="Camera3DDepth" type="Camera3D" parent="DepthViewPort" unique_id=1040286652 node_paths=PackedStringArray("target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 7)
 environment = SubResource("Environment_depth")
+near = 0.1
+far = 40.0
 script = ExtResource("3_5vw27")
 target = NodePath("../../Camera3D")
 
@@ -346,7 +348,6 @@ base_path = &"/Users/bytedance/Develop/生成数据集"
 save_depth = true
 occlusion_threshold = 80
 max_generate_frame = 10
-auto_calibrate_depth = false
 
 [node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
 script = ExtResource("10_4c57u")

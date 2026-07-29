@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://dgw8adhglx57r" path="res://scripts/session_controller.gd" id="2_session"]
 [ext_resource type="Script" path="res://scripts/preview_scaler.gd" id="3_preview_scaler"]
 [ext_resource type="Script" path="res://scripts/viewport_texture_rect.gd" id="4_viewport_texture_rect"]
+[ext_resource type="Shader" path="res://shaders/depth_preview.gdshader" id="5_depth_preview"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_depth_preview"]
+shader = ExtResource("5_depth_preview")
+shader_parameter/near_mm = 300.0
+shader_parameter/far_mm = 15000.0
 
 [node name="Main" type="Control"]
 anchors_preset = 15
@@ -58,6 +64,7 @@ render_target_update_mode = 4
 [node name="GeneratorScene" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport" instance=ExtResource("1_generator")]
 
 [node name="DepthPreview" type="TextureRect" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip" node_paths=PackedStringArray("source_viewport")]
+material = SubResource("ShaderMaterial_depth_preview")
 custom_minimum_size = Vector2(640, 480)
 expand_mode = 1
 stretch_mode = 5
