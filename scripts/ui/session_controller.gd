@@ -271,7 +271,7 @@ func _open_dir_dialog() -> void:
 		_file_dialog = FileDialog.new()
 		_file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 		_file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-		_file_dialog.use_native_dialog = true
+		_file_dialog.use_native_dialog = false
 		_file_dialog.dir_selected.connect(_on_dir_selected)
 		add_child(_file_dialog)
 	if not _output_dir.is_empty():

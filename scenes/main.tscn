@@ -1,25 +1,40 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://7pknpdrlq5ok"]
 
-[ext_resource type="PackedScene" path="res://scenes/generator_scene.tscn" id="1_generator"]
+[ext_resource type="PackedScene" uid="uid://kkdqolpw35hy" path="res://scenes/generator_scene.tscn" id="1_generator"]
 [ext_resource type="Script" uid="uid://dgw8adhglx57r" path="res://scripts/ui/session_controller.gd" id="2_session"]
-[ext_resource type="Script" path="res://scripts/ui/preview_scaler.gd" id="3_preview_scaler"]
-[ext_resource type="Script" path="res://scripts/ui/viewport_texture_rect.gd" id="4_viewport_texture_rect"]
-[ext_resource type="Shader" path="res://shaders/depth_preview.gdshader" id="5_depth_preview"]
+[ext_resource type="Script" uid="uid://udughmpl1f32" path="res://scripts/ui/preview_scaler.gd" id="3_preview_scaler"]
+[ext_resource type="Script" uid="uid://co44ygirlneus" path="res://scripts/ui/viewport_texture_rect.gd" id="4_viewport_texture_rect"]
+[ext_resource type="Shader" uid="uid://l64tg7k5h78" path="res://shaders/depth_preview.gdshader" id="5_depth_preview"]
+[ext_resource type="Theme" path="res://themes/app_theme.tres" id="6_app_theme"]
+[ext_resource type="Script" path="res://scripts/ui/responsive_window.gd" id="7_responsive_window"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_depth_preview"]
 shader = ExtResource("5_depth_preview")
 shader_parameter/near_mm = 300.0
 shader_parameter/far_mm = 15000.0
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=848931713]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_app_theme")
+script = ExtResource("7_responsive_window")
+max_ui_scale = 1.2
 
-[node name="RootLayout" type="HSplitContainer" parent="."]
-anchors_preset = 15
+[node name="AppBackground" type="ColorRect" parent="." unique_id=1869368465]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.960784, 0.968627, 0.984314, 1)
+
+[node name="RootLayout" type="HSplitContainer" parent="." unique_id=1234484418]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
@@ -28,60 +43,70 @@ offset_right = -12.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
+split_offsets = PackedInt32Array(460)
 split_offset = 460
 
-[node name="PreviewPanel" type="PanelContainer" parent="RootLayout"]
+[node name="PreviewPanel" type="PanelContainer" parent="RootLayout" unique_id=1967820833]
 custom_minimum_size = Vector2(320, 240)
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PreviewMargin" type="MarginContainer" parent="RootLayout/PreviewPanel"]
+[node name="PreviewMargin" type="MarginContainer" parent="RootLayout/PreviewPanel" unique_id=1522946677]
+layout_mode = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="PreviewScaler" type="Control" parent="RootLayout/PreviewPanel/PreviewMargin" node_paths=PackedStringArray("target")]
+[node name="PreviewScaler" type="Control" parent="RootLayout/PreviewPanel/PreviewMargin" unique_id=1194655647 node_paths=PackedStringArray("target")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_preview_scaler")
 target = NodePath("PreviewStrip")
-logical_size = Vector2(1280, 480)
+logical_size = Vector2(640, 960)
 
-[node name="PreviewStrip" type="HBoxContainer" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler"]
-custom_minimum_size = Vector2(1280, 480)
+[node name="PreviewStrip" type="VBoxContainer" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler" unique_id=332875851]
+custom_minimum_size = Vector2(640, 960)
+layout_mode = 0
 theme_override_constants/separation = 0
 
-[node name="GeneratorView" type="SubViewportContainer" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip"]
+[node name="GeneratorView" type="SubViewportContainer" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip" unique_id=1323605459]
 custom_minimum_size = Vector2(640, 480)
-stretch = false
+layout_mode = 2
 
-[node name="GeneratorViewport" type="SubViewport" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView"]
+[node name="GeneratorViewport" type="SubViewport" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView" unique_id=1131313440]
 own_world_3d = true
+handle_input_locally = false
 size = Vector2i(640, 480)
 render_target_update_mode = 4
 
-[node name="GeneratorScene" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport" instance=ExtResource("1_generator")]
+[node name="GeneratorScene" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport" unique_id=1525887565 instance=ExtResource("1_generator")]
 
-[node name="DepthPreview" type="TextureRect" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip" node_paths=PackedStringArray("source_viewport")]
+[node name="DepthPreview" type="TextureRect" parent="RootLayout/PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip" unique_id=1833346607 node_paths=PackedStringArray("source_viewport")]
 material = SubResource("ShaderMaterial_depth_preview")
 custom_minimum_size = Vector2(640, 480)
+layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 script = ExtResource("4_viewport_texture_rect")
 source_viewport = NodePath("../GeneratorView/GeneratorViewport/GeneratorScene/DepthViewPort")
 
-[node name="ControlPanel" type="PanelContainer" parent="RootLayout"]
-custom_minimum_size = Vector2(360, 480)
+[node name="ControlPanel" type="PanelContainer" parent="RootLayout" unique_id=1277428043]
+custom_minimum_size = Vector2(460, 480)
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ControlMargin" type="MarginContainer" parent="RootLayout/ControlPanel"]
+[node name="ControlMargin" type="MarginContainer" parent="RootLayout/ControlPanel" unique_id=2128327810]
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="SessionController" type="Control" parent="RootLayout/ControlPanel/ControlMargin" node_paths=PackedStringArray("camera", "random_placer", "data_generator", "bbox_layer", "table_selector", "rotate_light")]
+[node name="SessionController" type="Control" parent="RootLayout/ControlPanel/ControlMargin" unique_id=884732434 node_paths=PackedStringArray("camera", "random_placer", "data_generator", "bbox_layer", "table_selector", "rotate_light")]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_session")
