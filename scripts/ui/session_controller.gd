@@ -1,5 +1,6 @@
 extends Control
 
+const CaptureSettingsScript = preload("res://scripts/ui/capture_settings.gd")
 const SessionPanelBuilderScript = preload("res://scripts/ui/session_panel_builder.gd")
 
 ## 采集会话总控 + GUI 面板。
@@ -181,45 +182,19 @@ func _sync_catalog_from_controls() -> void:
 # 配置持久化
 # ----------------------------------------------------------------------------
 func _on_save_config_pressed() -> void:
-	var cfg := ConfigFile.new()
-	cfg.set_value("general", "output_dir", _output_dir)
-	cfg.set_value("general", "count_min", int(_count_min.value))
-	cfg.set_value("general", "count_max", int(_count_max.value))
-	cfg.set_value("general", "save_interval", int(_interval_spin.value))
-	cfg.set_value("general", "save_depth", _save_depth_check.button_pressed)
-	cfg.set_value("general", "save_enabled", _save_enabled_check.button_pressed)
-	cfg.set_value("general", "show_bbox", _show_bbox_check.button_pressed)
-	cfg.set_value("general", "rotate_light", _rotate_light_check.button_pressed)
-	cfg.set_value("general", "table_shape", _table_option.selected)
-	for prefix in _category_controls:
-		var ctrl = _category_controls[prefix]
-		cfg.set_value("enabled", prefix, ctrl.enabled.button_pressed)
-		cfg.set_value("weight", prefix, float(ctrl.weight.value))
-	cfg.save(CONFIG_PATH)
-	print("[session] config saved to %s" % CONFIG_PATH)
+	var settings: CaptureSettings = CaptureSettingsScript.from_controls(_output_dir, _get_controls())
+	var err := settings.save_to_file(CONFIG_PATH)
+	if err == OK:
+		print("[session] config saved to %s" % CONFIG_PATH)
+	else:
+		push_error("[session] config save failed: %s (err=%d)" % [CONFIG_PATH, err])
 
 
 func _load_config() -> void:
-	var cfg := ConfigFile.new()
-	if cfg.load(CONFIG_PATH) != OK:
-		return
-	_output_dir = cfg.get_value("general", "output_dir", _output_dir)
-	_output_dir_value.text = _output_dir
-	_count_min.value = cfg.get_value("general", "count_min", _count_min.value)
-	_count_max.value = cfg.get_value("general", "count_max", _count_max.value)
-	_interval_spin.value = cfg.get_value("general", "save_interval", _interval_spin.value)
-	_save_depth_check.button_pressed = cfg.get_value("general", "save_depth", false)
-	_save_enabled_check.button_pressed = cfg.get_value("general", "save_enabled", false)
-	_show_bbox_check.button_pressed = cfg.get_value("general", "show_bbox", true)
-	_rotate_light_check.button_pressed = cfg.get_value("general", "rotate_light", true)
-	_table_option.selected = cfg.get_value("general", "table_shape", 0)
-	for prefix in _category_controls:
-		var ctrl = _category_controls[prefix]
-		var category: ObjectCategory = ctrl.category
-		var default_enabled := category.enabled if category != null else true
-		var default_weight := category.weight if category != null else 1.0
-		ctrl.enabled.button_pressed = cfg.get_value("enabled", prefix, default_enabled)
-		ctrl.weight.value = cfg.get_value("weight", prefix, default_weight)
+	var defaults: CaptureSettings = CaptureSettingsScript.from_controls(_output_dir, _get_controls())
+	var settings: CaptureSettings = CaptureSettingsScript.load_from_file(CONFIG_PATH, defaults)
+	settings.apply_to_controls(_get_controls())
+	_output_dir = settings.output_dir
 
 
 # ----------------------------------------------------------------------------
@@ -255,6 +230,21 @@ func _build_gui() -> void:
 	_stop_btn = controls["stop_btn"]
 	_status_label = controls["status_label"]
 	_category_controls = controls["category_controls"]
+
+
+func _get_controls() -> Dictionary:
+	return {
+		"output_dir_value": _output_dir_value,
+		"count_min": _count_min,
+		"count_max": _count_max,
+		"interval_spin": _interval_spin,
+		"save_depth_check": _save_depth_check,
+		"save_enabled_check": _save_enabled_check,
+		"show_bbox_check": _show_bbox_check,
+		"rotate_light_check": _rotate_light_check,
+		"table_option": _table_option,
+		"category_controls": _category_controls,
+	}
 
 
 # 启动后禁用结构性配置控件（保存/预览开关除外）
