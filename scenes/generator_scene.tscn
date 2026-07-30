@@ -255,5 +255,8 @@ item_count_range = Vector2i(7, 15)
 min_distance_between_items = 0.8
 y_offset = 1.0
 scale_range = Vector2(0.9, 1.1)
+stack_offset_ratio = 0.1
+stacked_max_tilt_degrees = 0.0
+stacked_base_max_tilt_degrees = 0.0
 
 [node name="Objects" type="Node" parent="." unique_id=284703767]
