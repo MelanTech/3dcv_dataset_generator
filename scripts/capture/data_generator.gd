@@ -15,11 +15,12 @@ const LabelGeneratorScript = preload("res://scripts/capture/label_generator.gd")
 # RGB 保存分辨率（固定，不随窗口大小变化）
 @export var rgb_capture_size: Vector2i = Vector2i(640, 480)
 
-# 遮挡检测射线数量（越多越精确，性能消耗越大）
-@export var ray_count: int = 10  # 建议 10-20 个点平衡精度和性能
-
-# 遮挡阈值（0-100），超过此百分比则视为需要忽略的遮挡
-@export_range(0, 100, 5) var occlusion_threshold: int = 70
+# 可见点比例阈值（0-100），低于此比例则丢弃标签。
+@export_range(0, 100, 5) var visibility_threshold: int = 20
+@export_enum("Grid", "Bounds Key Points", "Hybrid") var occlusion_sample_mode: int = 1
+@export var occlusion_grid_sample_count: int = 10  # 仅 Grid / Hybrid 模式使用
+@export var debug_occlusion: bool = false
+@export var drop_below_table_threshold: float = 0.35
 
 var folder_name: StringName
 var rgb_image_path: StringName
@@ -129,9 +130,12 @@ func get_all_labels() -> Array:
 		table,
 		object_container,
 		_get_unknown_class_id(),
-		ray_count,
-		occlusion_threshold,
-		_get_active_world_3d()
+		_get_active_world_3d(),
+		visibility_threshold,
+		occlusion_sample_mode,
+		occlusion_grid_sample_count,
+		debug_occlusion,
+		drop_below_table_threshold
 	)
 
 

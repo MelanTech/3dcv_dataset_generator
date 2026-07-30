@@ -243,7 +243,6 @@ depth_view = NodePath("../DepthViewPort")
 object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
 save_depth = true
-occlusion_threshold = 80
 
 [node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
 script = ExtResource("10_4c57u")
