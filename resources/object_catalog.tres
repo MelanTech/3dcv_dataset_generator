@@ -1,0 +1,303 @@
+[gd_resource type="Resource" script_class="ObjectCatalog" load_steps=130 format=3]
+
+[ext_resource type="Script" path="res://scripts/config/object_catalog.gd" id="script_catalog"]
+[ext_resource type="Script" path="res://scripts/config/object_category.gd" id="script_category"]
+[ext_resource type="PackedScene" uid="uid://coe0chnea2y10" path="res://prefabs/toothbrushes/toothbrush_1.tscn" id="scene_1"]
+[ext_resource type="PackedScene" uid="uid://ddj5nfbygg77d" path="res://prefabs/toothbrushes/toothbrush_2.tscn" id="scene_2"]
+[ext_resource type="PackedScene" uid="uid://de2jyaq7o3360" path="res://prefabs/toothbrushes/toothbrush_3.tscn" id="scene_3"]
+[ext_resource type="PackedScene" uid="uid://bm6blyq8u2gq5" path="res://prefabs/toothbrushes/toothbrush_4.tscn" id="scene_4"]
+[ext_resource type="PackedScene" uid="uid://bdrnf73hha8ed" path="res://prefabs/toothbrushes/toothbrush_5.tscn" id="scene_5"]
+[ext_resource type="PackedScene" uid="uid://foenkodhxd0d" path="res://prefabs/toothbrushes/toothbrush_6.tscn" id="scene_6"]
+[ext_resource type="PackedScene" uid="uid://d3t6oqdgvwthe" path="res://prefabs/papercups/papercup_1.tscn" id="scene_7"]
+[ext_resource type="PackedScene" uid="uid://crnp212dpj5u1" path="res://prefabs/papercups/papercup_2.tscn" id="scene_8"]
+[ext_resource type="PackedScene" uid="uid://cf1hek5r5il12" path="res://prefabs/papercups/papercup_3.tscn" id="scene_9"]
+[ext_resource type="PackedScene" uid="uid://cq158vuhbqg6v" path="res://prefabs/papercups/papercup_4.tscn" id="scene_10"]
+[ext_resource type="PackedScene" uid="uid://dgjblut5nbxlo" path="res://prefabs/papercups/papercup_5.tscn" id="scene_11"]
+[ext_resource type="PackedScene" uid="uid://8hn2io3xkv3b" path="res://prefabs/clotheshangers/clotheshanger_1.tscn" id="scene_12"]
+[ext_resource type="PackedScene" uid="uid://c4s1umf3rj2hq" path="res://prefabs/clotheshangers/clotheshanger_2.tscn" id="scene_13"]
+[ext_resource type="PackedScene" uid="uid://bttdd6g7qy5vu" path="res://prefabs/clotheshangers/clotheshanger_3.tscn" id="scene_14"]
+[ext_resource type="PackedScene" uid="uid://dkjcxa2sf21b7" path="res://prefabs/clotheshangers/clotheshanger_4.tscn" id="scene_15"]
+[ext_resource type="PackedScene" uid="uid://dlaxtrqijbsa7" path="res://prefabs/clotheshangers/clotheshanger_5.tscn" id="scene_16"]
+[ext_resource type="PackedScene" uid="uid://qh6cdky6v36x" path="res://prefabs/clotheshangers/clotheshanger_6.tscn" id="scene_17"]
+[ext_resource type="PackedScene" uid="uid://2tgmxqwlege" path="res://prefabs/clotheshangers/clotheshanger_7.tscn" id="scene_18"]
+[ext_resource type="PackedScene" uid="uid://cgwf8unnu2bym" path="res://prefabs/sausages/sausage_1.tscn" id="scene_19"]
+[ext_resource type="PackedScene" uid="uid://bm6roqmfi6ciq" path="res://prefabs/chips/chips_1.tscn" id="scene_20"]
+[ext_resource type="PackedScene" uid="uid://bdpq4egesqo4e" path="res://prefabs/chips/chips_2.tscn" id="scene_21"]
+[ext_resource type="PackedScene" uid="uid://7283h1swoad6" path="res://prefabs/chips/chips_3.tscn" id="scene_22"]
+[ext_resource type="PackedScene" uid="uid://bfsa6ww4wpfy0" path="res://prefabs/chips/chips_4.tscn" id="scene_23"]
+[ext_resource type="PackedScene" uid="uid://bevsnywn50b86" path="res://prefabs/chips/chips_5.tscn" id="scene_24"]
+[ext_resource type="PackedScene" uid="uid://t1vtdjjrpll7" path="res://prefabs/chips/chips_6.tscn" id="scene_25"]
+[ext_resource type="PackedScene" uid="uid://bvbosnjt22x72" path="res://prefabs/cannedchips/cannedchips_1.tscn" id="scene_26"]
+[ext_resource type="PackedScene" uid="uid://rhy6rrq1hvji" path="res://prefabs/cannedchips/cannedchips_2.tscn" id="scene_27"]
+[ext_resource type="PackedScene" uid="uid://dbigr7eakcqdh" path="res://prefabs/cannedchips/cannedchips_3.tscn" id="scene_28"]
+[ext_resource type="PackedScene" uid="uid://cjlsresjqbxhr" path="res://prefabs/cannedchips/cannedchips_4.tscn" id="scene_29"]
+[ext_resource type="PackedScene" uid="uid://2yy3v1yhh3g0" path="res://prefabs/cannedchips/cannedchips_5.tscn" id="scene_30"]
+[ext_resource type="PackedScene" uid="uid://fqtpxcd5njd3" path="res://prefabs/cannedchips/cannedchips_6.tscn" id="scene_31"]
+[ext_resource type="PackedScene" uid="uid://b0yi006r13jfm" path="res://prefabs/cans/can_1.tscn" id="scene_32"]
+[ext_resource type="PackedScene" uid="uid://dr7navw782osw" path="res://prefabs/cans/can_2.tscn" id="scene_33"]
+[ext_resource type="PackedScene" uid="uid://clahpebgx7yyk" path="res://prefabs/cans/can_3.tscn" id="scene_34"]
+[ext_resource type="PackedScene" uid="uid://dn5fc3g82lpu1" path="res://prefabs/cans/can_4.tscn" id="scene_35"]
+[ext_resource type="PackedScene" uid="uid://dnsvlmyb52km0" path="res://prefabs/cans/can_5.tscn" id="scene_36"]
+[ext_resource type="PackedScene" uid="uid://xk0i6dra566o" path="res://prefabs/cans/can_6.tscn" id="scene_37"]
+[ext_resource type="PackedScene" uid="uid://p6bydn8qf4l2" path="res://prefabs/cans/can_7.tscn" id="scene_38"]
+[ext_resource type="PackedScene" uid="uid://cvv4qnroy0h07" path="res://prefabs/cans/can_8.tscn" id="scene_39"]
+[ext_resource type="PackedScene" uid="uid://c0d8b1fb58jvf" path="res://prefabs/cans/can_9.tscn" id="scene_40"]
+[ext_resource type="PackedScene" uid="uid://cst1kpxfungor" path="res://prefabs/cans/can_10.tscn" id="scene_41"]
+[ext_resource type="PackedScene" uid="uid://cut8pfc70q7wu" path="res://prefabs/bottles/bottle_1.tscn" id="scene_42"]
+[ext_resource type="PackedScene" uid="uid://c4pxargcc4ri5" path="res://prefabs/bottles/bottle_2.tscn" id="scene_43"]
+[ext_resource type="PackedScene" uid="uid://72h2mn44e4ya" path="res://prefabs/bottles/bottle_3.tscn" id="scene_44"]
+[ext_resource type="PackedScene" uid="uid://eflv81qiktr0" path="res://prefabs/bottles/bottle_4.tscn" id="scene_45"]
+[ext_resource type="PackedScene" uid="uid://by5phodyfh222" path="res://prefabs/bottles/bottle_5.tscn" id="scene_46"]
+[ext_resource type="PackedScene" uid="uid://bvhyospo0l2vp" path="res://prefabs/bottles/bottle_6.tscn" id="scene_47"]
+[ext_resource type="PackedScene" uid="uid://ci27awjwn0edr" path="res://prefabs/bottles/bottle_7.tscn" id="scene_48"]
+[ext_resource type="PackedScene" uid="uid://dfkq6gn1w1cu6" path="res://prefabs/bottles/bottle_8.tscn" id="scene_49"]
+[ext_resource type="PackedScene" uid="uid://cbef0td3lvm2i" path="res://prefabs/bottles/bottle_9.tscn" id="scene_50"]
+[ext_resource type="PackedScene" uid="uid://hn3rkljsifvp" path="res://prefabs/milks/milk_1.tscn" id="scene_51"]
+[ext_resource type="PackedScene" uid="uid://cfc8jbyi7g2jh" path="res://prefabs/milks/milk_2.tscn" id="scene_52"]
+[ext_resource type="PackedScene" uid="uid://cl1wxrhvroxoq" path="res://prefabs/milks/milk_3.tscn" id="scene_53"]
+[ext_resource type="PackedScene" uid="uid://crg6ceal0uv6r" path="res://prefabs/milks/milk_4.tscn" id="scene_54"]
+[ext_resource type="PackedScene" uid="uid://cn6vea7g5f6xx" path="res://prefabs/milks/milk_5.tscn" id="scene_55"]
+[ext_resource type="PackedScene" uid="uid://cok1qrcvmwvxi" path="res://prefabs/milks/milk_6.tscn" id="scene_56"]
+[ext_resource type="PackedScene" uid="uid://bwy0b3b0ompgp" path="res://prefabs/milks/milk_7.tscn" id="scene_57"]
+[ext_resource type="PackedScene" uid="uid://dkqem4r3q6ju7" path="res://prefabs/milks/milk_8.tscn" id="scene_58"]
+[ext_resource type="PackedScene" uid="uid://bmaup05kkj5lb" path="res://prefabs/milks/milk_9.tscn" id="scene_59"]
+[ext_resource type="PackedScene" uid="uid://cvdahfsdg6tr2" path="res://prefabs/milks/milk_10.tscn" id="scene_60"]
+[ext_resource type="PackedScene" uid="uid://bgnmocs6nc743" path="res://prefabs/waters/water_1.tscn" id="scene_61"]
+[ext_resource type="PackedScene" uid="uid://b3s15iksc36l7" path="res://prefabs/waters/water_2.tscn" id="scene_62"]
+[ext_resource type="PackedScene" uid="uid://k8e0a31gktor" path="res://prefabs/waters/water_3.tscn" id="scene_63"]
+[ext_resource type="PackedScene" uid="uid://bm61vkkaoi3yk" path="res://prefabs/waters/water_4.tscn" id="scene_64"]
+[ext_resource type="PackedScene" uid="uid://dm4sq287wettr" path="res://prefabs/waters/water_5.tscn" id="scene_65"]
+[ext_resource type="PackedScene" uid="uid://c8jcbtybfcplp" path="res://prefabs/waters/water_6.tscn" id="scene_66"]
+[ext_resource type="PackedScene" uid="uid://d4gv0bdfuhkby" path="res://prefabs/waters/water_7.tscn" id="scene_67"]
+[ext_resource type="PackedScene" uid="uid://fqf5rl32r82m" path="res://prefabs/waters/water_8.tscn" id="scene_68"]
+[ext_resource type="PackedScene" uid="uid://dg83fv7p8fys3" path="res://prefabs/waters/water_9.tscn" id="scene_69"]
+[ext_resource type="PackedScene" uid="uid://cr8g3b35oj38f" path="res://prefabs/bananas/banana_1.tscn" id="scene_70"]
+[ext_resource type="PackedScene" uid="uid://b27de8lo25taq" path="res://prefabs/bananas/banana_2.tscn" id="scene_71"]
+[ext_resource type="PackedScene" uid="uid://ceigwj7h2oj23" path="res://prefabs/bananas/banana_3.tscn" id="scene_72"]
+[ext_resource type="PackedScene" uid="uid://dgmkprl7rvv8g" path="res://prefabs/books/book_1.tscn" id="scene_73"]
+[ext_resource type="PackedScene" uid="uid://b5gk5v32uurq1" path="res://prefabs/books/book_2.tscn" id="scene_74"]
+[ext_resource type="PackedScene" uid="uid://dqqqua68e1ag8" path="res://prefabs/books/book_3.tscn" id="scene_75"]
+[ext_resource type="PackedScene" uid="uid://cihfynt4247dh" path="res://prefabs/books/book_4.tscn" id="scene_76"]
+[ext_resource type="PackedScene" uid="uid://u6lhloypl5up" path="res://prefabs/books/book_5.tscn" id="scene_77"]
+[ext_resource type="PackedScene" uid="uid://cmgwr7v21b5ht" path="res://prefabs/books/book_6.tscn" id="scene_78"]
+[ext_resource type="PackedScene" uid="uid://b2vn56bxberhb" path="res://prefabs/books/book_7.tscn" id="scene_79"]
+[ext_resource type="PackedScene" uid="uid://cqj2mrhtwn14u" path="res://prefabs/books/book_8.tscn" id="scene_80"]
+[ext_resource type="PackedScene" uid="uid://ct2ls861jr8cg" path="res://prefabs/books/book_9.tscn" id="scene_81"]
+[ext_resource type="PackedScene" uid="uid://svnnm8g1d7u7" path="res://prefabs/books/book_10.tscn" id="scene_82"]
+[ext_resource type="PackedScene" uid="uid://cdveifqs8utww" path="res://prefabs/books/book_11.tscn" id="scene_83"]
+[ext_resource type="PackedScene" uid="uid://dh05gm2x6ri37" path="res://prefabs/combs/comb_1.tscn" id="scene_84"]
+[ext_resource type="PackedScene" uid="uid://cnu3vx7uwwii7" path="res://prefabs/combs/comb_2.tscn" id="scene_85"]
+[ext_resource type="PackedScene" uid="uid://6ktx8ukp3jod" path="res://prefabs/combs/comb_3.tscn" id="scene_86"]
+[ext_resource type="PackedScene" uid="uid://b6x3a2fcxj0jb" path="res://prefabs/combs/comb_4.tscn" id="scene_87"]
+[ext_resource type="PackedScene" uid="uid://bj7pww7hpj3dr" path="res://prefabs/combs/comb_5.tscn" id="scene_88"]
+[ext_resource type="PackedScene" uid="uid://bgsqrtqwdqsjr" path="res://prefabs/combs/comb_6.tscn" id="scene_89"]
+[ext_resource type="PackedScene" uid="uid://4evlvhkpf8v0" path="res://prefabs/biscuits/biscuit_1.tscn" id="scene_90"]
+[ext_resource type="PackedScene" uid="uid://djkiyobuik5xl" path="res://prefabs/biscuits/biscuit_2.tscn" id="scene_91"]
+[ext_resource type="PackedScene" uid="uid://cvena0qtmubjl" path="res://prefabs/biscuits/biscuit_3.tscn" id="scene_92"]
+[ext_resource type="PackedScene" uid="uid://7dnwg6h3e8cp" path="res://prefabs/biscuits/biscuit_4.tscn" id="scene_93"]
+[ext_resource type="PackedScene" uid="uid://dgsu764p2f867" path="res://prefabs/biscuits/biscuit_5.tscn" id="scene_94"]
+[ext_resource type="PackedScene" uid="uid://bc71feb1f3mi8" path="res://prefabs/dragonfruits/dragonfruit_1.tscn" id="scene_95"]
+[ext_resource type="PackedScene" uid="uid://b1j5nx8tmcst1" path="res://prefabs/dragonfruits/dragonfruit_2.tscn" id="scene_96"]
+[ext_resource type="PackedScene" uid="uid://civ6oof5uqu88" path="res://prefabs/dragonfruits/dragonfruit_3.tscn" id="scene_97"]
+[ext_resource type="PackedScene" uid="uid://cg78hmrp2ut7" path="res://prefabs/oranges/orange_1.tscn" id="scene_98"]
+[ext_resource type="PackedScene" uid="uid://djdqw7jfqfh8i" path="res://prefabs/oranges/orange_2.tscn" id="scene_99"]
+[ext_resource type="PackedScene" uid="uid://44jtwm42104l" path="res://prefabs/oranges/orange_3.tscn" id="scene_100"]
+[ext_resource type="PackedScene" uid="uid://dnbwqbi5xsgov" path="res://prefabs/pomegranates/pomegranate_1.tscn" id="scene_101"]
+[ext_resource type="PackedScene" uid="uid://d1cqoo30cndu0" path="res://prefabs/pomegranates/pomegranate_2.tscn" id="scene_102"]
+[ext_resource type="PackedScene" uid="uid://bdi0x7nx08b1d" path="res://prefabs/pomegranates/pomegranate_3.tscn" id="scene_103"]
+
+[sub_resource type="Resource" id="cat_brush"]
+script = ExtResource("script_category")
+display_name = &"Brush"
+key = &"brush"
+label_name = &"Brush"
+class_id = 1
+scenes = Array[PackedScene]([ExtResource("scene_1"), ExtResource("scene_2"), ExtResource("scene_3"), ExtResource("scene_4"), ExtResource("scene_5"), ExtResource("scene_6")])
+
+[sub_resource type="Resource" id="cat_earphone"]
+script = ExtResource("script_category")
+display_name = &"Earphone"
+key = &"earphone"
+label_name = &"Earphone"
+class_id = 2
+
+[sub_resource type="Resource" id="cat_cup"]
+script = ExtResource("script_category")
+display_name = &"Cup"
+key = &"cup"
+label_name = &"Cup"
+class_id = 3
+scenes = Array[PackedScene]([ExtResource("scene_7"), ExtResource("scene_8"), ExtResource("scene_9"), ExtResource("scene_10"), ExtResource("scene_11")])
+
+[sub_resource type="Resource" id="cat_hanger"]
+script = ExtResource("script_category")
+display_name = &"Hanger"
+key = &"hanger"
+label_name = &"Hanger"
+class_id = 4
+scenes = Array[PackedScene]([ExtResource("scene_12"), ExtResource("scene_13"), ExtResource("scene_14"), ExtResource("scene_15"), ExtResource("scene_16"), ExtResource("scene_17"), ExtResource("scene_18")])
+
+[sub_resource type="Resource" id="cat_chocolate"]
+script = ExtResource("script_category")
+display_name = &"Chocolate"
+key = &"chocolate"
+label_name = &"Chocolate"
+class_id = 5
+
+[sub_resource type="Resource" id="cat_sunflower_seeds"]
+script = ExtResource("script_category")
+display_name = &"SunflowerSeeds"
+key = &"sunflower_seeds"
+label_name = &"SunflowerSeeds"
+class_id = 6
+
+[sub_resource type="Resource" id="cat_sausage"]
+script = ExtResource("script_category")
+display_name = &"Sausage"
+key = &"sausage"
+label_name = &"Sausage"
+class_id = 7
+scenes = Array[PackedScene]([ExtResource("scene_19")])
+
+[sub_resource type="Resource" id="cat_chips"]
+script = ExtResource("script_category")
+display_name = &"Chips"
+key = &"chips"
+label_name = &"Chips"
+class_id = 8
+scenes = Array[PackedScene]([ExtResource("scene_20"), ExtResource("scene_21"), ExtResource("scene_22"), ExtResource("scene_23"), ExtResource("scene_24"), ExtResource("scene_25")])
+
+[sub_resource type="Resource" id="cat_canned_chips"]
+script = ExtResource("script_category")
+display_name = &"CannedChips"
+key = &"canned_chips"
+label_name = &"CannedChips"
+class_id = 9
+scenes = Array[PackedScene]([ExtResource("scene_26"), ExtResource("scene_27"), ExtResource("scene_28"), ExtResource("scene_29"), ExtResource("scene_30"), ExtResource("scene_31")])
+
+[sub_resource type="Resource" id="cat_can"]
+script = ExtResource("script_category")
+display_name = &"Can"
+key = &"can"
+label_name = &"Can"
+class_id = 10
+scenes = Array[PackedScene]([ExtResource("scene_32"), ExtResource("scene_33"), ExtResource("scene_34"), ExtResource("scene_35"), ExtResource("scene_36"), ExtResource("scene_37"), ExtResource("scene_38"), ExtResource("scene_39"), ExtResource("scene_40"), ExtResource("scene_41")])
+
+[sub_resource type="Resource" id="cat_bottle"]
+script = ExtResource("script_category")
+display_name = &"Bottle"
+key = &"bottle"
+label_name = &"Bottle"
+class_id = 11
+scenes = Array[PackedScene]([ExtResource("scene_42"), ExtResource("scene_43"), ExtResource("scene_44"), ExtResource("scene_45"), ExtResource("scene_46"), ExtResource("scene_47"), ExtResource("scene_48"), ExtResource("scene_49"), ExtResource("scene_50")])
+
+[sub_resource type="Resource" id="cat_milk"]
+script = ExtResource("script_category")
+display_name = &"Milk"
+key = &"milk"
+label_name = &"Milk"
+class_id = 12
+scenes = Array[PackedScene]([ExtResource("scene_51"), ExtResource("scene_52"), ExtResource("scene_53"), ExtResource("scene_54"), ExtResource("scene_55"), ExtResource("scene_56"), ExtResource("scene_57"), ExtResource("scene_58"), ExtResource("scene_59"), ExtResource("scene_60")])
+
+[sub_resource type="Resource" id="cat_water"]
+script = ExtResource("script_category")
+display_name = &"Water"
+key = &"water"
+label_name = &"Water"
+class_id = 13
+scenes = Array[PackedScene]([ExtResource("scene_61"), ExtResource("scene_62"), ExtResource("scene_63"), ExtResource("scene_64"), ExtResource("scene_65"), ExtResource("scene_66"), ExtResource("scene_67"), ExtResource("scene_68"), ExtResource("scene_69")])
+
+[sub_resource type="Resource" id="cat_peach"]
+script = ExtResource("script_category")
+display_name = &"Peach"
+key = &"peach"
+label_name = &"Peach"
+class_id = 14
+
+[sub_resource type="Resource" id="cat_apple"]
+script = ExtResource("script_category")
+display_name = &"Apple"
+key = &"apple"
+label_name = &"Apple"
+class_id = 15
+
+[sub_resource type="Resource" id="cat_banana"]
+script = ExtResource("script_category")
+display_name = &"Banana"
+key = &"banana"
+label_name = &"Banana"
+class_id = 16
+scenes = Array[PackedScene]([ExtResource("scene_70"), ExtResource("scene_71"), ExtResource("scene_72")])
+
+[sub_resource type="Resource" id="cat_pear"]
+script = ExtResource("script_category")
+display_name = &"Pear"
+key = &"pear"
+label_name = &"Pear"
+class_id = 17
+
+[sub_resource type="Resource" id="cat_book"]
+script = ExtResource("script_category")
+display_name = &"Book"
+key = &"book"
+label_name = &"Book"
+class_id = 18
+enabled = false
+scenes = Array[PackedScene]([ExtResource("scene_73"), ExtResource("scene_74"), ExtResource("scene_75"), ExtResource("scene_76"), ExtResource("scene_77"), ExtResource("scene_78"), ExtResource("scene_79"), ExtResource("scene_80"), ExtResource("scene_81"), ExtResource("scene_82"), ExtResource("scene_83")])
+
+[sub_resource type="Resource" id="cat_comb"]
+script = ExtResource("script_category")
+display_name = &"Comb"
+key = &"comb"
+label_name = &"Comb"
+class_id = 19
+is_unknown = true
+scenes = Array[PackedScene]([ExtResource("scene_84"), ExtResource("scene_85"), ExtResource("scene_86"), ExtResource("scene_87"), ExtResource("scene_88"), ExtResource("scene_89")])
+
+[sub_resource type="Resource" id="cat_biscuit"]
+script = ExtResource("script_category")
+display_name = &"Biscuit"
+key = &"biscuit"
+label_name = &"Biscuit"
+class_id = 19
+is_unknown = true
+scenes = Array[PackedScene]([ExtResource("scene_90"), ExtResource("scene_91"), ExtResource("scene_92"), ExtResource("scene_93"), ExtResource("scene_94")])
+
+[sub_resource type="Resource" id="cat_dragon_fruit"]
+script = ExtResource("script_category")
+display_name = &"DragonFruit"
+key = &"dragon_fruit"
+label_name = &"DragonFruit"
+class_id = 19
+is_unknown = true
+scenes = Array[PackedScene]([ExtResource("scene_95"), ExtResource("scene_96"), ExtResource("scene_97")])
+
+[sub_resource type="Resource" id="cat_orange"]
+script = ExtResource("script_category")
+display_name = &"Orange"
+key = &"orange"
+label_name = &"Orange"
+class_id = 19
+is_unknown = true
+scenes = Array[PackedScene]([ExtResource("scene_98"), ExtResource("scene_99"), ExtResource("scene_100")])
+
+[sub_resource type="Resource" id="cat_pomegranate"]
+script = ExtResource("script_category")
+display_name = &"Pomegranate"
+key = &"pomegranate"
+label_name = &"Pomegranate"
+class_id = 19
+is_unknown = true
+scenes = Array[PackedScene]([ExtResource("scene_101"), ExtResource("scene_102"), ExtResource("scene_103")])
+
+[sub_resource type="Resource" id="cat_jelly"]
+script = ExtResource("script_category")
+display_name = &"Jelly"
+key = &"jelly"
+label_name = &"Jelly"
+class_id = 19
+is_unknown = true
+
+[resource]
+script = ExtResource("script_catalog")
+categories = Array[Resource]([SubResource("cat_brush"), SubResource("cat_earphone"), SubResource("cat_cup"), SubResource("cat_hanger"), SubResource("cat_chocolate"), SubResource("cat_sunflower_seeds"), SubResource("cat_sausage"), SubResource("cat_chips"), SubResource("cat_canned_chips"), SubResource("cat_can"), SubResource("cat_bottle"), SubResource("cat_milk"), SubResource("cat_water"), SubResource("cat_peach"), SubResource("cat_apple"), SubResource("cat_banana"), SubResource("cat_pear"), SubResource("cat_book"), SubResource("cat_comb"), SubResource("cat_biscuit"), SubResource("cat_dragon_fruit"), SubResource("cat_orange"), SubResource("cat_pomegranate"), SubResource("cat_jelly")])

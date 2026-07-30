@@ -13,21 +13,9 @@ extends Control
 @export var bbox_layer: CanvasItem
 @export var table_selector: Node
 @export var rotate_light: Node3D
+@export var object_catalog: ObjectCatalog
 
 const CONFIG_PATH := "user://gui_config.cfg"
-
-# 类别定义：显示名 -> random_placer 上的属性前缀
-const OFFICIAL_CATEGORIES := [
-	["Brush", "brush"], ["Earphone", "earphone"], ["Cup", "cup"], ["Hanger", "hanger"],
-	["Chocolate", "chocolate"], ["SunflowerSeeds", "sunflower_seeds"], ["Sausage", "sausage"],
-	["Chips", "chips"], ["CannedChips", "canned_chips"], ["Can", "can"], ["Bottle", "bottle"],
-	["Milk", "milk"], ["Water", "water"], ["Peach", "peach"], ["Apple", "apple"],
-	["Banana", "banana"], ["Pear", "pear"], ["Book", "book"],
-]
-const UNKNOWN_CATEGORIES := [
-	["Comb", "comb"], ["Biscuit", "biscuit"], ["DragonFruit", "dragon_fruit"],
-	["Orange", "orange"], ["Pomegranate", "pomegranate"], ["Jelly", "jelly"],
-]
 
 var _running := false
 
@@ -55,10 +43,19 @@ func _ready() -> void:
 	# 默认从 data_generator 读出输出目录初值
 	if data_generator != null:
 		_output_dir = str(data_generator.base_path)
+	_resolve_object_catalog()
 	_build_gui()
 	_load_config()
+	_sync_catalog_from_controls()
 	_apply_realtime_settings()
 	_set_running(false)
+
+
+func _resolve_object_catalog() -> void:
+	if object_catalog != null:
+		return
+	if random_placer != null:
+		object_catalog = random_placer.get("object_catalog") as ObjectCatalog
 
 
 # ----------------------------------------------------------------------------
@@ -158,6 +155,7 @@ func _on_table_shape_selected(index: int) -> void:
 
 # 启动时把 GUI 配置推入各节点
 func _apply_config_to_nodes() -> void:
+	_sync_catalog_from_controls()
 	if data_generator != null:
 		data_generator.base_path = _output_dir
 		data_generator.save_interval = int(_interval_spin.value)
@@ -165,10 +163,16 @@ func _apply_config_to_nodes() -> void:
 		data_generator.save_enabled = _save_enabled_check.button_pressed
 	if random_placer != null:
 		random_placer.item_count_range = Vector2i(int(_count_min.value), int(_count_max.value))
-		for prefix in _category_controls:
-			var ctrl = _category_controls[prefix]
-			random_placer.set("%s_enabled" % prefix, ctrl.enabled.button_pressed)
-			random_placer.set("%s_weight" % prefix, float(ctrl.weight.value))
+
+
+func _sync_catalog_from_controls() -> void:
+	for key in _category_controls:
+		var ctrl = _category_controls[key]
+		var category: ObjectCategory = ctrl.category
+		if category == null:
+			continue
+		category.enabled = ctrl.enabled.button_pressed
+		category.weight = float(ctrl.weight.value)
 
 
 # ----------------------------------------------------------------------------
@@ -209,8 +213,11 @@ func _load_config() -> void:
 	_table_option.selected = cfg.get_value("general", "table_shape", 0)
 	for prefix in _category_controls:
 		var ctrl = _category_controls[prefix]
-		ctrl.enabled.button_pressed = cfg.get_value("enabled", prefix, true)
-		ctrl.weight.value = cfg.get_value("weight", prefix, 1.0)
+		var category: ObjectCategory = ctrl.category
+		var default_enabled := category.enabled if category != null else true
+		var default_weight := category.weight if category != null else 1.0
+		ctrl.enabled.button_pressed = cfg.get_value("enabled", prefix, default_enabled)
+		ctrl.weight.value = cfg.get_value("weight", prefix, default_weight)
 
 
 # ----------------------------------------------------------------------------
@@ -282,8 +289,13 @@ func _build_gui() -> void:
 	var cat_box := VBoxContainer.new()
 	cat_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root.add_child(cat_box)
-	_build_category_group(cat_box, "Official Categories", OFFICIAL_CATEGORIES)
-	_build_category_group(cat_box, "Unknown Sub-categories", UNKNOWN_CATEGORIES)
+	if object_catalog != null:
+		_build_category_group(cat_box, "Official Categories", object_catalog.get_official_categories())
+		_build_category_group(cat_box, "Unknown Sub-categories", object_catalog.get_unknown_categories())
+	else:
+		var missing_catalog := Label.new()
+		missing_catalog.text = "Object catalog is not configured."
+		cat_box.add_child(missing_catalog)
 
 	# 按钮
 	var btn_row := HBoxContainer.new()
@@ -307,7 +319,7 @@ func _build_gui() -> void:
 	root.add_child(_status_label)
 
 
-func _build_category_group(parent: VBoxContainer, title: String, categories: Array) -> void:
+func _build_category_group(parent: VBoxContainer, title: String, categories: Array[ObjectCategory]) -> void:
 	# 用可折叠的 CheckButton 作为分组标题控制展开/收起
 	var header := CheckButton.new()
 	header.text = title
@@ -317,19 +329,21 @@ func _build_category_group(parent: VBoxContainer, title: String, categories: Arr
 	parent.add_child(group_box)
 	header.toggled.connect(func(pressed): group_box.visible = pressed)
 
-	for entry in categories:
-		var disp: String = entry[0]
-		var prefix: String = entry[1]
+	for category in categories:
+		if category == null:
+			continue
+		var display_name := str(category.display_name)
+		var key := str(category.key)
 		var row := HBoxContainer.new()
 		group_box.add_child(row)
 		var enabled := CheckBox.new()
-		enabled.text = disp
-		enabled.button_pressed = true
+		enabled.text = display_name
+		enabled.button_pressed = category.enabled
 		enabled.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		row.add_child(enabled)
-		var weight := _make_spin(0.0, 10.0, 0.1, 1.0)
+		var weight := _make_spin(0.0, 10.0, 0.1, category.weight)
 		row.add_child(weight)
-		_category_controls[prefix] = {"enabled": enabled, "weight": weight}
+		_category_controls[key] = {"enabled": enabled, "weight": weight, "category": category}
 
 
 # 启动后禁用结构性配置控件（保存/预览开关除外）

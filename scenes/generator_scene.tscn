@@ -16,114 +16,12 @@
 [ext_resource type="PackedScene" uid="uid://c2xyg4odjxor4" path="res://models/envs/lab1/lab1.blend" id="8_kq58d"]
 [ext_resource type="PackedScene" uid="uid://inwj2d360ypa" path="res://models/envs/room1/room1.blend" id="9_kq58d"]
 [ext_resource type="Script" uid="uid://kht1taxe4y4r" path="res://scripts/environment/random_placer.gd" id="10_4c57u"]
+[ext_resource type="Resource" path="res://resources/object_catalog.tres" id="object_catalog"]
 [ext_resource type="PackedScene" uid="uid://bvceplppf6qds" path="res://models/envs/room2/room2.blend" id="10_seu75"]
-[ext_resource type="PackedScene" uid="uid://coe0chnea2y10" path="res://prefabs/toothbrushes/toothbrush_1.tscn" id="11_2cqfq"]
-[ext_resource type="PackedScene" uid="uid://cr8g3b35oj38f" path="res://prefabs/bananas/banana_1.tscn" id="11_efxa6"]
-[ext_resource type="PackedScene" uid="uid://bgnmocs6nc743" path="res://prefabs/waters/water_1.tscn" id="11_w48qg"]
-[ext_resource type="PackedScene" uid="uid://b27de8lo25taq" path="res://prefabs/bananas/banana_2.tscn" id="12_dg77c"]
-[ext_resource type="PackedScene" uid="uid://b3s15iksc36l7" path="res://prefabs/waters/water_2.tscn" id="12_vivmo"]
-[ext_resource type="PackedScene" uid="uid://d3t6oqdgvwthe" path="res://prefabs/papercups/papercup_1.tscn" id="12_yaehf"]
-[ext_resource type="PackedScene" uid="uid://ceigwj7h2oj23" path="res://prefabs/bananas/banana_3.tscn" id="13_ycdy4"]
-[ext_resource type="PackedScene" uid="uid://8hn2io3xkv3b" path="res://prefabs/clotheshangers/clotheshanger_1.tscn" id="14_cegan"]
-[ext_resource type="PackedScene" uid="uid://4evlvhkpf8v0" path="res://prefabs/biscuits/biscuit_1.tscn" id="15_82xsv"]
-[ext_resource type="PackedScene" uid="uid://bm6roqmfi6ciq" path="res://prefabs/chips/chips_1.tscn" id="16_getpj"]
-[ext_resource type="PackedScene" uid="uid://b0yi006r13jfm" path="res://prefabs/cans/can_1.tscn" id="17_ryguw"]
 [ext_resource type="PackedScene" uid="uid://2eyrtsi1vc0p" path="res://models/envs/office1/office1.blend" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://bjcoijhqajluc" path="res://prefabs/tables/table_disc.tscn" id="18_c2n8d"]
-[ext_resource type="PackedScene" uid="uid://cut8pfc70q7wu" path="res://prefabs/bottles/bottle_1.tscn" id="18_d13ii"]
-[ext_resource type="PackedScene" uid="uid://hn3rkljsifvp" path="res://prefabs/milks/milk_1.tscn" id="19_1u8w0"]
-[ext_resource type="PackedScene" uid="uid://dh05gm2x6ri37" path="res://prefabs/combs/comb_1.tscn" id="19_facbu"]
-[ext_resource type="PackedScene" uid="uid://cnu3vx7uwwii7" path="res://prefabs/combs/comb_2.tscn" id="20_b1qrp"]
-[ext_resource type="PackedScene" uid="uid://6ktx8ukp3jod" path="res://prefabs/combs/comb_3.tscn" id="21_come4"]
-[ext_resource type="PackedScene" uid="uid://dnbwqbi5xsgov" path="res://prefabs/pomegranates/pomegranate_1.tscn" id="22_0odxb"]
-[ext_resource type="PackedScene" uid="uid://cg78hmrp2ut7" path="res://prefabs/oranges/orange_1.tscn" id="23_a6jrf"]
-[ext_resource type="PackedScene" uid="uid://ddj5nfbygg77d" path="res://prefabs/toothbrushes/toothbrush_2.tscn" id="23_hrvbo"]
-[ext_resource type="PackedScene" uid="uid://b6x3a2fcxj0jb" path="res://prefabs/combs/comb_4.tscn" id="24_f1p13"]
-[ext_resource type="PackedScene" uid="uid://de2jyaq7o3360" path="res://prefabs/toothbrushes/toothbrush_3.tscn" id="24_uypp3"]
-[ext_resource type="PackedScene" uid="uid://c4s1umf3rj2hq" path="res://prefabs/clotheshangers/clotheshanger_2.tscn" id="25_0cp0l"]
-[ext_resource type="PackedScene" uid="uid://bj7pww7hpj3dr" path="res://prefabs/combs/comb_5.tscn" id="25_4obbf"]
-[ext_resource type="PackedScene" uid="uid://bttdd6g7qy5vu" path="res://prefabs/clotheshangers/clotheshanger_3.tscn" id="26_d2t1y"]
-[ext_resource type="PackedScene" uid="uid://bgsqrtqwdqsjr" path="res://prefabs/combs/comb_6.tscn" id="26_ovcoh"]
-[ext_resource type="PackedScene" uid="uid://bm6blyq8u2gq5" path="res://prefabs/toothbrushes/toothbrush_4.tscn" id="27_5dllo"]
-[ext_resource type="PackedScene" uid="uid://crnp212dpj5u1" path="res://prefabs/papercups/papercup_2.tscn" id="27_abqjc"]
-[ext_resource type="PackedScene" uid="uid://dkjcxa2sf21b7" path="res://prefabs/clotheshangers/clotheshanger_4.tscn" id="27_gngh3"]
-[ext_resource type="PackedScene" uid="uid://bc71feb1f3mi8" path="res://prefabs/dragonfruits/dragonfruit_1.tscn" id="27_xuqvo"]
-[ext_resource type="PackedScene" uid="uid://dlaxtrqijbsa7" path="res://prefabs/clotheshangers/clotheshanger_5.tscn" id="28_0n3wm"]
-[ext_resource type="PackedScene" uid="uid://cf1hek5r5il12" path="res://prefabs/papercups/papercup_3.tscn" id="28_6iyjs"]
-[ext_resource type="PackedScene" uid="uid://bdrnf73hha8ed" path="res://prefabs/toothbrushes/toothbrush_5.tscn" id="28_phcyf"]
-[ext_resource type="PackedScene" uid="uid://qh6cdky6v36x" path="res://prefabs/clotheshangers/clotheshanger_6.tscn" id="29_qnost"]
-[ext_resource type="PackedScene" uid="uid://djkiyobuik5xl" path="res://prefabs/biscuits/biscuit_2.tscn" id="36_34ol3"]
-[ext_resource type="PackedScene" uid="uid://cq158vuhbqg6v" path="res://prefabs/papercups/papercup_4.tscn" id="36_l0gw7"]
-[ext_resource type="PackedScene" uid="uid://dgjblut5nbxlo" path="res://prefabs/papercups/papercup_5.tscn" id="37_inymm"]
-[ext_resource type="PackedScene" uid="uid://bdpq4egesqo4e" path="res://prefabs/chips/chips_2.tscn" id="37_vke2r"]
-[ext_resource type="PackedScene" uid="uid://7dnwg6h3e8cp" path="res://prefabs/biscuits/biscuit_4.tscn" id="38_c2n8d"]
-[ext_resource type="PackedScene" uid="uid://d1cqoo30cndu0" path="res://prefabs/pomegranates/pomegranate_2.tscn" id="38_f6a44"]
-[ext_resource type="PackedScene" uid="uid://7283h1swoad6" path="res://prefabs/chips/chips_3.tscn" id="38_uit24"]
-[ext_resource type="PackedScene" uid="uid://bdi0x7nx08b1d" path="res://prefabs/pomegranates/pomegranate_3.tscn" id="39_0cbny"]
-[ext_resource type="PackedScene" uid="uid://djdqw7jfqfh8i" path="res://prefabs/oranges/orange_2.tscn" id="39_qnost"]
-[ext_resource type="PackedScene" uid="uid://bfsa6ww4wpfy0" path="res://prefabs/chips/chips_4.tscn" id="39_ruth0"]
-[ext_resource type="PackedScene" uid="uid://dgsu764p2f867" path="res://prefabs/biscuits/biscuit_5.tscn" id="39_wy5fy"]
-[ext_resource type="PackedScene" uid="uid://bevsnywn50b86" path="res://prefabs/chips/chips_5.tscn" id="40_rm4vd"]
-[ext_resource type="PackedScene" uid="uid://44jtwm42104l" path="res://prefabs/oranges/orange_3.tscn" id="40_wnkbs"]
-[ext_resource type="PackedScene" uid="uid://t1vtdjjrpll7" path="res://prefabs/chips/chips_6.tscn" id="41_pjyto"]
-[ext_resource type="PackedScene" uid="uid://2tgmxqwlege" path="res://prefabs/clotheshangers/clotheshanger_7.tscn" id="42_4obbf"]
-[ext_resource type="PackedScene" uid="uid://b1j5nx8tmcst1" path="res://prefabs/dragonfruits/dragonfruit_2.tscn" id="43_gngh3"]
-[ext_resource type="PackedScene" uid="uid://dr7navw782osw" path="res://prefabs/cans/can_2.tscn" id="43_ruth0"]
-[ext_resource type="PackedScene" uid="uid://civ6oof5uqu88" path="res://prefabs/dragonfruits/dragonfruit_3.tscn" id="44_0n3wm"]
-[ext_resource type="PackedScene" uid="uid://clahpebgx7yyk" path="res://prefabs/cans/can_3.tscn" id="44_rm4vd"]
-[ext_resource type="PackedScene" uid="uid://dn5fc3g82lpu1" path="res://prefabs/cans/can_4.tscn" id="45_sm6fg"]
-[ext_resource type="PackedScene" uid="uid://dnsvlmyb52km0" path="res://prefabs/cans/can_5.tscn" id="46_b17eg"]
-[ext_resource type="PackedScene" uid="uid://xk0i6dra566o" path="res://prefabs/cans/can_6.tscn" id="47_ntx8l"]
-[ext_resource type="PackedScene" uid="uid://p6bydn8qf4l2" path="res://prefabs/cans/can_7.tscn" id="48_rqtf5"]
-[ext_resource type="PackedScene" uid="uid://cvv4qnroy0h07" path="res://prefabs/cans/can_8.tscn" id="49_1vm84"]
-[ext_resource type="PackedScene" uid="uid://cgwf8unnu2bym" path="res://prefabs/sausages/sausage_1.tscn" id="50_qwt6e"]
-[ext_resource type="PackedScene" uid="uid://c0d8b1fb58jvf" path="res://prefabs/cans/can_9.tscn" id="50_wu3dr"]
 [ext_resource type="Script" uid="uid://c1rb7xfqi70bw" path="res://addons/post_processing/node/post_process.gd" id="51_blkrb"]
-[ext_resource type="PackedScene" uid="uid://cst1kpxfungor" path="res://prefabs/cans/can_10.tscn" id="51_cyx1q"]
 [ext_resource type="Script" uid="uid://bs45b6eixrfy3" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="52_abqjc"]
-[ext_resource type="PackedScene" uid="uid://c4pxargcc4ri5" path="res://prefabs/bottles/bottle_2.tscn" id="53_cyx1q"]
-[ext_resource type="PackedScene" uid="uid://72h2mn44e4ya" path="res://prefabs/bottles/bottle_3.tscn" id="54_0dhbp"]
-[ext_resource type="PackedScene" uid="uid://bvbosnjt22x72" path="res://prefabs/cannedchips/cannedchips_1.tscn" id="54_23xmf"]
-[ext_resource type="PackedScene" uid="uid://eflv81qiktr0" path="res://prefabs/bottles/bottle_4.tscn" id="55_jx0wj"]
-[ext_resource type="PackedScene" uid="uid://rhy6rrq1hvji" path="res://prefabs/cannedchips/cannedchips_2.tscn" id="55_swlj1"]
-[ext_resource type="PackedScene" uid="uid://dbigr7eakcqdh" path="res://prefabs/cannedchips/cannedchips_3.tscn" id="56_yysqy"]
-[ext_resource type="PackedScene" uid="uid://cjlsresjqbxhr" path="res://prefabs/cannedchips/cannedchips_4.tscn" id="57_n5t1e"]
-[ext_resource type="PackedScene" uid="uid://2yy3v1yhh3g0" path="res://prefabs/cannedchips/cannedchips_5.tscn" id="58_h6isl"]
-[ext_resource type="PackedScene" uid="uid://fqtpxcd5njd3" path="res://prefabs/cannedchips/cannedchips_6.tscn" id="59_53bls"]
-[ext_resource type="PackedScene" uid="uid://cvena0qtmubjl" path="res://prefabs/biscuits/biscuit_3.tscn" id="71_0dhbp"]
-[ext_resource type="PackedScene" uid="uid://cfc8jbyi7g2jh" path="res://prefabs/milks/milk_2.tscn" id="75_vieuh"]
-[ext_resource type="PackedScene" uid="uid://by5phodyfh222" path="res://prefabs/bottles/bottle_5.tscn" id="76_cpm2s"]
-[ext_resource type="PackedScene" uid="uid://foenkodhxd0d" path="res://prefabs/toothbrushes/toothbrush_6.tscn" id="76_wy5fy"]
-[ext_resource type="PackedScene" uid="uid://cl1wxrhvroxoq" path="res://prefabs/milks/milk_3.tscn" id="76_yjja3"]
-[ext_resource type="PackedScene" uid="uid://crg6ceal0uv6r" path="res://prefabs/milks/milk_4.tscn" id="77_l0gw7"]
-[ext_resource type="PackedScene" uid="uid://bvhyospo0l2vp" path="res://prefabs/bottles/bottle_6.tscn" id="77_u81y6"]
-[ext_resource type="PackedScene" uid="uid://cn6vea7g5f6xx" path="res://prefabs/milks/milk_5.tscn" id="78_inymm"]
-[ext_resource type="PackedScene" uid="uid://ci27awjwn0edr" path="res://prefabs/bottles/bottle_7.tscn" id="78_rt5wr"]
-[ext_resource type="PackedScene" uid="uid://cok1qrcvmwvxi" path="res://prefabs/milks/milk_6.tscn" id="79_jcxqu"]
-[ext_resource type="PackedScene" uid="uid://dfkq6gn1w1cu6" path="res://prefabs/bottles/bottle_8.tscn" id="79_mnw77"]
-[ext_resource type="PackedScene" uid="uid://bwy0b3b0ompgp" path="res://prefabs/milks/milk_7.tscn" id="80_0arob"]
-[ext_resource type="PackedScene" uid="uid://cbef0td3lvm2i" path="res://prefabs/bottles/bottle_9.tscn" id="80_vjgyh"]
-[ext_resource type="PackedScene" uid="uid://dkqem4r3q6ju7" path="res://prefabs/milks/milk_8.tscn" id="83_am8a1"]
-[ext_resource type="PackedScene" uid="uid://bmaup05kkj5lb" path="res://prefabs/milks/milk_9.tscn" id="84_8dc3g"]
-[ext_resource type="PackedScene" uid="uid://cvdahfsdg6tr2" path="res://prefabs/milks/milk_10.tscn" id="85_htgcl"]
-[ext_resource type="PackedScene" uid="uid://k8e0a31gktor" path="res://prefabs/waters/water_3.tscn" id="85_ywjan"]
-[ext_resource type="PackedScene" uid="uid://bm61vkkaoi3yk" path="res://prefabs/waters/water_4.tscn" id="86_m74q3"]
-[ext_resource type="PackedScene" uid="uid://dm4sq287wettr" path="res://prefabs/waters/water_5.tscn" id="87_tko6h"]
-[ext_resource type="PackedScene" uid="uid://c8jcbtybfcplp" path="res://prefabs/waters/water_6.tscn" id="88_am8a1"]
-[ext_resource type="PackedScene" uid="uid://d4gv0bdfuhkby" path="res://prefabs/waters/water_7.tscn" id="89_8dc3g"]
-[ext_resource type="PackedScene" uid="uid://dgmkprl7rvv8g" path="res://prefabs/books/book_1.tscn" id="89_swlj1"]
-[ext_resource type="PackedScene" uid="uid://b5gk5v32uurq1" path="res://prefabs/books/book_2.tscn" id="90_53bls"]
-[ext_resource type="PackedScene" uid="uid://fqf5rl32r82m" path="res://prefabs/waters/water_8.tscn" id="90_htgcl"]
-[ext_resource type="PackedScene" uid="uid://dqqqua68e1ag8" path="res://prefabs/books/book_3.tscn" id="91_lwnsi"]
-[ext_resource type="PackedScene" uid="uid://dg83fv7p8fys3" path="res://prefabs/waters/water_9.tscn" id="91_smeu8"]
-[ext_resource type="PackedScene" uid="uid://cihfynt4247dh" path="res://prefabs/books/book_4.tscn" id="92_41lik"]
-[ext_resource type="PackedScene" uid="uid://u6lhloypl5up" path="res://prefabs/books/book_5.tscn" id="93_jbvwl"]
-[ext_resource type="PackedScene" uid="uid://cmgwr7v21b5ht" path="res://prefabs/books/book_6.tscn" id="117_asu84"]
-[ext_resource type="PackedScene" uid="uid://b2vn56bxberhb" path="res://prefabs/books/book_7.tscn" id="118_qwt6e"]
-[ext_resource type="PackedScene" uid="uid://cqj2mrhtwn14u" path="res://prefabs/books/book_8.tscn" id="119_off2o"]
-[ext_resource type="PackedScene" uid="uid://ct2ls861jr8cg" path="res://prefabs/books/book_9.tscn" id="120_tttfs"]
-[ext_resource type="PackedScene" uid="uid://svnnm8g1d7u7" path="res://prefabs/books/book_10.tscn" id="121_1iygd"]
-[ext_resource type="PackedScene" uid="uid://cdveifqs8utww" path="res://prefabs/books/book_11.tscn" id="122_g5xqc"]
 [ext_resource type="Texture2D" uid="uid://dmg3wx7nauf1s" path="res://hdri/brown_photostudio_02_2k.hdr" id="hdri_panorama"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSky_hdri"]
@@ -339,7 +237,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.76107, 0)
 
 [node name="DataGenerator" type="Node" parent="." unique_id=404970568 node_paths=PackedStringArray("camera", "table", "depth_view", "object_container")]
 script = ExtResource("2_0xm2m")
-enable = true
 camera = NodePath("../Camera3D")
 table = NodePath("../Tables/TableSquare")
 depth_view = NodePath("../DepthViewPort")
@@ -347,31 +244,13 @@ object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
 save_depth = true
 occlusion_threshold = 80
-max_generate_frame = 10
 
 [node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
 script = ExtResource("10_4c57u")
+object_catalog = ExtResource("object_catalog")
 table_mesh = NodePath("../Tables/TableSquare/TableBG")
 objects_parent = NodePath("../Objects")
 camera = NodePath("../Camera3D")
-book_enabled = false
-brush_scenes = Array[PackedScene]([ExtResource("11_2cqfq"), ExtResource("23_hrvbo"), ExtResource("24_uypp3"), ExtResource("27_5dllo"), ExtResource("28_phcyf"), ExtResource("76_wy5fy")])
-cup_scenes = Array[PackedScene]([ExtResource("12_yaehf"), ExtResource("27_abqjc"), ExtResource("28_6iyjs"), ExtResource("36_l0gw7"), ExtResource("37_inymm")])
-hanger_scenes = Array[PackedScene]([ExtResource("14_cegan"), ExtResource("25_0cp0l"), ExtResource("26_d2t1y"), ExtResource("27_gngh3"), ExtResource("28_0n3wm"), ExtResource("29_qnost"), ExtResource("42_4obbf")])
-sausage_scenes = Array[PackedScene]([ExtResource("50_qwt6e")])
-chips_scenes = Array[PackedScene]([ExtResource("16_getpj"), ExtResource("37_vke2r"), ExtResource("38_uit24"), ExtResource("39_ruth0"), ExtResource("40_rm4vd"), ExtResource("41_pjyto")])
-canned_chips_scenes = Array[PackedScene]([ExtResource("54_23xmf"), ExtResource("55_swlj1"), ExtResource("56_yysqy"), ExtResource("57_n5t1e"), ExtResource("58_h6isl"), ExtResource("59_53bls")])
-can_scenes = Array[PackedScene]([ExtResource("17_ryguw"), ExtResource("43_ruth0"), ExtResource("44_rm4vd"), ExtResource("45_sm6fg"), ExtResource("46_b17eg"), ExtResource("47_ntx8l"), ExtResource("48_rqtf5"), ExtResource("49_1vm84"), ExtResource("50_wu3dr"), ExtResource("51_cyx1q")])
-bottle_scenes = Array[PackedScene]([ExtResource("18_d13ii"), ExtResource("53_cyx1q"), ExtResource("54_0dhbp"), ExtResource("55_jx0wj"), ExtResource("76_cpm2s"), ExtResource("77_u81y6"), ExtResource("78_rt5wr"), ExtResource("79_mnw77"), ExtResource("80_vjgyh")])
-milk_scenes = Array[PackedScene]([ExtResource("19_1u8w0"), ExtResource("75_vieuh"), ExtResource("76_yjja3"), ExtResource("77_l0gw7"), ExtResource("78_inymm"), ExtResource("79_jcxqu"), ExtResource("80_0arob"), ExtResource("83_am8a1"), ExtResource("84_8dc3g"), ExtResource("85_htgcl")])
-water_scenes = Array[PackedScene]([ExtResource("11_w48qg"), ExtResource("12_vivmo"), ExtResource("85_ywjan"), ExtResource("86_m74q3"), ExtResource("87_tko6h"), ExtResource("88_am8a1"), ExtResource("89_8dc3g"), ExtResource("90_htgcl"), ExtResource("91_smeu8")])
-banana_scenes = Array[PackedScene]([ExtResource("11_efxa6"), ExtResource("12_dg77c"), ExtResource("13_ycdy4")])
-book_scenes = Array[PackedScene]([ExtResource("89_swlj1"), ExtResource("90_53bls"), ExtResource("91_lwnsi"), ExtResource("92_41lik"), ExtResource("93_jbvwl"), ExtResource("117_asu84"), ExtResource("118_qwt6e"), ExtResource("119_off2o"), ExtResource("120_tttfs"), ExtResource("121_1iygd"), ExtResource("122_g5xqc")])
-comb_scenes = Array[PackedScene]([ExtResource("19_facbu"), ExtResource("20_b1qrp"), ExtResource("21_come4"), ExtResource("24_f1p13"), ExtResource("25_4obbf"), ExtResource("26_ovcoh")])
-biscuit_scenes = Array[PackedScene]([ExtResource("15_82xsv"), ExtResource("36_34ol3"), ExtResource("71_0dhbp"), ExtResource("38_c2n8d"), ExtResource("39_wy5fy")])
-dragon_fruit_scenes = Array[PackedScene]([ExtResource("27_xuqvo"), ExtResource("43_gngh3"), ExtResource("44_0n3wm")])
-orange_scenes = Array[PackedScene]([ExtResource("23_a6jrf"), ExtResource("39_qnost"), ExtResource("40_wnkbs")])
-pomegranate_scenes = Array[PackedScene]([ExtResource("22_0odxb"), ExtResource("38_f6a44"), ExtResource("39_0cbny")])
 item_script = ExtResource("7_kek77")
 item_count_range = Vector2i(7, 15)
 min_distance_between_items = 0.8
