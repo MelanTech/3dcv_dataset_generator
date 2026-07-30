@@ -121,6 +121,13 @@
 [ext_resource type="PackedScene" path="res://prefabs/pears/pear_4.tscn" id="scene_119"]
 [ext_resource type="PackedScene" path="res://prefabs/pears/pear_5.tscn" id="scene_120"]
 [ext_resource type="PackedScene" path="res://prefabs/pears/pear_6.tscn" id="scene_121"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_1.tscn" id="scene_122"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_2.tscn" id="scene_123"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_3.tscn" id="scene_124"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_4.tscn" id="scene_125"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_5.tscn" id="scene_126"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_6.tscn" id="scene_127"]
+[ext_resource type="PackedScene" path="res://prefabs/peaches/peach_7.tscn" id="scene_128"]
 [ext_resource type="Script" uid="uid://bvbhjnj4drvhx" path="res://scripts/config/object_catalog.gd" id="script_catalog"]
 [ext_resource type="Script" uid="uid://drx4kdgyohgob" path="res://scripts/config/object_category.gd" id="script_category"]
 
@@ -232,6 +239,7 @@ display_name = &"Peach"
 key = &"peach"
 label_name = &"Peach"
 class_id = 14
+scenes = Array[PackedScene]([ExtResource("scene_122"), ExtResource("scene_123"), ExtResource("scene_124"), ExtResource("scene_125"), ExtResource("scene_126"), ExtResource("scene_127"), ExtResource("scene_128")])
 
 [sub_resource type="Resource" id="cat_apple"]
 script = ExtResource("script_category")
