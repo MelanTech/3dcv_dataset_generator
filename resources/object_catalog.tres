@@ -1,7 +1,5 @@
-[gd_resource type="Resource" script_class="ObjectCatalog" load_steps=130 format=3]
+[gd_resource type="Resource" script_class="ObjectCatalog" format=3 uid="uid://c4awxveucvk00"]
 
-[ext_resource type="Script" path="res://scripts/config/object_catalog.gd" id="script_catalog"]
-[ext_resource type="Script" path="res://scripts/config/object_category.gd" id="script_category"]
 [ext_resource type="PackedScene" uid="uid://coe0chnea2y10" path="res://prefabs/toothbrushes/toothbrush_1.tscn" id="scene_1"]
 [ext_resource type="PackedScene" uid="uid://ddj5nfbygg77d" path="res://prefabs/toothbrushes/toothbrush_2.tscn" id="scene_2"]
 [ext_resource type="PackedScene" uid="uid://de2jyaq7o3360" path="res://prefabs/toothbrushes/toothbrush_3.tscn" id="scene_3"]
@@ -105,6 +103,20 @@
 [ext_resource type="PackedScene" uid="uid://dnbwqbi5xsgov" path="res://prefabs/pomegranates/pomegranate_1.tscn" id="scene_101"]
 [ext_resource type="PackedScene" uid="uid://d1cqoo30cndu0" path="res://prefabs/pomegranates/pomegranate_2.tscn" id="scene_102"]
 [ext_resource type="PackedScene" uid="uid://bdi0x7nx08b1d" path="res://prefabs/pomegranates/pomegranate_3.tscn" id="scene_103"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_1.tscn" id="scene_104"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_2.tscn" id="scene_105"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_3.tscn" id="scene_106"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_4.tscn" id="scene_107"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_5.tscn" id="scene_108"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_6.tscn" id="scene_109"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_7.tscn" id="scene_110"]
+[ext_resource type="PackedScene" path="res://prefabs/melonseeds/melonseeds_8.tscn" id="scene_111"]
+[ext_resource type="PackedScene" path="res://prefabs/sausages/sausage_2.tscn" id="scene_112"]
+[ext_resource type="PackedScene" path="res://prefabs/sausages/sausage_3.tscn" id="scene_113"]
+[ext_resource type="PackedScene" path="res://prefabs/sausages/sausage_4.tscn" id="scene_114"]
+[ext_resource type="PackedScene" uid="uid://c5lrd2al4mct5" path="res://prefabs/sausages/sausage_5.tscn" id="scene_115"]
+[ext_resource type="Script" uid="uid://bvbhjnj4drvhx" path="res://scripts/config/object_catalog.gd" id="script_catalog"]
+[ext_resource type="Script" uid="uid://drx4kdgyohgob" path="res://scripts/config/object_category.gd" id="script_category"]
 
 [sub_resource type="Resource" id="cat_brush"]
 script = ExtResource("script_category")
@@ -150,6 +162,7 @@ display_name = &"SunflowerSeeds"
 key = &"sunflower_seeds"
 label_name = &"SunflowerSeeds"
 class_id = 6
+scenes = Array[PackedScene]([ExtResource("scene_104"), ExtResource("scene_105"), ExtResource("scene_106"), ExtResource("scene_107"), ExtResource("scene_108"), ExtResource("scene_109"), ExtResource("scene_110"), ExtResource("scene_111")])
 
 [sub_resource type="Resource" id="cat_sausage"]
 script = ExtResource("script_category")
@@ -157,7 +170,7 @@ display_name = &"Sausage"
 key = &"sausage"
 label_name = &"Sausage"
 class_id = 7
-scenes = Array[PackedScene]([ExtResource("scene_19")])
+scenes = Array[PackedScene]([ExtResource("scene_19"), ExtResource("scene_112"), ExtResource("scene_113"), ExtResource("scene_114"), ExtResource("scene_115")])
 
 [sub_resource type="Resource" id="cat_chips"]
 script = ExtResource("script_category")
@@ -300,4 +313,4 @@ is_unknown = true
 
 [resource]
 script = ExtResource("script_catalog")
-categories = Array[Resource]([SubResource("cat_brush"), SubResource("cat_earphone"), SubResource("cat_cup"), SubResource("cat_hanger"), SubResource("cat_chocolate"), SubResource("cat_sunflower_seeds"), SubResource("cat_sausage"), SubResource("cat_chips"), SubResource("cat_canned_chips"), SubResource("cat_can"), SubResource("cat_bottle"), SubResource("cat_milk"), SubResource("cat_water"), SubResource("cat_peach"), SubResource("cat_apple"), SubResource("cat_banana"), SubResource("cat_pear"), SubResource("cat_book"), SubResource("cat_comb"), SubResource("cat_biscuit"), SubResource("cat_dragon_fruit"), SubResource("cat_orange"), SubResource("cat_pomegranate"), SubResource("cat_jelly")])
+categories = Array[ExtResource("script_category")]([SubResource("cat_brush"), SubResource("cat_earphone"), SubResource("cat_cup"), SubResource("cat_hanger"), SubResource("cat_chocolate"), SubResource("cat_sunflower_seeds"), SubResource("cat_sausage"), SubResource("cat_chips"), SubResource("cat_canned_chips"), SubResource("cat_can"), SubResource("cat_bottle"), SubResource("cat_milk"), SubResource("cat_water"), SubResource("cat_peach"), SubResource("cat_apple"), SubResource("cat_banana"), SubResource("cat_pear"), SubResource("cat_book"), SubResource("cat_comb"), SubResource("cat_biscuit"), SubResource("cat_dragon_fruit"), SubResource("cat_orange"), SubResource("cat_pomegranate"), SubResource("cat_jelly")])

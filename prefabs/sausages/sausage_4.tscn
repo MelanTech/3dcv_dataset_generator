@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d0che87hotlg2"]
+
+[ext_resource type="PackedScene" uid="uid://6gud31i260im" path="res://models/sausages/sausage4/sausage4.blend" id="1_model"]
+
+[node name="sausage4" type="Node3D" unique_id=1361959026]
+
+[node name="sausage4_model" parent="." unique_id=1280443005 instance=ExtResource("1_model")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

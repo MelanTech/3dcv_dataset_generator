@@ -16,13 +16,13 @@
 [ext_resource type="PackedScene" uid="uid://c2xyg4odjxor4" path="res://models/envs/lab1/lab1.blend" id="8_kq58d"]
 [ext_resource type="PackedScene" uid="uid://inwj2d360ypa" path="res://models/envs/room1/room1.blend" id="9_kq58d"]
 [ext_resource type="Script" uid="uid://kht1taxe4y4r" path="res://scripts/environment/random_placer.gd" id="10_4c57u"]
-[ext_resource type="Resource" path="res://resources/object_catalog.tres" id="object_catalog"]
 [ext_resource type="PackedScene" uid="uid://bvceplppf6qds" path="res://models/envs/room2/room2.blend" id="10_seu75"]
 [ext_resource type="PackedScene" uid="uid://2eyrtsi1vc0p" path="res://models/envs/office1/office1.blend" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://bjcoijhqajluc" path="res://prefabs/tables/table_disc.tscn" id="18_c2n8d"]
 [ext_resource type="Script" uid="uid://c1rb7xfqi70bw" path="res://addons/post_processing/node/post_process.gd" id="51_blkrb"]
 [ext_resource type="Script" uid="uid://bs45b6eixrfy3" path="res://addons/post_processing/resource/post_processing_configuration.gd" id="52_abqjc"]
 [ext_resource type="Texture2D" uid="uid://dmg3wx7nauf1s" path="res://hdri/brown_photostudio_02_2k.hdr" id="hdri_panorama"]
+[ext_resource type="Resource" uid="uid://c4awxveucvk00" path="res://resources/object_catalog.tres" id="object_catalog"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSky_hdri"]
 panorama = ExtResource("hdri_panorama")

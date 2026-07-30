@@ -40,38 +40,13 @@ static func get_table_label(table: Node3D, camera: Camera3D) -> Dictionary:
 
 
 static func get_2d_bbox(node: Node3D, camera: Camera3D) -> Array:
-	# 获取碰撞形状节点及其变换
-	var collision_shape := node.get_child(1) as CollisionShape3D
-	if collision_shape == null:
-		print("找不到有效的 CollisionShape3D")
-		return []
-
-	var shape := collision_shape.shape
-	var vertices := PackedVector3Array()
-	var shape_transform := collision_shape.transform
-
-	# 根据形状类型获取顶点
-	if shape is ConvexPolygonShape3D:
-		vertices = shape.get_points()
-	elif shape is BoxShape3D:
-		var half_extents: Vector3 = shape.size / 2.0
-		var local_vertices := PackedVector3Array([
-			Vector3(-half_extents.x, -half_extents.y, -half_extents.z),
-			Vector3(half_extents.x, -half_extents.y, -half_extents.z),
-			Vector3(half_extents.x, half_extents.y, -half_extents.z),
-			Vector3(-half_extents.x, half_extents.y, -half_extents.z),
-			Vector3(-half_extents.x, -half_extents.y, half_extents.z),
-			Vector3(half_extents.x, -half_extents.y, half_extents.z),
-			Vector3(half_extents.x, half_extents.y, half_extents.z),
-			Vector3(-half_extents.x, half_extents.y, half_extents.z),
-		])
-		for vertex in local_vertices:
-			vertices.append(shape_transform * vertex)
+	var vertices := get_collision_shape_world_vertices(node)
+	if vertices.is_empty():
+		vertices = get_mesh_aabb_world_vertices(node)
 
 	var viewport_points := []
 	for vertex in vertices:
-		var world_vertex: Vector3 = node.global_transform * vertex
-		viewport_points.append(camera.unproject_position(world_vertex))
+		viewport_points.append(camera.unproject_position(vertex))
 
 	if viewport_points.is_empty():
 		return []
@@ -100,11 +75,13 @@ static func is_occluded_above_threshold(
 	if camera == null or world == null:
 		return false
 
-	var mesh := object.get_child(0) as MeshInstance3D
+	var mesh := find_mesh_instance(object)
 	if mesh == null:
 		return false
 	var aabb: AABB = mesh.get_aabb()
-	var points := get_detection_points(object, aabb, ray_count)
+	var points := get_detection_points(mesh, aabb, ray_count)
+	if points.is_empty():
+		return false
 
 	var occluded_count := 0
 	for point in points:
@@ -115,27 +92,112 @@ static func is_occluded_above_threshold(
 	return occlusion_percentage >= occlusion_threshold
 
 
-static func get_detection_points(object: Node3D, aabb: AABB, ray_count: int) -> Array:
+static func get_detection_points(mesh: MeshInstance3D, aabb: AABB, ray_count: int) -> Array:
 	var points := []
+	if ray_count <= 0:
+		return points
+
 	var local_points := []
-	var grid_size: float = ceil(sqrt(ray_count))
-	var step: float = 1.0 / (grid_size - 1.0) if ray_count > 1 else 1.0
+	var grid_size: int = max(1, int(ceil(sqrt(float(ray_count)))))
+	var step: float = 1.0 / float(grid_size - 1) if grid_size > 1 else 1.0
 
 	for i in range(ray_count):
-		var x: float = aabb.position.x + fmod(i, grid_size) * step * aabb.size.x
-		var y: float = aabb.position.y + (i / floor(sqrt(ray_count))) * step * aabb.size.y
+		var col := i % grid_size
+		var row := i / grid_size
+		var x: float = aabb.position.x + float(col) * step * aabb.size.x
+		var y: float = aabb.position.y + float(row) * step * aabb.size.y
 		var z: float = aabb.position.z + aabb.size.z * 0.5
 		local_points.append(Vector3(x, y, z))
 
-	var global_center := object.global_position
+	var global_center: Vector3 = mesh.global_transform * (aabb.position + aabb.size * 0.5)
 	points.append(global_center)
 
 	for local_point in local_points:
-		var global_point: Vector3 = object.to_global(local_point)
+		var global_point: Vector3 = mesh.global_transform * local_point
 		if global_point.distance_to(global_center) > 0.01 and global_point not in points:
 			points.append(global_point)
 
 	return points.slice(0, ray_count)
+
+
+static func find_collision_shape(node: Node) -> CollisionShape3D:
+	if node is CollisionShape3D:
+		var collision_shape := node as CollisionShape3D
+		if collision_shape.shape != null and not collision_shape.disabled:
+			return collision_shape
+
+	for child in node.get_children():
+		var found := find_collision_shape(child)
+		if found != null:
+			return found
+	return null
+
+
+static func find_mesh_instance(node: Node) -> MeshInstance3D:
+	if node is MeshInstance3D:
+		var mesh_instance := node as MeshInstance3D
+		if mesh_instance.mesh != null:
+			return mesh_instance
+
+	for child in node.get_children():
+		var found := find_mesh_instance(child)
+		if found != null:
+			return found
+	return null
+
+
+static func get_collision_shape_world_vertices(node: Node3D) -> PackedVector3Array:
+	var collision_shape := find_collision_shape(node)
+	var vertices := PackedVector3Array()
+	if collision_shape == null:
+		return vertices
+
+	var shape := collision_shape.shape
+	if shape is ConvexPolygonShape3D:
+		for point in shape.get_points():
+			vertices.append(collision_shape.global_transform * point)
+	elif shape is BoxShape3D:
+		var half_extents: Vector3 = shape.size / 2.0
+		var local_vertices := PackedVector3Array([
+			Vector3(-half_extents.x, -half_extents.y, -half_extents.z),
+			Vector3(half_extents.x, -half_extents.y, -half_extents.z),
+			Vector3(half_extents.x, half_extents.y, -half_extents.z),
+			Vector3(-half_extents.x, half_extents.y, -half_extents.z),
+			Vector3(-half_extents.x, -half_extents.y, half_extents.z),
+			Vector3(half_extents.x, -half_extents.y, half_extents.z),
+			Vector3(half_extents.x, half_extents.y, half_extents.z),
+			Vector3(-half_extents.x, half_extents.y, half_extents.z),
+		])
+		for vertex in local_vertices:
+			vertices.append(collision_shape.global_transform * vertex)
+
+	return vertices
+
+
+static func get_mesh_aabb_world_vertices(node: Node3D) -> PackedVector3Array:
+	var mesh := find_mesh_instance(node)
+	var vertices := PackedVector3Array()
+	if mesh == null:
+		print("找不到有效的 CollisionShape3D 或 MeshInstance3D: ", node.name)
+		return vertices
+
+	var aabb := mesh.get_aabb()
+	var min_corner := aabb.position
+	var max_corner := aabb.position + aabb.size
+	var local_vertices := PackedVector3Array([
+		Vector3(min_corner.x, min_corner.y, min_corner.z),
+		Vector3(max_corner.x, min_corner.y, min_corner.z),
+		Vector3(max_corner.x, max_corner.y, min_corner.z),
+		Vector3(min_corner.x, max_corner.y, min_corner.z),
+		Vector3(min_corner.x, min_corner.y, max_corner.z),
+		Vector3(max_corner.x, min_corner.y, max_corner.z),
+		Vector3(max_corner.x, max_corner.y, max_corner.z),
+		Vector3(min_corner.x, max_corner.y, max_corner.z),
+	])
+	for vertex in local_vertices:
+		vertices.append(mesh.global_transform * vertex)
+
+	return vertices
 
 
 static func is_point_occluded(point: Vector3, camera: Camera3D, world: World3D) -> bool:
