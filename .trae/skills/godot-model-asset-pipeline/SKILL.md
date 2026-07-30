@@ -11,13 +11,16 @@ This skill covers the complete project workflow:
 
 - Batch import source models through Blender.
 - Reduce mesh face count and shrink textures.
+- Flatten imported hierarchy, center/ground each object, and normalize object scale.
+- Merge mesh fragments that belong to the same physical object.
+- Split multi-object packs so each generated prefab contains exactly one physical object.
 - Save compact `.blend` assets under `models/<category>/<asset_name>/`.
 - Generate wrapper prefabs under `prefabs/<category>/`.
 - Wire those prefabs into `resources/object_catalog.tres`.
 - Keep prefab resources external by path instead of inlining mesh/material data.
 - Validate Godot import and bbox generation.
 
-Do not include manual size calibration in this workflow. If the user asks to adjust model scale, rotation, or offsets, handle that as a separate follow-up edit on the prefab model child nodes.
+Automatic size normalization is part of this workflow. Do not include subjective/manual pose calibration in this workflow. If the user asks to adjust artistic scale, rotation, or offsets after import, handle that as a separate follow-up edit on the prefab model child nodes.
 
 ## Tooling
 
@@ -87,6 +90,10 @@ Optional fields:
 ```python
 {
     "decimate_ratio": 0.1,
+    "target_max_dimension": 0.8,
+    "merge_meshes": True,
+    "center_xy": True,
+    "ground_to_z_zero": True,
     "texture_max_edge": 1024,
     "jpeg_quality": 85,
     "normal_max_edge": 1024,
@@ -96,9 +103,13 @@ Optional fields:
 
 Default quality policy:
 
-- Geometry: decimate to `0.1`.
+- Geometry: decimate to `0.1` for high-poly meshes. If the model is already small, skip geometry reduction by using `decimate_ratio: 1.0`.
+- Scale and origin: flatten mesh hierarchy, apply transforms, center the object footprint on the Blender world origin, ground the lowest point at `Z=0`, and normalize the largest dimension to `target_max_dimension` unless the category has a stronger established size convention.
+- Mesh structure: merge multiple mesh fragments when they are parts of the same physical item. The final optimized `.blend` for one prefab should contain one mesh object whenever possible.
+- Multi-object packs: inspect source files before import. If a downloaded asset is a pack containing multiple separate physical objects, split it into separate asset jobs and create one prefab per object. Do not place multiple distinct objects in one prefab.
 - Base color and packed roughness/metallic textures: JPEG, quality `85`, max edge `1024`.
 - Normal maps or alpha-linked textures: PNG, max edge `1024`, maximum compression.
+- Vertex color assets: if the source has no texture images but has color attributes, do not rely on Godot importing mesh vertex colors. Generate UVs when needed, bake the vertex colors into a normal base-color texture, save it under `textures/`, and wire an Image Texture node into the material base color. Report the model as vertex-color sourced and texture-baked, not as missing textures.
 - Save `.blend` with compression enabled.
 - Externalize images using relative paths like `//textures/file.jpg`.
 - Rename every mesh object with `_rigid` suffix so Godot can generate colliders from imported scene names.
@@ -112,6 +123,10 @@ ASSET_JOBS = [
         "out_dir": "/Users/bytedance/Develop/DatasetGen/models/category/category1",
         "asset_name": "category1",
         "decimate_ratio": 0.1,
+        "target_max_dimension": 0.8,
+        "merge_meshes": True,
+        "center_xy": True,
+        "ground_to_z_zero": True,
         "texture_max_edge": 1024,
         "normal_max_edge": 1024,
         "jpeg_quality": 85,
@@ -131,7 +146,10 @@ The script prints `DATASETGEN_BATCH_RESULT=...`. Capture and summarize:
 - Original and final triangle counts.
 - Actual reduction ratio.
 - Mesh object names.
+- Whether meshes were merged and whether the saved `.blend` contains one mesh for one prefab.
+- Bounds before and after normalization.
 - Texture sizes and formats.
+- Vertex color handling when a model has no texture images, including the baked texture filename.
 - Final `.blend` size and texture directory size.
 - Any failed or skipped files.
 
