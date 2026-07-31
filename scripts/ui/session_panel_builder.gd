@@ -116,6 +116,64 @@ static func build(
 	toggles_card.add_child(rotate_light_check)
 	controls["rotate_light_check"] = rotate_light_check
 
+	_add_title(settings_root, "Camera Perturbation", "Continuously vary lens distortion and white balance during capture.")
+	var camera_card := _add_card(settings_root)
+	var camera_perturb_enabled_check := _make_check("Enable Camera Perturbation", true)
+	camera_card.add_child(camera_perturb_enabled_check)
+	controls["camera_perturb_enabled_check"] = camera_perturb_enabled_check
+
+	var change_time_row := HBoxContainer.new()
+	var camera_change_time_min := _make_spin(0.1, 30.0, 0.1, 1.0)
+	var camera_change_time_max := _make_spin(0.1, 30.0, 0.1, 3.0)
+	change_time_row.add_child(_label("Min"))
+	change_time_row.add_child(camera_change_time_min)
+	change_time_row.add_child(_label("Max"))
+	change_time_row.add_child(camera_change_time_max)
+	_add_labeled_row(camera_card, "Change Time", change_time_row)
+	controls["camera_change_time_min"] = camera_change_time_min
+	controls["camera_change_time_max"] = camera_change_time_max
+
+	var camera_distortion_enabled_check := _make_check("Enable Lens Distortion", true)
+	camera_card.add_child(camera_distortion_enabled_check)
+	controls["camera_distortion_enabled_check"] = camera_distortion_enabled_check
+
+	var distortion_row := HBoxContainer.new()
+	var distortion_delta_min := _make_spin(-0.5, 0.5, 0.01, -0.06)
+	var distortion_delta_max := _make_spin(-0.5, 0.5, 0.01, 0.06)
+	distortion_row.add_child(_label("Min"))
+	distortion_row.add_child(distortion_delta_min)
+	distortion_row.add_child(_label("Max"))
+	distortion_row.add_child(distortion_delta_max)
+	_add_labeled_row(camera_card, "Distortion Δ", distortion_row)
+	controls["distortion_delta_min"] = distortion_delta_min
+	controls["distortion_delta_max"] = distortion_delta_max
+
+	var white_balance_enabled_check := _make_check("Enable White Balance", true)
+	camera_card.add_child(white_balance_enabled_check)
+	controls["white_balance_enabled_check"] = white_balance_enabled_check
+
+	var warm_cool_row := HBoxContainer.new()
+	var warm_cool_min := _make_spin(-0.5, 0.5, 0.01, -0.08)
+	var warm_cool_max := _make_spin(-0.5, 0.5, 0.01, 0.08)
+	warm_cool_row.add_child(_label("Min"))
+	warm_cool_row.add_child(warm_cool_min)
+	warm_cool_row.add_child(_label("Max"))
+	warm_cool_row.add_child(warm_cool_max)
+	_add_labeled_row(camera_card, "Warm/Cool", warm_cool_row)
+	controls["warm_cool_min"] = warm_cool_min
+	controls["warm_cool_max"] = warm_cool_max
+
+	var green_magenta_row := HBoxContainer.new()
+	var green_magenta_min := _make_spin(-0.5, 0.5, 0.01, -0.04)
+	var green_magenta_max := _make_spin(-0.5, 0.5, 0.01, 0.04)
+	green_magenta_row.add_child(_label("Min"))
+	green_magenta_row.add_child(green_magenta_min)
+	green_magenta_row.add_child(_label("Max"))
+	green_magenta_row.add_child(green_magenta_max)
+	_add_labeled_row(camera_card, "Green/Magenta", green_magenta_row)
+	controls["green_magenta_min"] = green_magenta_min
+	controls["green_magenta_max"] = green_magenta_max
+
 	_add_title(categories_root, "Categories", "Enable classes and tune sampling weights.")
 	var cat_box := _add_card(categories_root)
 	var category_controls: Dictionary = controls["category_controls"]

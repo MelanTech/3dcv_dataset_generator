@@ -145,7 +145,8 @@ func _setup_capture_viewport() -> void:
 		self,
 		rgb_capture_size,
 		_get_active_world_3d(),
-		get_node_or_null("../PostProcess") as CanvasLayer
+		get_node_or_null("../PostProcess") as CanvasLayer,
+		get_node_or_null("../CameraImageAugmenter")
 	)
 
 

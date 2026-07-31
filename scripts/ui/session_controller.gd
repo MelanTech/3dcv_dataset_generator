@@ -11,6 +11,7 @@ const SessionPanelBuilderScript = preload("res://scripts/ui/session_panel_builde
 ## GUI 位于主界面右侧面板，3D 画面在左侧 SubViewportContainer 中。
 
 @export var camera: Node
+@export var camera_image_augmenter: Node
 @export var random_placer: Node
 @export var table_distractor_placer: Node
 @export var data_generator: Node
@@ -36,6 +37,17 @@ var _save_enabled_check: CheckBox
 var _show_bbox_check: CheckBox
 var _rotate_light_check: CheckBox
 var _table_option: OptionButton
+var _camera_perturb_enabled_check: CheckBox
+var _camera_change_time_min: SpinBox
+var _camera_change_time_max: SpinBox
+var _camera_distortion_enabled_check: CheckBox
+var _distortion_delta_min: SpinBox
+var _distortion_delta_max: SpinBox
+var _white_balance_enabled_check: CheckBox
+var _warm_cool_min: SpinBox
+var _warm_cool_max: SpinBox
+var _green_magenta_min: SpinBox
+var _green_magenta_max: SpinBox
 var _start_btn: Button
 var _stop_btn: Button
 var _status_label: Label
@@ -74,6 +86,8 @@ func _on_start_pressed() -> void:
 	_apply_config_to_nodes()
 	if camera != null and camera.has_method("begin"):
 		camera.begin()
+	if camera_image_augmenter != null and camera_image_augmenter.has_method("begin"):
+		camera_image_augmenter.begin()
 	if data_generator != null and data_generator.has_method("begin"):
 		data_generator.begin()
 	if table_distractor_placer != null and table_distractor_placer.has_method("begin"):
@@ -96,6 +110,8 @@ func _on_stop_pressed() -> void:
 		random_placer.halt()
 	if table_distractor_placer != null and table_distractor_placer.has_method("halt"):
 		table_distractor_placer.halt()
+	if camera_image_augmenter != null and camera_image_augmenter.has_method("halt"):
+		camera_image_augmenter.halt()
 	if camera != null and camera.has_method("halt"):
 		camera.halt()
 	_set_running(false)
@@ -180,6 +196,17 @@ func _apply_config_to_nodes() -> void:
 			"distractor_count_range",
 			Vector2i(int(_distractor_count_min.value), int(_distractor_count_max.value))
 		)
+	if camera_image_augmenter != null:
+		camera_image_augmenter.call(
+			"apply_settings",
+			_camera_perturb_enabled_check.button_pressed,
+			_camera_distortion_enabled_check.button_pressed,
+			Vector2(float(_distortion_delta_min.value), float(_distortion_delta_max.value)),
+			_white_balance_enabled_check.button_pressed,
+			Vector2(float(_warm_cool_min.value), float(_warm_cool_max.value)),
+			Vector2(float(_green_magenta_min.value), float(_green_magenta_max.value)),
+			Vector2(float(_camera_change_time_min.value), float(_camera_change_time_max.value))
+		)
 
 
 func _sync_catalog_from_controls() -> void:
@@ -243,6 +270,17 @@ func _build_gui() -> void:
 	_show_bbox_check = controls["show_bbox_check"]
 	_rotate_light_check = controls["rotate_light_check"]
 	_table_option = controls["table_option"]
+	_camera_perturb_enabled_check = controls["camera_perturb_enabled_check"]
+	_camera_change_time_min = controls["camera_change_time_min"]
+	_camera_change_time_max = controls["camera_change_time_max"]
+	_camera_distortion_enabled_check = controls["camera_distortion_enabled_check"]
+	_distortion_delta_min = controls["distortion_delta_min"]
+	_distortion_delta_max = controls["distortion_delta_max"]
+	_white_balance_enabled_check = controls["white_balance_enabled_check"]
+	_warm_cool_min = controls["warm_cool_min"]
+	_warm_cool_max = controls["warm_cool_max"]
+	_green_magenta_min = controls["green_magenta_min"]
+	_green_magenta_max = controls["green_magenta_max"]
 	_start_btn = controls["start_btn"]
 	_stop_btn = controls["stop_btn"]
 	_status_label = controls["status_label"]
@@ -263,6 +301,17 @@ func _get_controls() -> Dictionary:
 		"show_bbox_check": _show_bbox_check,
 		"rotate_light_check": _rotate_light_check,
 		"table_option": _table_option,
+		"camera_perturb_enabled_check": _camera_perturb_enabled_check,
+		"camera_change_time_min": _camera_change_time_min,
+		"camera_change_time_max": _camera_change_time_max,
+		"camera_distortion_enabled_check": _camera_distortion_enabled_check,
+		"distortion_delta_min": _distortion_delta_min,
+		"distortion_delta_max": _distortion_delta_max,
+		"white_balance_enabled_check": _white_balance_enabled_check,
+		"warm_cool_min": _warm_cool_min,
+		"warm_cool_max": _warm_cool_max,
+		"green_magenta_min": _green_magenta_min,
+		"green_magenta_max": _green_magenta_max,
 		"category_controls": _category_controls,
 	}
 
@@ -270,11 +319,31 @@ func _get_controls() -> Dictionary:
 # 启动后禁用结构性配置控件（保存/预览开关除外）
 func _set_structural_config_disabled(disabled: bool) -> void:
 	# SpinBox 用 editable，其余用 disabled
-	for spin in [_count_min, _count_max, _distractor_count_min, _distractor_count_max, _interval_spin]:
+	for spin in [
+		_count_min,
+		_count_max,
+		_distractor_count_min,
+		_distractor_count_max,
+		_interval_spin,
+		_camera_change_time_min,
+		_camera_change_time_max,
+		_distortion_delta_min,
+		_distortion_delta_max,
+		_warm_cool_min,
+		_warm_cool_max,
+		_green_magenta_min,
+		_green_magenta_max,
+	]:
 		if spin != null:
 			spin.editable = not disabled
 	if _distractor_enabled_check != null:
 		_distractor_enabled_check.disabled = disabled
+	if _camera_perturb_enabled_check != null:
+		_camera_perturb_enabled_check.disabled = disabled
+	if _camera_distortion_enabled_check != null:
+		_camera_distortion_enabled_check.disabled = disabled
+	if _white_balance_enabled_check != null:
+		_white_balance_enabled_check.disabled = disabled
 	if _save_depth_check != null:
 		_save_depth_check.disabled = disabled
 	if _table_option != null:

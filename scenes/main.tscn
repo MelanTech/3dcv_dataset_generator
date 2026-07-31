@@ -105,12 +105,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="SessionController" type="Control" parent="RootLayout/ControlPanel/ControlMargin" unique_id=884732434 node_paths=PackedStringArray("camera", "random_placer", "table_distractor_placer", "data_generator", "bbox_layer", "table_selector", "rotate_light")]
+[node name="SessionController" type="Control" parent="RootLayout/ControlPanel/ControlMargin" unique_id=884732434 node_paths=PackedStringArray("camera", "camera_image_augmenter", "random_placer", "table_distractor_placer", "data_generator", "bbox_layer", "table_selector", "rotate_light")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_session")
 camera = NodePath("../../../PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport/GeneratorScene/Camera3D")
+camera_image_augmenter = NodePath("../../../PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport/GeneratorScene/CameraImageAugmenter")
 random_placer = NodePath("../../../PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport/GeneratorScene/RandomPlacer")
 table_distractor_placer = NodePath("../../../PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport/GeneratorScene/TableDistractorPlacer")
 data_generator = NodePath("../../../PreviewPanel/PreviewMargin/PreviewScaler/PreviewStrip/GeneratorView/GeneratorViewport/GeneratorScene/DataGenerator")

@@ -16,8 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://c2xyg4odjxor4" path="res://models/envs/lab1/lab1.blend" id="8_kq58d"]
 [ext_resource type="PackedScene" uid="uid://inwj2d360ypa" path="res://models/envs/room1/room1.blend" id="9_kq58d"]
 [ext_resource type="Script" uid="uid://kht1taxe4y4r" path="res://scripts/environment/random_placer.gd" id="10_4c57u"]
-[ext_resource type="Script" path="res://scripts/environment/table_distractor_placer.gd" id="11_distractor"]
 [ext_resource type="PackedScene" uid="uid://bvceplppf6qds" path="res://models/envs/room2/room2.blend" id="10_seu75"]
+[ext_resource type="Script" uid="uid://butts73xhsryq" path="res://scripts/environment/table_distractor_placer.gd" id="11_distractor"]
+[ext_resource type="Script" path="res://scripts/environment/camera_image_augmenter.gd" id="12_camera_aug"]
 [ext_resource type="PackedScene" uid="uid://2eyrtsi1vc0p" path="res://models/envs/office1/office1.blend" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://bjcoijhqajluc" path="res://prefabs/tables/table_disc.tscn" id="18_c2n8d"]
 [ext_resource type="Script" uid="uid://c1rb7xfqi70bw" path="res://addons/post_processing/node/post_process.gd" id="51_blkrb"]
@@ -104,6 +105,10 @@ ambient_mode = 0
 script = ExtResource("51_blkrb")
 configuration = SubResource("Resource_uypp3")
 metadata/_custom_type_script = "uid://c1rb7xfqi70bw"
+
+[node name="CameraImageAugmenter" type="Node" parent="." unique_id=848040865 node_paths=PackedStringArray("camera")]
+script = ExtResource("12_camera_aug")
+camera = NodePath("../Camera3D")
 
 [node name="Lights" type="Node" parent="." unique_id=1901610759]
 
@@ -246,7 +251,7 @@ object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
 save_depth = true
 
-[node name="TableDistractorPlacer" type="Node" parent="." node_paths=PackedStringArray("table_mesh", "distractor_parent", "camera")]
+[node name="TableDistractorPlacer" type="Node" parent="." unique_id=711326478 node_paths=PackedStringArray("table_mesh", "distractor_parent", "camera")]
 script = ExtResource("11_distractor")
 object_catalog = ExtResource("object_catalog")
 table_mesh = NodePath("../Tables/TableSquare/TableBG")
@@ -271,6 +276,6 @@ stack_offset_ratio = 0.1
 stacked_max_tilt_degrees = 0.0
 stacked_base_max_tilt_degrees = 0.0
 
-[node name="TableDistractors" type="Node3D" parent="."]
+[node name="TableDistractors" type="Node3D" parent="." unique_id=457059934]
 
 [node name="Objects" type="Node" parent="." unique_id=284703767]

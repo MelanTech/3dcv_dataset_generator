@@ -4,9 +4,16 @@ class_name CaptureViewportRig
 var viewport: SubViewport
 var camera: Camera3D
 var post_process: CanvasLayer
+var camera_augmentation: CanvasLayer
 
 
-func setup(owner: Node, size: Vector2i, world: World3D, source_post_process: CanvasLayer) -> void:
+func setup(
+	owner: Node,
+	size: Vector2i,
+	world: World3D,
+	source_post_process: CanvasLayer,
+	source_camera_augmenter: Node = null
+) -> void:
 	viewport = SubViewport.new()
 	viewport.name = "CleanCaptureViewport"
 	viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
@@ -27,6 +34,11 @@ func setup(owner: Node, size: Vector2i, world: World3D, source_post_process: Can
 		post_process.layer = source_post_process.layer
 		post_process.custom_viewport = viewport
 		viewport.add_child(post_process)
+
+	if source_camera_augmenter != null and source_camera_augmenter.has_method("create_effect_layer"):
+		camera_augmentation = source_camera_augmenter.call("create_effect_layer", viewport) as CanvasLayer
+		if camera_augmentation != null:
+			viewport.add_child(camera_augmentation)
 
 
 func prepare(size: Vector2i, world: World3D, source_camera: Camera3D) -> void:
