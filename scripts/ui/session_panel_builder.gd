@@ -80,6 +80,21 @@ static func build(
 	controls["count_min"] = count_min
 	controls["count_max"] = count_max
 
+	var distractor_enabled_check := _make_check("Enable Table Distractors", true)
+	capture_card.add_child(distractor_enabled_check)
+	controls["distractor_enabled_check"] = distractor_enabled_check
+
+	var distractor_count_row := HBoxContainer.new()
+	var distractor_count_min := _make_spin(0, 99, 1, 4)
+	var distractor_count_max := _make_spin(0, 99, 1, 8)
+	distractor_count_row.add_child(_label("Min"))
+	distractor_count_row.add_child(distractor_count_min)
+	distractor_count_row.add_child(_label("Max"))
+	distractor_count_row.add_child(distractor_count_max)
+	_add_labeled_row(capture_card, "Distractor Count", distractor_count_row)
+	controls["distractor_count_min"] = distractor_count_min
+	controls["distractor_count_max"] = distractor_count_max
+
 	var interval_spin := _make_spin(1, 600, 1, 30)
 	_add_labeled_row(capture_card, "Save Interval", interval_spin)
 	controls["interval_spin"] = interval_spin

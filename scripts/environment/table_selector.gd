@@ -20,6 +20,7 @@ enum TableShape {
 @export_group("Consumers")
 @export var data_generator: Node
 @export var random_placer: Node
+@export var table_distractor_placer: Node
 
 
 func _enter_tree() -> void:
@@ -49,3 +50,5 @@ func _apply_table_selection() -> void:
 		data_generator.set("table", active_table)
 	if random_placer != null:
 		random_placer.set("table_mesh", active_mesh)
+	if table_distractor_placer != null:
+		table_distractor_placer.set("table_mesh", active_mesh)

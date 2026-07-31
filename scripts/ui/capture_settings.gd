@@ -4,6 +4,9 @@ class_name CaptureSettings
 var output_dir := ""
 var count_min := 3
 var count_max := 7
+var distractor_enabled := true
+var distractor_count_min := 4
+var distractor_count_max := 8
 var save_interval := 30
 var save_depth := false
 var save_enabled := false
@@ -19,6 +22,9 @@ static func from_controls(output_dir_value: String, controls: Dictionary) -> Cap
 	settings.output_dir = output_dir_value
 	settings.count_min = int(controls["count_min"].value)
 	settings.count_max = int(controls["count_max"].value)
+	settings.distractor_enabled = controls["distractor_enabled_check"].button_pressed
+	settings.distractor_count_min = int(controls["distractor_count_min"].value)
+	settings.distractor_count_max = int(controls["distractor_count_max"].value)
 	settings.save_interval = int(controls["interval_spin"].value)
 	settings.save_depth = controls["save_depth_check"].button_pressed
 	settings.save_enabled = controls["save_enabled_check"].button_pressed
@@ -44,6 +50,9 @@ static func load_from_file(path: String, defaults: CaptureSettings) -> CaptureSe
 	settings.output_dir = cfg.get_value("general", "output_dir", settings.output_dir)
 	settings.count_min = cfg.get_value("general", "count_min", settings.count_min)
 	settings.count_max = cfg.get_value("general", "count_max", settings.count_max)
+	settings.distractor_enabled = cfg.get_value("general", "distractor_enabled", settings.distractor_enabled)
+	settings.distractor_count_min = cfg.get_value("general", "distractor_count_min", settings.distractor_count_min)
+	settings.distractor_count_max = cfg.get_value("general", "distractor_count_max", settings.distractor_count_max)
 	settings.save_interval = cfg.get_value("general", "save_interval", settings.save_interval)
 	settings.save_depth = cfg.get_value("general", "save_depth", settings.save_depth)
 	settings.save_enabled = cfg.get_value("general", "save_enabled", settings.save_enabled)
@@ -64,6 +73,9 @@ func save_to_file(path: String) -> Error:
 	cfg.set_value("general", "output_dir", output_dir)
 	cfg.set_value("general", "count_min", count_min)
 	cfg.set_value("general", "count_max", count_max)
+	cfg.set_value("general", "distractor_enabled", distractor_enabled)
+	cfg.set_value("general", "distractor_count_min", distractor_count_min)
+	cfg.set_value("general", "distractor_count_max", distractor_count_max)
 	cfg.set_value("general", "save_interval", save_interval)
 	cfg.set_value("general", "save_depth", save_depth)
 	cfg.set_value("general", "save_enabled", save_enabled)
@@ -83,6 +95,9 @@ func apply_to_controls(controls: Dictionary) -> void:
 	controls["output_dir_value"].text = output_dir
 	controls["count_min"].value = count_min
 	controls["count_max"].value = count_max
+	controls["distractor_enabled_check"].button_pressed = distractor_enabled
+	controls["distractor_count_min"].value = distractor_count_min
+	controls["distractor_count_max"].value = distractor_count_max
 	controls["interval_spin"].value = save_interval
 	controls["save_depth_check"].button_pressed = save_depth
 	controls["save_enabled_check"].button_pressed = save_enabled
@@ -104,6 +119,9 @@ func duplicate_settings() -> CaptureSettings:
 	copy.output_dir = output_dir
 	copy.count_min = count_min
 	copy.count_max = count_max
+	copy.distractor_enabled = distractor_enabled
+	copy.distractor_count_min = distractor_count_min
+	copy.distractor_count_max = distractor_count_max
 	copy.save_interval = save_interval
 	copy.save_depth = save_depth
 	copy.save_enabled = save_enabled

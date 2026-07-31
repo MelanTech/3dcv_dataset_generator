@@ -12,6 +12,7 @@ const SessionPanelBuilderScript = preload("res://scripts/ui/session_panel_builde
 
 @export var camera: Node
 @export var random_placer: Node
+@export var table_distractor_placer: Node
 @export var data_generator: Node
 @export var bbox_layer: CanvasItem
 @export var table_selector: Node
@@ -26,6 +27,9 @@ var _running := false
 var _output_dir_value: Label
 var _count_min: SpinBox
 var _count_max: SpinBox
+var _distractor_enabled_check: CheckBox
+var _distractor_count_min: SpinBox
+var _distractor_count_max: SpinBox
 var _interval_spin: SpinBox
 var _save_depth_check: CheckBox
 var _save_enabled_check: CheckBox
@@ -72,6 +76,8 @@ func _on_start_pressed() -> void:
 		camera.begin()
 	if data_generator != null and data_generator.has_method("begin"):
 		data_generator.begin()
+	if table_distractor_placer != null and table_distractor_placer.has_method("begin"):
+		table_distractor_placer.begin()
 	if random_placer != null and random_placer.has_method("begin"):
 		random_placer.begin()
 	_set_running(true)
@@ -88,6 +94,8 @@ func _on_stop_pressed() -> void:
 		data_generator.halt()
 	if random_placer != null and random_placer.has_method("halt"):
 		random_placer.halt()
+	if table_distractor_placer != null and table_distractor_placer.has_method("halt"):
+		table_distractor_placer.halt()
 	if camera != null and camera.has_method("halt"):
 		camera.halt()
 	_set_running(false)
@@ -166,6 +174,12 @@ func _apply_config_to_nodes() -> void:
 		data_generator.save_enabled = _save_enabled_check.button_pressed
 	if random_placer != null:
 		random_placer.item_count_range = Vector2i(int(_count_min.value), int(_count_max.value))
+	if table_distractor_placer != null:
+		table_distractor_placer.set("enabled", _distractor_enabled_check.button_pressed)
+		table_distractor_placer.set(
+			"distractor_count_range",
+			Vector2i(int(_distractor_count_min.value), int(_distractor_count_max.value))
+		)
 
 
 func _sync_catalog_from_controls() -> void:
@@ -220,6 +234,9 @@ func _build_gui() -> void:
 	_output_dir_value = controls["output_dir_value"]
 	_count_min = controls["count_min"]
 	_count_max = controls["count_max"]
+	_distractor_enabled_check = controls["distractor_enabled_check"]
+	_distractor_count_min = controls["distractor_count_min"]
+	_distractor_count_max = controls["distractor_count_max"]
 	_interval_spin = controls["interval_spin"]
 	_save_depth_check = controls["save_depth_check"]
 	_save_enabled_check = controls["save_enabled_check"]
@@ -237,6 +254,9 @@ func _get_controls() -> Dictionary:
 		"output_dir_value": _output_dir_value,
 		"count_min": _count_min,
 		"count_max": _count_max,
+		"distractor_enabled_check": _distractor_enabled_check,
+		"distractor_count_min": _distractor_count_min,
+		"distractor_count_max": _distractor_count_max,
 		"interval_spin": _interval_spin,
 		"save_depth_check": _save_depth_check,
 		"save_enabled_check": _save_enabled_check,
@@ -250,9 +270,11 @@ func _get_controls() -> Dictionary:
 # 启动后禁用结构性配置控件（保存/预览开关除外）
 func _set_structural_config_disabled(disabled: bool) -> void:
 	# SpinBox 用 editable，其余用 disabled
-	for spin in [_count_min, _count_max, _interval_spin]:
+	for spin in [_count_min, _count_max, _distractor_count_min, _distractor_count_max, _interval_spin]:
 		if spin != null:
 			spin.editable = not disabled
+	if _distractor_enabled_check != null:
+		_distractor_enabled_check.disabled = disabled
 	if _save_depth_check != null:
 		_save_depth_check.disabled = disabled
 	if _table_option != null:

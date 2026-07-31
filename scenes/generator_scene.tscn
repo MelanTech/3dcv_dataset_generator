@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c2xyg4odjxor4" path="res://models/envs/lab1/lab1.blend" id="8_kq58d"]
 [ext_resource type="PackedScene" uid="uid://inwj2d360ypa" path="res://models/envs/room1/room1.blend" id="9_kq58d"]
 [ext_resource type="Script" uid="uid://kht1taxe4y4r" path="res://scripts/environment/random_placer.gd" id="10_4c57u"]
+[ext_resource type="Script" path="res://scripts/environment/table_distractor_placer.gd" id="11_distractor"]
 [ext_resource type="PackedScene" uid="uid://bvceplppf6qds" path="res://models/envs/room2/room2.blend" id="10_seu75"]
 [ext_resource type="PackedScene" uid="uid://2eyrtsi1vc0p" path="res://models/envs/office1/office1.blend" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://bjcoijhqajluc" path="res://prefabs/tables/table_disc.tscn" id="18_c2n8d"]
@@ -208,7 +209,7 @@ visible = false
 transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0, -0.468148, 0)
 visible = false
 
-[node name="Tables" type="Node" parent="." unique_id=1789543958 node_paths=PackedStringArray("square_table", "square_table_mesh", "disc_table", "disc_table_mesh", "data_generator", "random_placer")]
+[node name="Tables" type="Node" parent="." unique_id=1789543958 node_paths=PackedStringArray("square_table", "square_table_mesh", "disc_table", "disc_table_mesh", "data_generator", "random_placer", "table_distractor_placer")]
 script = ExtResource("7_tselect")
 square_table = NodePath("TableSquare")
 square_table_mesh = NodePath("TableSquare/TableBG")
@@ -216,6 +217,7 @@ disc_table = NodePath("TableDisc")
 disc_table_mesh = NodePath("TableDisc/disc-rigid")
 data_generator = NodePath("../DataGenerator")
 random_placer = NodePath("../RandomPlacer")
+table_distractor_placer = NodePath("../TableDistractorPlacer")
 
 [node name="TableSquare" parent="Tables" unique_id=2138597908 instance=ExtResource("1_h2yge")]
 script = ExtResource("7_kek77")
@@ -244,6 +246,16 @@ object_container = NodePath("../Objects")
 base_path = &"/Users/bytedance/Develop/生成数据集"
 save_depth = true
 
+[node name="TableDistractorPlacer" type="Node" parent="." node_paths=PackedStringArray("table_mesh", "distractor_parent", "camera")]
+script = ExtResource("11_distractor")
+object_catalog = ExtResource("object_catalog")
+table_mesh = NodePath("../Tables/TableSquare/TableBG")
+distractor_parent = NodePath("../TableDistractors")
+camera = NodePath("../Camera3D")
+distractor_count_range = Vector2i(4, 8)
+edge_margin = 0.7
+scale_range = Vector2(0.75, 1.05)
+
 [node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
 script = ExtResource("10_4c57u")
 object_catalog = ExtResource("object_catalog")
@@ -258,5 +270,7 @@ scale_range = Vector2(0.9, 1.1)
 stack_offset_ratio = 0.1
 stacked_max_tilt_degrees = 0.0
 stacked_base_max_tilt_degrees = 0.0
+
+[node name="TableDistractors" type="Node3D" parent="."]
 
 [node name="Objects" type="Node" parent="." unique_id=284703767]
