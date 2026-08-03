@@ -10,10 +10,11 @@ func _process(_delta: float) -> void:
 	# 复制位姿
 	global_transform = target.global_transform
 	# 复制投影参数，保证深度图与 RGB 在空间上严格对齐。
-	# 注意：不同步 near/far —— 它们只影响深度值到 [0,1] 缓冲的映射，
-	# 不影响 X/Y 像素位置（已实测偏差为 0）。深度相机保留自己更紧的
-	# near/far，让深度缓冲精度集中在场景区间，避免量化台阶。
+	# near/far 也必须同步，否则 RGB 可见但超出深度相机 far plane 的墙体
+	# 会在 depth texture 中变成 reversed-Z 背景值 0，最终被编码为黑色无效深度。
 	projection = target.projection
 	fov = target.fov
 	keep_aspect = target.keep_aspect
 	size = target.size
+	near = target.near
+	far = target.far
