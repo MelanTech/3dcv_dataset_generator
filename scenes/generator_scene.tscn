@@ -106,9 +106,10 @@ script = ExtResource("51_blkrb")
 configuration = SubResource("Resource_uypp3")
 metadata/_custom_type_script = "uid://c1rb7xfqi70bw"
 
-[node name="CameraImageAugmenter" type="Node" parent="." unique_id=848040865 node_paths=PackedStringArray("camera")]
+[node name="CameraImageAugmenter" type="Node" parent="." unique_id=848040865 node_paths=PackedStringArray("camera", "depth_view")]
 script = ExtResource("12_camera_aug")
 camera = NodePath("../Camera3D")
+depth_view = NodePath("../DepthViewPort/Camera3DDepth/DepthView")
 
 [node name="Lights" type="Node" parent="." unique_id=1901610759]
 

@@ -4,6 +4,7 @@ class_name CameraImageAugmenter
 const AUGMENTATION_SHADER := preload("res://shaders/camera_image_augmentation.gdshader")
 
 @export var camera: Node
+@export var depth_view: MeshInstance3D
 
 @export_category("Camera Perturbation")
 @export var enabled: bool = true
@@ -35,6 +36,7 @@ func _ready() -> void:
 	var default_layer := create_effect_layer(null)
 	add_child(default_layer)
 	_apply_current_to_layers()
+	_apply_current_to_depth_material()
 
 
 func begin() -> void:
@@ -43,6 +45,7 @@ func begin() -> void:
 	_white_balance = Vector3.ONE
 	_start_new_transition()
 	_apply_current_to_layers()
+	_apply_current_to_depth_material()
 
 
 func halt() -> void:
@@ -55,6 +58,7 @@ func halt() -> void:
 	_target_white_balance = Vector3.ONE
 	_transition_timer = 0.0
 	_apply_current_to_layers()
+	_apply_current_to_depth_material()
 
 
 func apply_settings(
@@ -78,6 +82,7 @@ func apply_settings(
 		_distortion_strength = 0.0
 		_white_balance = Vector3.ONE
 		_apply_current_to_layers()
+		_apply_current_to_depth_material()
 
 
 func _process(delta: float) -> void:
@@ -88,6 +93,7 @@ func _process(delta: float) -> void:
 		_distortion_strength = 0.0
 		_white_balance = Vector3.ONE
 		_apply_current_to_layers()
+		_apply_current_to_depth_material()
 		return
 
 	_transition_timer += delta
@@ -96,6 +102,7 @@ func _process(delta: float) -> void:
 	_distortion_strength = lerp(_start_distortion_strength, _target_distortion_strength, eased_progress)
 	_white_balance = _start_white_balance.lerp(_target_white_balance, eased_progress)
 	_apply_current_to_layers()
+	_apply_current_to_depth_material()
 
 	if progress >= 1.0:
 		_start_new_transition()
@@ -163,6 +170,16 @@ func _apply_current_to_layers() -> void:
 		_apply_to_layer(_effect_layers[i], _effect_materials[i])
 
 
+func _apply_current_to_depth_material() -> void:
+	var material := _get_depth_material()
+	if material == null:
+		return
+
+	var strength := _distortion_strength if enabled and distortion_enabled else 0.0
+	material.set_shader_parameter("distortion_strength", strength)
+	material.set_shader_parameter("distortion_zoom", _calculate_distortion_zoom(strength))
+
+
 func _apply_to_layer(layer: CanvasLayer, material: ShaderMaterial) -> void:
 	if layer == null or material == null:
 		return
@@ -177,6 +194,13 @@ func _apply_to_layer(layer: CanvasLayer, material: ShaderMaterial) -> void:
 func _calculate_distortion_zoom(strength: float) -> float:
 	# Positive distortion samples outside screen bounds first; zoom in enough to avoid black/cropped edges.
 	return 1.0 + abs(strength) * 2.2
+
+
+func _get_depth_material() -> ShaderMaterial:
+	if depth_view == null or not is_instance_valid(depth_view):
+		return null
+	var material := depth_view.get_active_material(0) as ShaderMaterial
+	return material
 
 
 func _prune_invalid_layers() -> void:
