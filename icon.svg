@@ -1,1 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128"><rect width="124" height="124" x="2" y="2" fill="#363d52" stroke="#212532" stroke-width="4" rx="14"/><g fill="#fff" transform="translate(12.322 12.322)scale(.101)"><path d="M105 673v33q407 354 814 0v-33z"/><path fill="#478cbf" d="m105 673 152 14q12 1 15 14l4 67 132 10 8-61q2-11 15-15h162q13 4 15 15l8 61 132-10 4-67q3-13 15-14l152-14V427q30-39 56-81-35-59-83-108-43 20-82 47-40-37-88-64 7-51 8-102-59-28-123-42-26 43-46 89-49-7-98 0-20-46-46-89-64 14-123 42 1 51 8 102-48 27-88 64-39-27-82-47-48 49-83 108 26 42 56 81zm0 33v39c0 276 813 276 814 0v-39l-134 12-5 69q-2 10-14 13l-162 11q-12 0-16-11l-10-65H446l-10 65q-4 11-16 11l-162-11q-12-3-14-13l-5-69z"/><path d="M483 600c0 34 58 34 58 0v-86c0-34-58-34-58 0z"/><circle cx="725" cy="526" r="90"/><circle cx="299" cy="526" r="90"/></g><g fill="#414042" transform="translate(12.322 12.322)scale(.101)"><circle cx="307" cy="532" r="60"/><circle cx="717" cy="532" r="60"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Center icon adapted from Tabler Icons "cube-3d-sphere" (MIT). -->
+  <defs>
+    <linearGradient id="bg" x1="18" y1="14" x2="112" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1f2a44"/>
+      <stop offset="0.52" stop-color="#172033"/>
+      <stop offset="1" stop-color="#0d1220"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="42" cy="31" r="86" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4ad9ff" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#7c5cff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#0d1220" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mark" x1="34" y1="29" x2="92" y2="98" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#9af3ff"/>
+      <stop offset="0.46" stop-color="#5bc8ff"/>
+      <stop offset="1" stop-color="#c7b7ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="4" y="4" width="120" height="120" rx="27" fill="url(#bg)"/>
+  <rect x="4" y="4" width="120" height="120" rx="27" fill="url(#glow)"/>
+  <rect x="7" y="7" width="114" height="114" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.10" stroke-width="2"/>
+
+  <path d="M19 33h90M19 64h90M19 95h90M33 19v90M64 19v90M95 19v90" fill="none" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1.4"/>
+
+  <circle cx="64" cy="64" r="41" fill="#111a2c" fill-opacity="0.62" stroke="#5bc8ff" stroke-opacity="0.18" stroke-width="2"/>
+  <circle cx="64" cy="64" r="31" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1.5"/>
+
+  <g transform="translate(24 24) scale(3.333333)">
+    <path fill="none" stroke="url(#mark)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.85" d="m6 17.6l-2-1.1V14m0-4V7.5l2-1.1m4-2.3L12 3l2 1.1m4 2.3l2 1.1V10m0 4v2.5l-2 1.12m-4 2.28L12 21l-2-1.1m2-7.9l2-1.1m4-2.3l2-1.1M12 12v2.5m0 4V21m0-9l-2-1.12M6 8.6L4 7.5"/>
+  </g>
+
+  <circle cx="88" cy="40" r="5" fill="#9af3ff"/>
+  <circle cx="39" cy="86" r="4" fill="#c7b7ff"/>
+</svg>
