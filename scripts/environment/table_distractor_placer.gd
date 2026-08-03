@@ -47,6 +47,7 @@ func begin() -> void:
 		clear_distractors()
 		return
 	if object_catalog == null or table_mesh == null or distractor_parent == null:
+		clear_distractors()
 		return
 	call_deferred("_place_distractors_async", _generation_id)
 

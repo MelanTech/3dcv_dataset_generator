@@ -280,6 +280,7 @@ key = &"comb"
 label_name = &"Comb"
 class_id = 19
 is_unknown = true
+enabled = false
 scenes = Array[PackedScene]([ExtResource("scene_84"), ExtResource("scene_85"), ExtResource("scene_86"), ExtResource("scene_87"), ExtResource("scene_88"), ExtResource("scene_89")])
 
 [sub_resource type="Resource" id="cat_biscuit"]
@@ -289,6 +290,7 @@ key = &"biscuit"
 label_name = &"Biscuit"
 class_id = 19
 is_unknown = true
+enabled = false
 scenes = Array[PackedScene]([ExtResource("scene_90"), ExtResource("scene_91"), ExtResource("scene_92"), ExtResource("scene_93"), ExtResource("scene_94")])
 
 [sub_resource type="Resource" id="cat_dragon_fruit"]
@@ -298,6 +300,7 @@ key = &"dragon_fruit"
 label_name = &"DragonFruit"
 class_id = 19
 is_unknown = true
+enabled = false
 scenes = Array[PackedScene]([ExtResource("scene_95"), ExtResource("scene_96"), ExtResource("scene_97")])
 
 [sub_resource type="Resource" id="cat_orange"]
@@ -307,6 +310,7 @@ key = &"orange"
 label_name = &"Orange"
 class_id = 19
 is_unknown = true
+enabled = false
 scenes = Array[PackedScene]([ExtResource("scene_98"), ExtResource("scene_99"), ExtResource("scene_100")])
 
 [sub_resource type="Resource" id="cat_pomegranate"]
@@ -316,6 +320,7 @@ key = &"pomegranate"
 label_name = &"Pomegranate"
 class_id = 19
 is_unknown = true
+enabled = false
 scenes = Array[PackedScene]([ExtResource("scene_101"), ExtResource("scene_102"), ExtResource("scene_103")])
 
 [sub_resource type="Resource" id="cat_jelly"]
@@ -325,6 +330,7 @@ key = &"jelly"
 label_name = &"Jelly"
 class_id = 19
 is_unknown = true
+enabled = false
 
 [resource]
 script = ExtResource("script_catalog")

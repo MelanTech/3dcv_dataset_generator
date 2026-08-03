@@ -13,6 +13,23 @@ var save_enabled := false
 var show_bbox := true
 var rotate_light := true
 var table_shape := 0
+var visibility_threshold := 20
+var occlusion_sample_mode := 1
+var occlusion_grid_sample_count := 10
+var drop_below_table_threshold := 0.35
+var debug_occlusion := false
+var camera_rotation_speed := 90.0
+var camera_transition_duration := 1.0
+var camera_distance_min := 15.0
+var camera_distance_max := 20.0
+var camera_height_min := 5.0
+var camera_height_max := 15.0
+var camera_rotation_x_min := -8.0
+var camera_rotation_x_max := 8.0
+var camera_rotation_y_min := -10.0
+var camera_rotation_y_max := 10.0
+var camera_rotation_z_min := -5.0
+var camera_rotation_z_max := 5.0
 var camera_perturb_enabled := true
 var camera_change_time_min := 1.0
 var camera_change_time_max := 3.0
@@ -42,6 +59,23 @@ static func from_controls(output_dir_value: String, controls: Dictionary) -> Cap
 	settings.show_bbox = controls["show_bbox_check"].button_pressed
 	settings.rotate_light = controls["rotate_light_check"].button_pressed
 	settings.table_shape = controls["table_option"].selected
+	settings.visibility_threshold = int(controls["visibility_threshold"].value)
+	settings.occlusion_sample_mode = controls["occlusion_sample_mode"].selected
+	settings.occlusion_grid_sample_count = int(controls["occlusion_grid_sample_count"].value)
+	settings.drop_below_table_threshold = float(controls["drop_below_table_threshold"].value)
+	settings.debug_occlusion = controls["debug_occlusion_check"].button_pressed
+	settings.camera_rotation_speed = float(controls["camera_rotation_speed"].value)
+	settings.camera_transition_duration = float(controls["camera_transition_duration"].value)
+	settings.camera_distance_min = float(controls["camera_distance_min"].value)
+	settings.camera_distance_max = float(controls["camera_distance_max"].value)
+	settings.camera_height_min = float(controls["camera_height_min"].value)
+	settings.camera_height_max = float(controls["camera_height_max"].value)
+	settings.camera_rotation_x_min = float(controls["camera_rotation_x_min"].value)
+	settings.camera_rotation_x_max = float(controls["camera_rotation_x_max"].value)
+	settings.camera_rotation_y_min = float(controls["camera_rotation_y_min"].value)
+	settings.camera_rotation_y_max = float(controls["camera_rotation_y_max"].value)
+	settings.camera_rotation_z_min = float(controls["camera_rotation_z_min"].value)
+	settings.camera_rotation_z_max = float(controls["camera_rotation_z_max"].value)
 	settings.camera_perturb_enabled = controls["camera_perturb_enabled_check"].button_pressed
 	settings.camera_change_time_min = float(controls["camera_change_time_min"].value)
 	settings.camera_change_time_max = float(controls["camera_change_time_max"].value)
@@ -81,6 +115,23 @@ static func load_from_file(path: String, defaults: CaptureSettings) -> CaptureSe
 	settings.show_bbox = cfg.get_value("general", "show_bbox", settings.show_bbox)
 	settings.rotate_light = cfg.get_value("general", "rotate_light", settings.rotate_light)
 	settings.table_shape = cfg.get_value("general", "table_shape", settings.table_shape)
+	settings.visibility_threshold = cfg.get_value("label_filtering", "visibility_threshold", settings.visibility_threshold)
+	settings.occlusion_sample_mode = cfg.get_value("label_filtering", "occlusion_sample_mode", settings.occlusion_sample_mode)
+	settings.occlusion_grid_sample_count = cfg.get_value("label_filtering", "occlusion_grid_sample_count", settings.occlusion_grid_sample_count)
+	settings.drop_below_table_threshold = cfg.get_value("label_filtering", "drop_below_table_threshold", settings.drop_below_table_threshold)
+	settings.debug_occlusion = cfg.get_value("label_filtering", "debug_occlusion", settings.debug_occlusion)
+	settings.camera_rotation_speed = cfg.get_value("camera_motion", "rotation_speed", settings.camera_rotation_speed)
+	settings.camera_transition_duration = cfg.get_value("camera_motion", "transition_duration", settings.camera_transition_duration)
+	settings.camera_distance_min = cfg.get_value("camera_motion", "distance_min", settings.camera_distance_min)
+	settings.camera_distance_max = cfg.get_value("camera_motion", "distance_max", settings.camera_distance_max)
+	settings.camera_height_min = cfg.get_value("camera_motion", "height_min", settings.camera_height_min)
+	settings.camera_height_max = cfg.get_value("camera_motion", "height_max", settings.camera_height_max)
+	settings.camera_rotation_x_min = cfg.get_value("camera_motion", "rotation_x_min", settings.camera_rotation_x_min)
+	settings.camera_rotation_x_max = cfg.get_value("camera_motion", "rotation_x_max", settings.camera_rotation_x_max)
+	settings.camera_rotation_y_min = cfg.get_value("camera_motion", "rotation_y_min", settings.camera_rotation_y_min)
+	settings.camera_rotation_y_max = cfg.get_value("camera_motion", "rotation_y_max", settings.camera_rotation_y_max)
+	settings.camera_rotation_z_min = cfg.get_value("camera_motion", "rotation_z_min", settings.camera_rotation_z_min)
+	settings.camera_rotation_z_max = cfg.get_value("camera_motion", "rotation_z_max", settings.camera_rotation_z_max)
 	settings.camera_perturb_enabled = cfg.get_value("camera", "camera_perturb_enabled", settings.camera_perturb_enabled)
 	settings.camera_change_time_min = cfg.get_value("camera", "camera_change_time_min", settings.camera_change_time_min)
 	settings.camera_change_time_max = cfg.get_value("camera", "camera_change_time_max", settings.camera_change_time_max)
@@ -115,6 +166,23 @@ func save_to_file(path: String) -> Error:
 	cfg.set_value("general", "show_bbox", show_bbox)
 	cfg.set_value("general", "rotate_light", rotate_light)
 	cfg.set_value("general", "table_shape", table_shape)
+	cfg.set_value("label_filtering", "visibility_threshold", visibility_threshold)
+	cfg.set_value("label_filtering", "occlusion_sample_mode", occlusion_sample_mode)
+	cfg.set_value("label_filtering", "occlusion_grid_sample_count", occlusion_grid_sample_count)
+	cfg.set_value("label_filtering", "drop_below_table_threshold", drop_below_table_threshold)
+	cfg.set_value("label_filtering", "debug_occlusion", debug_occlusion)
+	cfg.set_value("camera_motion", "rotation_speed", camera_rotation_speed)
+	cfg.set_value("camera_motion", "transition_duration", camera_transition_duration)
+	cfg.set_value("camera_motion", "distance_min", camera_distance_min)
+	cfg.set_value("camera_motion", "distance_max", camera_distance_max)
+	cfg.set_value("camera_motion", "height_min", camera_height_min)
+	cfg.set_value("camera_motion", "height_max", camera_height_max)
+	cfg.set_value("camera_motion", "rotation_x_min", camera_rotation_x_min)
+	cfg.set_value("camera_motion", "rotation_x_max", camera_rotation_x_max)
+	cfg.set_value("camera_motion", "rotation_y_min", camera_rotation_y_min)
+	cfg.set_value("camera_motion", "rotation_y_max", camera_rotation_y_max)
+	cfg.set_value("camera_motion", "rotation_z_min", camera_rotation_z_min)
+	cfg.set_value("camera_motion", "rotation_z_max", camera_rotation_z_max)
 	cfg.set_value("camera", "camera_perturb_enabled", camera_perturb_enabled)
 	cfg.set_value("camera", "camera_change_time_min", camera_change_time_min)
 	cfg.set_value("camera", "camera_change_time_max", camera_change_time_max)
@@ -148,6 +216,23 @@ func apply_to_controls(controls: Dictionary) -> void:
 	controls["show_bbox_check"].button_pressed = show_bbox
 	controls["rotate_light_check"].button_pressed = rotate_light
 	controls["table_option"].selected = table_shape
+	controls["visibility_threshold"].value = visibility_threshold
+	controls["occlusion_sample_mode"].selected = occlusion_sample_mode
+	controls["occlusion_grid_sample_count"].value = occlusion_grid_sample_count
+	controls["drop_below_table_threshold"].value = drop_below_table_threshold
+	controls["debug_occlusion_check"].button_pressed = debug_occlusion
+	controls["camera_rotation_speed"].value = camera_rotation_speed
+	controls["camera_transition_duration"].value = camera_transition_duration
+	controls["camera_distance_min"].value = camera_distance_min
+	controls["camera_distance_max"].value = camera_distance_max
+	controls["camera_height_min"].value = camera_height_min
+	controls["camera_height_max"].value = camera_height_max
+	controls["camera_rotation_x_min"].value = camera_rotation_x_min
+	controls["camera_rotation_x_max"].value = camera_rotation_x_max
+	controls["camera_rotation_y_min"].value = camera_rotation_y_min
+	controls["camera_rotation_y_max"].value = camera_rotation_y_max
+	controls["camera_rotation_z_min"].value = camera_rotation_z_min
+	controls["camera_rotation_z_max"].value = camera_rotation_z_max
 	controls["camera_perturb_enabled_check"].button_pressed = camera_perturb_enabled
 	controls["camera_change_time_min"].value = camera_change_time_min
 	controls["camera_change_time_max"].value = camera_change_time_max
@@ -183,6 +268,23 @@ func duplicate_settings() -> CaptureSettings:
 	copy.show_bbox = show_bbox
 	copy.rotate_light = rotate_light
 	copy.table_shape = table_shape
+	copy.visibility_threshold = visibility_threshold
+	copy.occlusion_sample_mode = occlusion_sample_mode
+	copy.occlusion_grid_sample_count = occlusion_grid_sample_count
+	copy.drop_below_table_threshold = drop_below_table_threshold
+	copy.debug_occlusion = debug_occlusion
+	copy.camera_rotation_speed = camera_rotation_speed
+	copy.camera_transition_duration = camera_transition_duration
+	copy.camera_distance_min = camera_distance_min
+	copy.camera_distance_max = camera_distance_max
+	copy.camera_height_min = camera_height_min
+	copy.camera_height_max = camera_height_max
+	copy.camera_rotation_x_min = camera_rotation_x_min
+	copy.camera_rotation_x_max = camera_rotation_x_max
+	copy.camera_rotation_y_min = camera_rotation_y_min
+	copy.camera_rotation_y_max = camera_rotation_y_max
+	copy.camera_rotation_z_min = camera_rotation_z_min
+	copy.camera_rotation_z_max = camera_rotation_z_max
 	copy.camera_perturb_enabled = camera_perturb_enabled
 	copy.camera_change_time_min = camera_change_time_min
 	copy.camera_change_time_max = camera_change_time_max

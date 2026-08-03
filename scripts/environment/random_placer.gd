@@ -1,9 +1,15 @@
 extends Node
 
+enum PlacementMode {
+	TABLE,
+	FLOATING,
+}
+
 @export var object_catalog: ObjectCatalog
 
 # 桌子的 MeshInstance3D 引用
 @export var table_mesh: MeshInstance3D
+@export var target_marker: Node3D
 
 # 物品要放置到的目标节点（如场景中的 Objects 容器）
 @export var objects_parent: Node
@@ -14,6 +20,8 @@ extends Node
 
 # 要挂载到物品上的脚本
 @export var item_script: Script
+
+@export var placement_mode: int = PlacementMode.TABLE
 
 # 物品数量范围（最小值, 最大值）
 @export var item_count_range: Vector2i = Vector2i(3, 7)
@@ -62,8 +70,17 @@ extends Node
 # 摆放完成后等待若干物理帧，再将刚体速度清零并休眠
 @export_range(0, 120, 1) var settle_physics_frames: int = 20
 
+@export_category("Floating")
+
+@export var floating_center: Vector3 = Vector3(0.0, 5.2, 0.0)
+@export var floating_area_size: Vector3 = Vector3(5.0, 2.8, 5.0)
+@export var floating_min_distance_between_items: float = 0.8
+@export_range(0.0, 180.0, 1.0) var floating_max_tilt_degrees: float = 180.0
+@export var move_target_marker_in_floating: bool = true
+
 var available_categories: Array[ObjectCategory] = []
 var table_size := Vector2.ZERO
+var _initial_target_marker_position := Vector3.ZERO
 
 
 func _ready() -> void:
@@ -73,6 +90,8 @@ func _ready() -> void:
 	table_size = get_table_size()
 	if table_size == Vector2.ZERO:
 		print("无法获取桌子尺寸")
+	if target_marker != null:
+		_initial_target_marker_position = target_marker.global_position
 
 	# 由 SessionController 控制何时开始摆放，_ready 不再自动放置
 
@@ -86,6 +105,11 @@ func begin() -> void:
 	if available_categories.is_empty():
 		print("错误：所有类别中都没有添加启用的物品场景")
 		return
+	if placement_mode == PlacementMode.FLOATING:
+		place_floating_items(available_categories)
+		return
+	if target_marker != null:
+		target_marker.global_position = _initial_target_marker_position
 	if table_size == Vector2.ZERO:
 		print("无法获取桌子尺寸")
 		return
@@ -269,6 +293,66 @@ func _create_item(categories: Array[ObjectCategory], stacked: bool) -> Node3D:
 	return item
 
 
+func place_floating_items(categories: Array[ObjectCategory]) -> void:
+	if move_target_marker_in_floating and target_marker != null:
+		target_marker.global_position = floating_center
+
+	var min_count: int = max(1, item_count_range.x)
+	var max_count: int = max(min_count, item_count_range.y)
+	var target_count: int = randi() % (max_count - min_count + 1) + min_count
+	var positions: Array[Vector3] = []
+	var placed_count := 0
+
+	for i in range(target_count):
+		var position := _pick_floating_position(positions)
+		positions.append(position)
+
+		var item := _create_item(categories, false)
+		if item == null:
+			continue
+
+		item.global_position = position
+		item.global_rotation = _get_floating_item_rotation()
+		_freeze_body(item)
+		placed_count += 1
+
+	print("成功悬浮放置 ", placed_count, " 个物品")
+
+
+func _pick_floating_position(existing_positions: Array[Vector3]) -> Vector3:
+	var attempts := 40
+	for i in range(attempts):
+		var position := _random_floating_position()
+		if _is_far_enough(position, existing_positions, floating_min_distance_between_items):
+			return position
+	return _random_floating_position()
+
+
+func _random_floating_position() -> Vector3:
+	var half_size := floating_area_size * 0.5
+	return floating_center + Vector3(
+		randf_range(-half_size.x, half_size.x),
+		randf_range(-half_size.y, half_size.y),
+		randf_range(-half_size.z, half_size.z)
+	)
+
+
+func _is_far_enough(position: Vector3, existing_positions: Array[Vector3], min_distance: float) -> bool:
+	for existing_position in existing_positions:
+		if position.distance_to(existing_position) < min_distance:
+			return false
+	return true
+
+
+func _get_floating_item_rotation() -> Vector3:
+	var tilt := deg_to_rad(floating_max_tilt_degrees)
+	return Vector3(
+		randf_range(-tilt, tilt),
+		randf_range(0.0, PI * 2.0),
+		randf_range(-tilt, tilt)
+	)
+
+
 func _get_item_rotation(stacked: bool) -> Vector3:
 	var yaw := randf_range(0.0, PI * 2.0)
 	if not random_tilt_enabled:
@@ -401,12 +485,35 @@ func _append_box_vertices(vertices: Array[Vector3], transform: Transform3D, min_
 
 
 func _reset_body_motion(item: Node3D) -> void:
-	var body := item as RigidBody3D
-	if body == null:
-		return
-	body.linear_velocity = Vector3.ZERO
-	body.angular_velocity = Vector3.ZERO
-	body.sleeping = false
+	_reset_body_motion_recursive(item)
+
+
+func _freeze_body(item: Node3D) -> void:
+	_freeze_body_recursive(item)
+
+
+func _reset_body_motion_recursive(node: Node) -> void:
+	if node is RigidBody3D:
+		var body := node as RigidBody3D
+		body.freeze = false
+		body.linear_velocity = Vector3.ZERO
+		body.angular_velocity = Vector3.ZERO
+		body.sleeping = false
+
+	for child in node.get_children():
+		_reset_body_motion_recursive(child)
+
+
+func _freeze_body_recursive(node: Node) -> void:
+	if node is RigidBody3D:
+		var body := node as RigidBody3D
+		body.linear_velocity = Vector3.ZERO
+		body.angular_velocity = Vector3.ZERO
+		body.freeze = true
+		body.sleeping = true
+
+	for child in node.get_children():
+		_freeze_body_recursive(child)
 
 
 func _settle_items_after_frames() -> void:
@@ -435,4 +542,7 @@ func _on_complete_rotation(_rotation: int) -> void:
 	available_categories = get_available_categories()
 
 	if not available_categories.is_empty():
-		place_items_on_grid(table_size, available_categories)
+		if placement_mode == PlacementMode.FLOATING:
+			place_floating_items(available_categories)
+		else:
+			place_items_on_grid(table_size, available_categories)

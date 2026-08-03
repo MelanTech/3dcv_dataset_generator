@@ -21,14 +21,15 @@ static func get_all_labels(
 	drop_below_table_threshold: float = 0.35
 ) -> Array:
 	var labels := []
-	if camera == null or table == null or object_container == null:
+	if camera == null or object_container == null:
 		return labels
 
-	var table_top_y := get_node_top_y(table)
+	var has_table := table != null
+	var table_top_y := get_node_top_y(table) if has_table else 0.0
 	for obj in object_container.get_children():
 		if obj.classes == unknown_class_id:
 			continue
-		elif is_dropped_below_table(obj, table_top_y, drop_below_table_threshold):
+		elif has_table and is_dropped_below_table(obj, table_top_y, drop_below_table_threshold):
 			obj.queue_free()
 			continue
 		elif is_visibility_below_threshold(
@@ -46,7 +47,8 @@ static func get_all_labels(
 		var cls = obj.classes
 		labels.append({"bbox": bbox, "class": cls})
 
-	labels.append(get_table_label(table, camera))
+	if has_table:
+		labels.append(get_table_label(table, camera))
 	return labels
 
 

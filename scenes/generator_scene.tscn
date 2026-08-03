@@ -261,10 +261,11 @@ distractor_count_range = Vector2i(4, 8)
 edge_margin = 0.7
 scale_range = Vector2(0.75, 1.05)
 
-[node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "objects_parent", "camera")]
+[node name="RandomPlacer" type="Node" parent="." unique_id=459477651 node_paths=PackedStringArray("table_mesh", "target_marker", "objects_parent", "camera")]
 script = ExtResource("10_4c57u")
 object_catalog = ExtResource("object_catalog")
 table_mesh = NodePath("../Tables/TableSquare/TableBG")
+target_marker = NodePath("../Tables/Marker3D")
 objects_parent = NodePath("../Objects")
 camera = NodePath("../Camera3D")
 item_script = ExtResource("7_kek77")

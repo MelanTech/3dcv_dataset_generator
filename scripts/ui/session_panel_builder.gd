@@ -63,10 +63,11 @@ static func build(
 	controls["output_dir_value"] = output_dir_value
 
 	var table_option := OptionButton.new()
-	table_option.add_item("Square", 0)
-	table_option.add_item("Disc", 1)
+	table_option.add_item("Square Table", 0)
+	table_option.add_item("Disc Table", 1)
+	table_option.add_item("Floating", 2)
 	table_option.item_selected.connect(callbacks["table_shape_selected"])
-	_add_labeled_row(capture_card, "Table Shape", table_option)
+	_add_labeled_row(capture_card, "Generation Mode", table_option)
 	controls["table_option"] = table_option
 
 	var count_row := HBoxContainer.new()
@@ -115,6 +116,99 @@ static func build(
 	var rotate_light_check := _make_check("Enable Rotate Light", true, callbacks["rotate_light_toggled"])
 	toggles_card.add_child(rotate_light_check)
 	controls["rotate_light_check"] = rotate_light_check
+
+	_add_title(settings_root, "Label Filtering", "Configure bbox visibility and occlusion filtering.")
+	var label_card := _add_card(settings_root)
+
+	var visibility_threshold := _make_spin(0, 100, 5, 20)
+	_add_labeled_row(label_card, "Visibility Threshold", visibility_threshold)
+	controls["visibility_threshold"] = visibility_threshold
+
+	var occlusion_sample_mode := OptionButton.new()
+	occlusion_sample_mode.add_item("Grid", 0)
+	occlusion_sample_mode.add_item("Bounds Key Points", 1)
+	occlusion_sample_mode.add_item("Hybrid", 2)
+	occlusion_sample_mode.selected = 1
+	_add_labeled_row(label_card, "Sample Mode", occlusion_sample_mode)
+	controls["occlusion_sample_mode"] = occlusion_sample_mode
+
+	var occlusion_grid_sample_count := _make_spin(1, 100, 1, 10)
+	_add_labeled_row(label_card, "Grid Samples", occlusion_grid_sample_count)
+	controls["occlusion_grid_sample_count"] = occlusion_grid_sample_count
+
+	var drop_below_table_threshold := _make_spin(0.0, 5.0, 0.05, 0.35)
+	_add_labeled_row(label_card, "Drop Threshold", drop_below_table_threshold)
+	controls["drop_below_table_threshold"] = drop_below_table_threshold
+
+	var debug_occlusion_check := _make_check("Debug Occlusion Logs", false)
+	label_card.add_child(debug_occlusion_check)
+	controls["debug_occlusion_check"] = debug_occlusion_check
+
+	_add_title(settings_root, "Camera Motion", "Configure orbit speed, distance, height, and view offset ranges.")
+	var camera_motion_card := _add_card(settings_root)
+
+	var camera_rotation_speed := _make_spin(-360.0, 360.0, 1.0, 90.0)
+	_add_labeled_row(camera_motion_card, "Rotation Speed", camera_rotation_speed)
+	controls["camera_rotation_speed"] = camera_rotation_speed
+
+	var camera_transition_duration := _make_spin(0.1, 30.0, 0.1, 1.0)
+	_add_labeled_row(camera_motion_card, "Motion Transition", camera_transition_duration)
+	controls["camera_transition_duration"] = camera_transition_duration
+
+	var camera_distance_row := HBoxContainer.new()
+	var camera_distance_min := _make_spin(0.1, 100.0, 0.1, 15.0)
+	var camera_distance_max := _make_spin(0.1, 100.0, 0.1, 20.0)
+	camera_distance_row.add_child(_label("Min"))
+	camera_distance_row.add_child(camera_distance_min)
+	camera_distance_row.add_child(_label("Max"))
+	camera_distance_row.add_child(camera_distance_max)
+	_add_labeled_row(camera_motion_card, "Camera Distance", camera_distance_row)
+	controls["camera_distance_min"] = camera_distance_min
+	controls["camera_distance_max"] = camera_distance_max
+
+	var camera_height_row := HBoxContainer.new()
+	var camera_height_min := _make_spin(-20.0, 100.0, 0.1, 5.0)
+	var camera_height_max := _make_spin(-20.0, 100.0, 0.1, 15.0)
+	camera_height_row.add_child(_label("Min"))
+	camera_height_row.add_child(camera_height_min)
+	camera_height_row.add_child(_label("Max"))
+	camera_height_row.add_child(camera_height_max)
+	_add_labeled_row(camera_motion_card, "Camera Height", camera_height_row)
+	controls["camera_height_min"] = camera_height_min
+	controls["camera_height_max"] = camera_height_max
+
+	var rotation_x_row := HBoxContainer.new()
+	var rotation_x_min := _make_spin(-90.0, 90.0, 1.0, -8.0)
+	var rotation_x_max := _make_spin(-90.0, 90.0, 1.0, 8.0)
+	rotation_x_row.add_child(_label("Min"))
+	rotation_x_row.add_child(rotation_x_min)
+	rotation_x_row.add_child(_label("Max"))
+	rotation_x_row.add_child(rotation_x_max)
+	_add_labeled_row(camera_motion_card, "Offset X", rotation_x_row)
+	controls["camera_rotation_x_min"] = rotation_x_min
+	controls["camera_rotation_x_max"] = rotation_x_max
+
+	var rotation_y_row := HBoxContainer.new()
+	var rotation_y_min := _make_spin(-90.0, 90.0, 1.0, -10.0)
+	var rotation_y_max := _make_spin(-90.0, 90.0, 1.0, 10.0)
+	rotation_y_row.add_child(_label("Min"))
+	rotation_y_row.add_child(rotation_y_min)
+	rotation_y_row.add_child(_label("Max"))
+	rotation_y_row.add_child(rotation_y_max)
+	_add_labeled_row(camera_motion_card, "Offset Y", rotation_y_row)
+	controls["camera_rotation_y_min"] = rotation_y_min
+	controls["camera_rotation_y_max"] = rotation_y_max
+
+	var rotation_z_row := HBoxContainer.new()
+	var rotation_z_min := _make_spin(-90.0, 90.0, 1.0, -5.0)
+	var rotation_z_max := _make_spin(-90.0, 90.0, 1.0, 5.0)
+	rotation_z_row.add_child(_label("Min"))
+	rotation_z_row.add_child(rotation_z_min)
+	rotation_z_row.add_child(_label("Max"))
+	rotation_z_row.add_child(rotation_z_max)
+	_add_labeled_row(camera_motion_card, "Offset Z", rotation_z_row)
+	controls["camera_rotation_z_min"] = rotation_z_min
+	controls["camera_rotation_z_max"] = rotation_z_max
 
 	_add_title(settings_root, "Camera Perturbation", "Continuously vary lens distortion and white balance during capture.")
 	var camera_card := _add_card(settings_root)

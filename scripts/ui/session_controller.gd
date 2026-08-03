@@ -37,6 +37,23 @@ var _save_enabled_check: CheckBox
 var _show_bbox_check: CheckBox
 var _rotate_light_check: CheckBox
 var _table_option: OptionButton
+var _visibility_threshold: SpinBox
+var _occlusion_sample_mode: OptionButton
+var _occlusion_grid_sample_count: SpinBox
+var _drop_below_table_threshold: SpinBox
+var _debug_occlusion_check: CheckBox
+var _camera_rotation_speed: SpinBox
+var _camera_transition_duration: SpinBox
+var _camera_distance_min: SpinBox
+var _camera_distance_max: SpinBox
+var _camera_height_min: SpinBox
+var _camera_height_max: SpinBox
+var _camera_rotation_x_min: SpinBox
+var _camera_rotation_x_max: SpinBox
+var _camera_rotation_y_min: SpinBox
+var _camera_rotation_y_max: SpinBox
+var _camera_rotation_z_min: SpinBox
+var _camera_rotation_z_max: SpinBox
 var _camera_perturb_enabled_check: CheckBox
 var _camera_change_time_min: SpinBox
 var _camera_change_time_max: SpinBox
@@ -183,18 +200,50 @@ func _on_table_shape_selected(index: int) -> void:
 # 启动时把 GUI 配置推入各节点
 func _apply_config_to_nodes() -> void:
 	_sync_catalog_from_controls()
+	if table_selector != null and _table_option != null:
+		table_selector.set("table_shape", _table_option.selected)
+		if table_selector.has_method("_apply_table_selection"):
+			table_selector.call("_apply_table_selection")
 	if data_generator != null:
 		data_generator.base_path = _output_dir
 		data_generator.save_interval = int(_interval_spin.value)
 		data_generator.save_depth = _save_depth_check.button_pressed
 		data_generator.save_enabled = _save_enabled_check.button_pressed
+		data_generator.visibility_threshold = int(_visibility_threshold.value)
+		data_generator.occlusion_sample_mode = _occlusion_sample_mode.selected
+		data_generator.occlusion_grid_sample_count = int(_occlusion_grid_sample_count.value)
+		data_generator.drop_below_table_threshold = float(_drop_below_table_threshold.value)
+		data_generator.debug_occlusion = _debug_occlusion_check.button_pressed
 	if random_placer != null:
 		random_placer.item_count_range = Vector2i(int(_count_min.value), int(_count_max.value))
 	if table_distractor_placer != null:
-		table_distractor_placer.set("enabled", _distractor_enabled_check.button_pressed)
+		table_distractor_placer.set("enabled", _distractor_enabled_check.button_pressed and _table_option.selected != 2)
 		table_distractor_placer.set(
 			"distractor_count_range",
 			Vector2i(int(_distractor_count_min.value), int(_distractor_count_max.value))
+		)
+	if camera != null:
+		camera.set("rotation_speed", float(_camera_rotation_speed.value))
+		camera.set("transition_duration", float(_camera_transition_duration.value))
+		camera.set(
+			"distance_range",
+			_make_sorted_vector2(float(_camera_distance_min.value), float(_camera_distance_max.value))
+		)
+		camera.set(
+			"height_range",
+			_make_sorted_vector2(float(_camera_height_min.value), float(_camera_height_max.value))
+		)
+		camera.set(
+			"rotation_x_range",
+			_make_sorted_vector2(float(_camera_rotation_x_min.value), float(_camera_rotation_x_max.value))
+		)
+		camera.set(
+			"rotation_y_range",
+			_make_sorted_vector2(float(_camera_rotation_y_min.value), float(_camera_rotation_y_max.value))
+		)
+		camera.set(
+			"rotation_z_range",
+			_make_sorted_vector2(float(_camera_rotation_z_min.value), float(_camera_rotation_z_max.value))
 		)
 	if camera_image_augmenter != null:
 		camera_image_augmenter.call(
@@ -217,6 +266,10 @@ func _sync_catalog_from_controls() -> void:
 			continue
 		category.enabled = ctrl.enabled.button_pressed
 		category.weight = float(ctrl.weight.value)
+
+
+func _make_sorted_vector2(a: float, b: float) -> Vector2:
+	return Vector2(min(a, b), max(a, b))
 
 
 # ----------------------------------------------------------------------------
@@ -270,6 +323,23 @@ func _build_gui() -> void:
 	_show_bbox_check = controls["show_bbox_check"]
 	_rotate_light_check = controls["rotate_light_check"]
 	_table_option = controls["table_option"]
+	_visibility_threshold = controls["visibility_threshold"]
+	_occlusion_sample_mode = controls["occlusion_sample_mode"]
+	_occlusion_grid_sample_count = controls["occlusion_grid_sample_count"]
+	_drop_below_table_threshold = controls["drop_below_table_threshold"]
+	_debug_occlusion_check = controls["debug_occlusion_check"]
+	_camera_rotation_speed = controls["camera_rotation_speed"]
+	_camera_transition_duration = controls["camera_transition_duration"]
+	_camera_distance_min = controls["camera_distance_min"]
+	_camera_distance_max = controls["camera_distance_max"]
+	_camera_height_min = controls["camera_height_min"]
+	_camera_height_max = controls["camera_height_max"]
+	_camera_rotation_x_min = controls["camera_rotation_x_min"]
+	_camera_rotation_x_max = controls["camera_rotation_x_max"]
+	_camera_rotation_y_min = controls["camera_rotation_y_min"]
+	_camera_rotation_y_max = controls["camera_rotation_y_max"]
+	_camera_rotation_z_min = controls["camera_rotation_z_min"]
+	_camera_rotation_z_max = controls["camera_rotation_z_max"]
 	_camera_perturb_enabled_check = controls["camera_perturb_enabled_check"]
 	_camera_change_time_min = controls["camera_change_time_min"]
 	_camera_change_time_max = controls["camera_change_time_max"]
@@ -301,6 +371,23 @@ func _get_controls() -> Dictionary:
 		"show_bbox_check": _show_bbox_check,
 		"rotate_light_check": _rotate_light_check,
 		"table_option": _table_option,
+		"visibility_threshold": _visibility_threshold,
+		"occlusion_sample_mode": _occlusion_sample_mode,
+		"occlusion_grid_sample_count": _occlusion_grid_sample_count,
+		"drop_below_table_threshold": _drop_below_table_threshold,
+		"debug_occlusion_check": _debug_occlusion_check,
+		"camera_rotation_speed": _camera_rotation_speed,
+		"camera_transition_duration": _camera_transition_duration,
+		"camera_distance_min": _camera_distance_min,
+		"camera_distance_max": _camera_distance_max,
+		"camera_height_min": _camera_height_min,
+		"camera_height_max": _camera_height_max,
+		"camera_rotation_x_min": _camera_rotation_x_min,
+		"camera_rotation_x_max": _camera_rotation_x_max,
+		"camera_rotation_y_min": _camera_rotation_y_min,
+		"camera_rotation_y_max": _camera_rotation_y_max,
+		"camera_rotation_z_min": _camera_rotation_z_min,
+		"camera_rotation_z_max": _camera_rotation_z_max,
 		"camera_perturb_enabled_check": _camera_perturb_enabled_check,
 		"camera_change_time_min": _camera_change_time_min,
 		"camera_change_time_max": _camera_change_time_max,
@@ -325,6 +412,21 @@ func _set_structural_config_disabled(disabled: bool) -> void:
 		_distractor_count_min,
 		_distractor_count_max,
 		_interval_spin,
+		_visibility_threshold,
+		_occlusion_grid_sample_count,
+		_drop_below_table_threshold,
+		_camera_rotation_speed,
+		_camera_transition_duration,
+		_camera_distance_min,
+		_camera_distance_max,
+		_camera_height_min,
+		_camera_height_max,
+		_camera_rotation_x_min,
+		_camera_rotation_x_max,
+		_camera_rotation_y_min,
+		_camera_rotation_y_max,
+		_camera_rotation_z_min,
+		_camera_rotation_z_max,
 		_camera_change_time_min,
 		_camera_change_time_max,
 		_distortion_delta_min,
@@ -346,6 +448,10 @@ func _set_structural_config_disabled(disabled: bool) -> void:
 		_white_balance_enabled_check.disabled = disabled
 	if _save_depth_check != null:
 		_save_depth_check.disabled = disabled
+	if _occlusion_sample_mode != null:
+		_occlusion_sample_mode.disabled = disabled
+	if _debug_occlusion_check != null:
+		_debug_occlusion_check.disabled = disabled
 	if _table_option != null:
 		_table_option.disabled = disabled
 	for prefix in _category_controls:
