@@ -31,6 +31,12 @@ var frame_count: int = 0
 var labels: Array = []
 var _saving: bool = false
 var _capture_rig
+var _save_thread: Thread
+var _save_mutex := Mutex.new()
+var _save_semaphore := Semaphore.new()
+var _save_queue: Array[Dictionary] = []
+var _save_worker_should_exit := false
+var _save_worker_started := false
 
 # 会话状态：由 SessionController 控制
 var running: bool = false
@@ -41,6 +47,11 @@ var save_enabled: bool = false
 func _ready() -> void:
 	_sync_depth_viewport_world()
 	_setup_capture_viewport()
+	_start_save_worker()
+
+
+func _exit_tree() -> void:
+	_stop_save_worker()
 
 
 # 进入运行：重置计数，若开启保存则准备新文件夹
@@ -68,11 +79,9 @@ func _process(_delta: float) -> void:
 		return
 
 	if save_enabled and frame_index % save_interval == 0 and frame_index > 0:
-		var file_name := generate_filename(frame_count)
+		var file_stem := generate_filename(frame_count)
 		_saving = true
-		await save_image("{0}.{1}".format([file_name, "jpg"]))
-		refresh_labels()
-		save_labels("{0}.{1}".format([file_name, "txt"]), labels)
+		await capture_and_queue_save(file_stem)
 		frame_count += 1
 		_saving = false
 
@@ -99,7 +108,7 @@ func ensure_output_dirs() -> void:
 	CaptureWriterScript.save_classes(session_path, _get_class_mapping())
 
 
-func save_image(file_name: String) -> void:
+func capture_and_queue_save(file_stem: String) -> void:
 	ensure_output_dirs()
 
 	var capture_viewport := get_viewport()
@@ -109,19 +118,104 @@ func save_image(file_name: String) -> void:
 		await RenderingServer.frame_post_draw
 
 	var rgb_image: Image = CaptureWriterScript.capture_viewport_image(capture_viewport)
-
-	# 用较低 JPEG 质量保存，制造真实照片放大后可见的 8x8 压缩块/锯齿
-	CaptureWriterScript.save_rgb_jpg(rgb_image, rgb_image_path.path_join(file_name), 0.6)
+	var depth_image: Image
 	if save_depth:
 		_sync_depth_viewport_world()
-		var depth_image: Image = CaptureWriterScript.capture_viewport_image(depth_view)
-		var depth_name := file_name.get_basename() + ".png"
-		CaptureWriterScript.save_depth_gray16(depth_image, depth_image_path.path_join(depth_name))
-	print("已保存 %s" % file_name)
+		depth_image = CaptureWriterScript.capture_viewport_image(depth_view)
+
+	refresh_labels()
+	var job := {
+		"file_stem": file_stem,
+		"rgb_image": rgb_image,
+		"rgb_path": rgb_image_path.path_join("%s.jpg" % file_stem),
+		"depth_image": depth_image,
+		"depth_path": depth_image_path.path_join("%s.png" % file_stem) if save_depth else "",
+		"labels": labels.duplicate(true),
+		"labels_path": label_path.path_join("%s.txt" % file_stem),
+		"viewport_size": get_viewport().size,
+		"save_depth": save_depth,
+	}
+	_enqueue_save_job(job)
+	print("已加入后台保存队列 %s" % file_stem)
 
 
 func save_labels(file_name: String, target_labels: Array) -> void:
 	CaptureWriterScript.save_labels(label_path.path_join(file_name), get_viewport().size, target_labels)
+
+
+func _start_save_worker() -> void:
+	if _save_worker_started:
+		return
+
+	_save_worker_should_exit = false
+	_save_thread = Thread.new()
+	var err := _save_thread.start(Callable(self, "_save_worker_loop"))
+	if err != OK:
+		push_error("后台保存线程启动失败，图像保存将回退到主线程 (err=%d)" % err)
+		_save_thread = null
+		return
+	_save_worker_started = true
+
+
+func _stop_save_worker() -> void:
+	if not _save_worker_started:
+		return
+
+	_save_mutex.lock()
+	_save_worker_should_exit = true
+	_save_mutex.unlock()
+	_save_semaphore.post()
+	_save_thread.wait_to_finish()
+	_save_worker_started = false
+	_save_thread = null
+
+
+func _enqueue_save_job(job: Dictionary) -> void:
+	if not _save_worker_started:
+		_write_save_job(job)
+		return
+
+	_save_mutex.lock()
+	_save_queue.append(job)
+	_save_mutex.unlock()
+	_save_semaphore.post()
+
+
+func _save_worker_loop() -> void:
+	while true:
+		_save_semaphore.wait()
+
+		var job: Dictionary = {}
+		var should_exit := false
+		_save_mutex.lock()
+		if not _save_queue.is_empty():
+			job = _save_queue.pop_front()
+		should_exit = _save_worker_should_exit and _save_queue.is_empty()
+		_save_mutex.unlock()
+
+		if not job.is_empty():
+			_write_save_job(job)
+		elif should_exit:
+			break
+
+
+func _write_save_job(job: Dictionary) -> void:
+	var rgb_image := job["rgb_image"] as Image
+	if rgb_image != null:
+		# 用较低 JPEG 质量保存，制造真实照片放大后可见的 8x8 压缩块/锯齿。
+		CaptureWriterScript.save_rgb_jpg(rgb_image, str(job["rgb_path"]), 0.6)
+
+	if bool(job["save_depth"]):
+		var depth_image := job["depth_image"] as Image
+		if depth_image != null:
+			CaptureWriterScript.save_depth_gray16(depth_image, str(job["depth_path"]))
+
+	CaptureWriterScript.save_labels(
+		str(job["labels_path"]),
+		job["viewport_size"] as Vector2i,
+		job["labels"] as Array
+	)
+	print("后台保存完成 %s" % str(job["file_stem"]))
 
 
 func get_all_labels() -> Array:
