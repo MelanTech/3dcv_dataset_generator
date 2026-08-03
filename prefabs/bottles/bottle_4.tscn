@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://eflv81qiktr0"]
-
-[ext_resource type="ArrayMesh" uid="uid://yxnjiko6bx7r" path="res://prefabs/bottles/bottle_4_res/bottle_4_mesh.res" id="1_5pqy7"]
-[ext_resource type="Shape3D" uid="uid://dbpl4m5mcyjut" path="res://prefabs/bottles/bottle_4_res/bottle_4_shape.res" id="2_bky6y"]
-
-[node name="bottle4" type="RigidBody3D" unique_id=565216148]
-
-[node name="bottle-rigid" type="MeshInstance3D" parent="." unique_id=526366977]
-mesh = ExtResource("1_5pqy7")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1760169329]
-shape = ExtResource("2_bky6y")
+version https://git-lfs.github.com/spec/v1
+oid sha256:debeed687d059db50782ce0638684a3ccaa7cb7aa396b3458f23643be7729694
+size 622

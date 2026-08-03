@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://cihfynt4247dh"]
-
-[ext_resource type="ArrayMesh" uid="uid://cphoi32uqadbl" path="res://prefabs/books/book_4_res/book_4_mesh.res" id="1_u6evy"]
-[ext_resource type="Shape3D" uid="uid://ce0aj2qrcuhy2" path="res://prefabs/books/book_4_res/book_4_shape.res" id="2_d7u4r"]
-
-[node name="book4" type="RigidBody3D" unique_id=662315767]
-
-[node name="book-rigid" type="MeshInstance3D" parent="." unique_id=902463772]
-mesh = ExtResource("1_u6evy")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=71417791]
-shape = ExtResource("2_d7u4r")
+version https://git-lfs.github.com/spec/v1
+oid sha256:ae3285a6d5eb362c2ae477a0d21a434f63de669c8230e77d2027dbc87ecb41d7
+size 606

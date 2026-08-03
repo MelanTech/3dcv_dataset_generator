@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://bgnmocs6nc743"]
-
-[ext_resource type="ArrayMesh" uid="uid://cg2f8mnt2eg4o" path="res://prefabs/waters/water_1_res/water_1_mesh.res" id="1_0rn4p"]
-[ext_resource type="Shape3D" uid="uid://cmngwje1ewq5n" path="res://prefabs/waters/water_1_res/water_1_shape.res" id="2_bp7ms"]
-
-[node name="water1" type="RigidBody3D" unique_id=1734379614]
-
-[node name="water-rigid" type="MeshInstance3D" parent="." unique_id=2146192982]
-mesh = ExtResource("1_0rn4p")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=90513731]
-shape = ExtResource("2_bp7ms")
+version https://git-lfs.github.com/spec/v1
+oid sha256:de950f024358797682015457065d9981b330dae5eae51516f485aa9cb7d2d082
+size 616

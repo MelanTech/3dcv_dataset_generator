@@ -1,15 +1,75 @@
-# Godot 4 编辑器生成的缓存/导入数据，可由源资源重新生成
+# Godot editor/runtime cache. Keep sidecar *.import and *.uid files tracked.
 .godot/
+.import/
 
-# macOS
-.DS_Store
-
-# Godot 导出产物
+# Godot export products and local export credentials/presets.
 export_presets.cfg
+export_credentials.cfg
+/exports/
+/export/
+/builds/
+/release/
+*.pck
+*.zip
 *.translation
 
-# Mono/.NET 构建产物
+# Mono/.NET build products.
 .mono/
-data_*/
 bin/
 obj/
+*.csproj.user
+*.sln.DotSettings.user
+*.userprefs
+*.pidb
+*.mdb
+
+# Generated datasets and capture outputs.
+/data_*/
+/captures/
+/capture/
+/datasets/
+/outputs/
+/output/
+/generated/
+/generated_data/
+/screenshots/
+/recordings/
+
+# Local IDE/editor state.
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+
+# Agent/AI assistant local state and generated skills.
+.trae/
+.agents/
+.agent/
+.claude/
+.codex/
+.gemini/
+.cursor/
+.continue/
+.windsurf/
+.aider*
+
+# OS metadata.
+.DS_Store
+._*
+.Spotlight-V100/
+.Trashes/
+Thumbs.db
+Desktop.ini
+
+# Logs, temp files, and local backups.
+*.log
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+
+# Blender backup files created next to source assets.
+*.blend[0-9]*

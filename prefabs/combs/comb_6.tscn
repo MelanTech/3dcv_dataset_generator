@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://bgsqrtqwdqsjr"]
-
-[ext_resource type="ArrayMesh" uid="uid://dwnwoxhtdji7n" path="res://prefabs/combs/comb_6_res/comb_6_mesh.res" id="1_6emcr"]
-[ext_resource type="Shape3D" uid="uid://dt1xkp3h3e1do" path="res://prefabs/combs/comb_6_res/comb_6_shape.res" id="2_fi2oa"]
-
-[node name="comb6" type="RigidBody3D" unique_id=928178780]
-
-[node name="comb-rigid" type="MeshInstance3D" parent="." unique_id=1927902970]
-mesh = ExtResource("1_6emcr")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=180559546]
-shape = ExtResource("2_fi2oa")
+version https://git-lfs.github.com/spec/v1
+oid sha256:294d3e9bd7c76b1931c9d2502a0986ebf446c779da3ebbe73aa50cb6595a0981
+size 608

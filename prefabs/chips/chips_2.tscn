@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://bdpq4egesqo4e"]
-
-[ext_resource type="ArrayMesh" uid="uid://dgwgltvw7xhee" path="res://prefabs/chips/chips_2_res/chips_2_mesh.res" id="1_dv001"]
-[ext_resource type="Shape3D" uid="uid://c50hnajxwit1i" path="res://prefabs/chips/chips_2_res/chips_2_shape.res" id="2_uedp5"]
-
-[node name="chips2" type="RigidBody3D" unique_id=98731841]
-
-[node name="chips-rigid" type="MeshInstance3D" parent="." unique_id=1081422480]
-mesh = ExtResource("1_dv001")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1559468626]
-shape = ExtResource("2_uedp5")
+version https://git-lfs.github.com/spec/v1
+oid sha256:a6f813bf126eb5d75ebc4465496eef76fd8490de6f157a3790bf573c8d86b521
+size 614

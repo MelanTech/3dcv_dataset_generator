@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://crdu7shyukcir"
-path="res://.godot/imported/Image_3.001.png-a7e2cd21de6de0f36ec81d1b85e72ffe.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/can/can2/textures/Image_3.001.png"
-dest_files=["res://.godot/imported/Image_3.001.png-a7e2cd21de6de0f36ec81d1b85e72ffe.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:76be64d2b8a8edbb38298b18c0219dabaa66c1e29d3af059259fc87b46411349
+size 792

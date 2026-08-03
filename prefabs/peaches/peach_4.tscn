@@ -1,7 +1,3 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="PackedScene" path="res://models/peaches/peach4/peach4.blend" id="1_model"]
-
-[node name="peach4" type="Node3D"]
-
-[node name="peach4_model" parent="." instance=ExtResource("1_model")]
+version https://git-lfs.github.com/spec/v1
+oid sha256:86b89934368b41f856eb7b8c5b0fbd402d1b9c85f5c705d62e723831d2722961
+size 236

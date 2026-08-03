@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://4evlvhkpf8v0"]
-
-[ext_resource type="ArrayMesh" uid="uid://dulqs26ra3fkn" path="res://prefabs/biscuits/biscuit_1_res/biscuit_1_mesh.res" id="1_vqc2s"]
-[ext_resource type="Shape3D" uid="uid://dxn0oq4ukgw16" path="res://prefabs/biscuits/biscuit_1_res/biscuit_1_shape.res" id="2_7p6nf"]
-
-[node name="biscuit1" type="RigidBody3D" unique_id=1147416577]
-
-[node name="biscuit-rigid" type="MeshInstance3D" parent="." unique_id=921386709]
-mesh = ExtResource("1_vqc2s")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1322478732]
-shape = ExtResource("2_7p6nf")
+version https://git-lfs.github.com/spec/v1
+oid sha256:41ff654f13ece1c9e0410acd82ed8933ed246a944a2b3aa2a0e15b34df2e501a
+size 632

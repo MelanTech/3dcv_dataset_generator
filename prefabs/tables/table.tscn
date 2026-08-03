@@ -1,15 +1,3 @@
-[gd_scene format=3 uid="uid://lc7x11n0ydse"]
-
-[ext_resource type="PackedScene" uid="uid://cn161ckn34stw" path="res://models/table.fbx" id="1_ik73a"]
-[ext_resource type="Shape3D" uid="uid://bagmamba73lju" path="res://prefabs/tables/table_res/table_shape.res" id="2_0sl77"]
-
-[node name="TableRigidBody3D" type="RigidBody3D" unique_id=1941787752]
-freeze = true
-freeze_mode = 1
-
-[node name="Table" type="Node3D" parent="." unique_id=372528290 instance=ExtResource("1_ik73a")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=138137060]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.00335693, 4.50301, 0.00701904)
-shape = ExtResource("2_0sl77")
+version https://git-lfs.github.com/spec/v1
+oid sha256:af63e50706dc27b68d54c98359b96dbef32cec60fca273e7340e7900c33643e4
+size 740

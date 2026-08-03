@@ -1,8 +1,3 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="PackedScene" path="res://models/melonseeds/melonseeds7/melonseeds7.blend" id="1_model"]
-
-[node name="melonseeds7" type="Node3D"]
-
-[node name="melonseeds7_model" parent="." instance=ExtResource("1_model")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+version https://git-lfs.github.com/spec/v1
+oid sha256:12635df446d059f36d3879c708301453acba393efcd7c154371d96c1f878d6e2
+size 325

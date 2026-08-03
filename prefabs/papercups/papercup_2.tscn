@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://crnp212dpj5u1"]
-
-[ext_resource type="ArrayMesh" uid="uid://jbgotw7g1l1x" path="res://prefabs/papercups/papercup_2_res/papercup_2_mesh.res" id="1_p0nbn"]
-[ext_resource type="Shape3D" uid="uid://b505hvg0hi1ks" path="res://prefabs/papercups/papercup_2_res/papercup_2_shape.res" id="2_1vnge"]
-
-[node name="papercup2" type="RigidBody3D" unique_id=634476882]
-
-[node name="papercup-rigid" type="MeshInstance3D" parent="." unique_id=1775091849]
-mesh = ExtResource("1_p0nbn")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=945297928]
-shape = ExtResource("2_1vnge")
+version https://git-lfs.github.com/spec/v1
+oid sha256:62a898b47a3a2ddb980cb91b63aa2bba5bfc4ba6b0987bc44cac9070675961dd
+size 639

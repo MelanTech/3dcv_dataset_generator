@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://djdqw7jfqfh8i"]
-
-[ext_resource type="ArrayMesh" uid="uid://4hso7gaoh2ma" path="res://prefabs/oranges/orange_2_res/orange_2_mesh.res" id="1_5lb6g"]
-[ext_resource type="Shape3D" uid="uid://b14drdd85mpfd" path="res://prefabs/oranges/orange_2_res/orange_2_shape.res" id="2_xxo20"]
-
-[node name="orange2" type="RigidBody3D" unique_id=1626500342]
-
-[node name="orange-rigid" type="MeshInstance3D" parent="." unique_id=739062126]
-mesh = ExtResource("1_5lb6g")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345234199]
-shape = ExtResource("2_xxo20")
+version https://git-lfs.github.com/spec/v1
+oid sha256:fcad8e0673d687c6e7bc163ac6cc0b4ec44d42d135206840c2af09830df5591a
+size 623

@@ -1,21 +1,3 @@
-[gd_scene format=3 uid="uid://cgwf8unnu2bym"]
-
-[ext_resource type="ArrayMesh" uid="uid://ccloanojxhqp2" path="res://prefabs/sausages/sausage_1_res/sausage_1_mesh.res" id="1_hhnpo"]
-[ext_resource type="Shape3D" uid="uid://grodl1hqi08n" path="res://prefabs/sausages/sausage_1_res/sausage_1_shape.res" id="2_ff0mb"]
-
-[node name="sausage1" type="RigidBody3D" unique_id=1175161310]
-metadata/extras = {
-"3d66Models": "www.3d66.com-ID:7689653",
-"MaxHandle": 47.0
-}
-
-[node name="sausage-rigid" type="MeshInstance3D" parent="." unique_id=410876239]
-mesh = ExtResource("1_hhnpo")
-skeleton = NodePath("")
-metadata/extras = {
-"3d66Models": "www.3d66.com-ID:7689653",
-"MaxHandle": 47.0
-}
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1039634784]
-shape = ExtResource("2_ff0mb")
+version https://git-lfs.github.com/spec/v1
+oid sha256:3b619c7eff58ee9b4fb2e14fa66ce288abc2b546a54d10c62b79db92e659ee33
+size 794

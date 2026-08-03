@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://2tgmxqwlege"]
-
-[ext_resource type="ArrayMesh" uid="uid://t38jeo78g43e" path="res://prefabs/clotheshangers/clotheshanger_7_res/clotheshanger_7_mesh.res" id="1_gwcx6"]
-[ext_resource type="Shape3D" uid="uid://5c1uvh74atbr" path="res://prefabs/clotheshangers/clotheshanger_7_res/clotheshanger_7_shape.res" id="2_6xnjh"]
-
-[node name="clotheshanger7" type="RigidBody3D" unique_id=1511309254]
-
-[node name="clotheshanger-rigid" type="MeshInstance3D" parent="." unique_id=1630699265]
-mesh = ExtResource("1_gwcx6")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1577237906]
-shape = ExtResource("2_6xnjh")
+version https://git-lfs.github.com/spec/v1
+oid sha256:fb634a8f2e129b9259abe059211030d77553f5f8e231b4aa6f43fd690241b887
+size 678

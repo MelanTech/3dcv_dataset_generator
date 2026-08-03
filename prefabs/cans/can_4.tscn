@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://dn5fc3g82lpu1"]
-
-[ext_resource type="ArrayMesh" uid="uid://bm4t7yrlsqt48" path="res://prefabs/cans/can_4_res/can_4_mesh.res" id="1_1jy0l"]
-[ext_resource type="Shape3D" uid="uid://c0e6glvwd1wvo" path="res://prefabs/cans/can_4_res/can_4_shape.res" id="2_vilya"]
-
-[node name="can4" type="RigidBody3D" unique_id=1784658318]
-
-[node name="can-rigid" type="MeshInstance3D" parent="." unique_id=1115646040]
-mesh = ExtResource("1_1jy0l")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1357837685]
-shape = ExtResource("2_vilya")
+version https://git-lfs.github.com/spec/v1
+oid sha256:8bb422a935b5346749721a6a1615b2ee8a12a974afd73283a702be2036257f9f
+size 602

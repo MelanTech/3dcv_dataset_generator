@@ -1,21 +1,3 @@
-[gd_scene format=3 uid="uid://c8jcbtybfcplp"]
-
-[ext_resource type="ArrayMesh" uid="uid://bjfhdynjmf1wa" path="res://prefabs/waters/water_6_res/water_6_mesh.res" id="1_r45q5"]
-[ext_resource type="Shape3D" uid="uid://cuoceybbuh7o4" path="res://prefabs/waters/water_6_res/water_6_shape.res" id="2_c31f2"]
-
-[node name="water6" type="RigidBody3D" unique_id=1774061606]
-metadata/extras = {
-"3d66Models": "www.3d66.com-ID:11951966",
-"MaxHandle": 284.0
-}
-
-[node name="water-rigid" type="MeshInstance3D" parent="." unique_id=570871804]
-mesh = ExtResource("1_r45q5")
-skeleton = NodePath("")
-metadata/extras = {
-"3d66Models": "www.3d66.com-ID:11951966",
-"MaxHandle": 284.0
-}
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1147785742]
-shape = ExtResource("2_c31f2")
+version https://git-lfs.github.com/spec/v1
+oid sha256:3b35d3667d2c9a72d6daf359ccaeda87b37c7ce92db647c50aa4e86186b4433d
+size 783

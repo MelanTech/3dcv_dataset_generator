@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://dxpd4ayu0ules"
-path="res://.godot/imported/3d66Model-16108978-files-012.jpg-a08db065d01ad2569db929868c00fa31.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/books/book10/textures/3d66Model-16108978-files-012.jpg"
-dest_files=["res://.godot/imported/3d66Model-16108978-files-012.jpg-a08db065d01ad2569db929868c00fa31.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:ba2441a1a39f6e9df89c2c70c24767cefc89a4ae6360b02dd0126e06dccb2df5
+size 847

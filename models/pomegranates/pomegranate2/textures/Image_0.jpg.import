@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://bvj4p8snpmc32"
-path="res://.godot/imported/Image_0.jpg-eef8726870b442c00fd0b4fa3332e9d5.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/pomegranates/pomegranate2/textures/Image_0.jpg"
-dest_files=["res://.godot/imported/Image_0.jpg-eef8726870b442c00fd0b4fa3332e9d5.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:106fa7dc1b74eedc2dc5926be866a0c878a539ba95ba73c529920350c20db973
+size 797

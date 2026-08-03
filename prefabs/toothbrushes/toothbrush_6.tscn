@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://foenkodhxd0d"]
-
-[ext_resource type="ArrayMesh" uid="uid://4fftpiy28225" path="res://prefabs/toothbrushes/toothbrush_6_res/toothbrush_6_mesh.res" id="1_wq5fb"]
-[ext_resource type="Shape3D" uid="uid://b6cww66s7g4w" path="res://prefabs/toothbrushes/toothbrush_6_res/toothbrush_6_shape.res" id="2_uppfi"]
-
-[node name="toothbrush6" type="RigidBody3D" unique_id=1415702029]
-
-[node name="toothbrush-rigid" type="MeshInstance3D" parent="." unique_id=846232495]
-mesh = ExtResource("1_wq5fb")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1866885699]
-shape = ExtResource("2_uppfi")
+version https://git-lfs.github.com/spec/v1
+oid sha256:ab81f49615777d84b544a072a1648742ab58e5e8bd7a6969bd0bd062ffc11f45
+size 656

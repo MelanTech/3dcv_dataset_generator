@@ -1,8 +1,3 @@
-[gd_scene format=3 uid="uid://c5lrd2al4mct5"]
-
-[ext_resource type="PackedScene" uid="uid://jw3ifmnnxajv" path="res://models/sausages/sausage5/sausage5.blend" id="1_model"]
-
-[node name="sausage5" type="Node3D" unique_id=508661012]
-
-[node name="sausage5_model" parent="." unique_id=196662510 instance=ExtResource("1_model")]
-transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0, 0, 0)
+version https://git-lfs.github.com/spec/v1
+oid sha256:32e6caf9305781e0b1b4ad426f299c2e9cdeec816caa4f6790176eb145e19f9c
+size 389

@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://ceigwj7h2oj23"]
-
-[ext_resource type="ArrayMesh" uid="uid://2l65445ysdku" path="res://prefabs/bananas/banana_3_res/banana_3_mesh.res" id="1_fk3kd"]
-[ext_resource type="Shape3D" uid="uid://cb62beiyu7bqg" path="res://prefabs/bananas/banana_3_res/banana_3_shape.res" id="2_qd5qj"]
-
-[node name="banana3" type="RigidBody3D" unique_id=318776378]
-
-[node name="banana-rigid" type="MeshInstance3D" parent="." unique_id=202985397]
-mesh = ExtResource("1_fk3kd")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1759586250]
-shape = ExtResource("2_qd5qj")
+version https://git-lfs.github.com/spec/v1
+oid sha256:26d3e82f47f3f07c3731616a36f15d2c7bb7d6f7582e1b753384dbca4a059189
+size 623

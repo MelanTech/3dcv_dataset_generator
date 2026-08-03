@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://b88aed55yynqj"
-path="res://.godot/imported/Image_2.png-1d4d01028caad9077b91c63eecee28c9.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/toothbrushes/toothbrush6/textures/Image_2.png"
-dest_files=["res://.godot/imported/Image_2.png-1d4d01028caad9077b91c63eecee28c9.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:6fa31895b1c5b9b9844f23404db479bceeed3a1719caad0e77862fbfc3627f68
+size 796

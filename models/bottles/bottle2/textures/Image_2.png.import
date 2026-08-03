@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://dcbhha0g1wkmo"
-path="res://.godot/imported/Image_2.png-2ad8c698fa1abca9ae8dc70f83eaa317.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/bottles/bottle2/textures/Image_2.png"
-dest_files=["res://.godot/imported/Image_2.png-2ad8c698fa1abca9ae8dc70f83eaa317.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:0e4f0b17bfbe1441e4056fe80eb4f7026a36fa347c4453104596e9d25a2d088a
+size 787

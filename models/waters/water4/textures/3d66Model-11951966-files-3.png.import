@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://c6tl708ehgn21"
-path="res://.godot/imported/3d66Model-11951966-files-3.png-d8d8f30e8bc9547ee884220c2be653f7.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/waters/water4/textures/3d66Model-11951966-files-3.png"
-dest_files=["res://.godot/imported/3d66Model-11951966-files-3.png-d8d8f30e8bc9547ee884220c2be653f7.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:746a28b377ef0eb12b224c6551a593984ba0091b9e3478e8106f2946de60abc5
+size 842

@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://bdi0x7nx08b1d"]
-
-[ext_resource type="ArrayMesh" uid="uid://bnpbwrdf6hlwb" path="res://prefabs/pomegranates/pomegranate_3_res/pomegranate_3_mesh.res" id="1_jlywp"]
-[ext_resource type="Shape3D" uid="uid://c48ww53hfgwde" path="res://prefabs/pomegranates/pomegranate_3_res/pomegranate_3_shape.res" id="2_q012v"]
-
-[node name="pomegranate3" type="RigidBody3D" unique_id=428695061]
-
-[node name="pomegranate-rigid" type="MeshInstance3D" parent="." unique_id=947156392]
-mesh = ExtResource("1_jlywp")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=767928769]
-shape = ExtResource("2_q012v")
+version https://git-lfs.github.com/spec/v1
+oid sha256:ebb6ff851eded212cae1b9781d08becdae5fbaa08cdff8e5b732ab23573e08e1
+size 663

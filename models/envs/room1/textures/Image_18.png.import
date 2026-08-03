@@ -1,34 +1,3 @@
-[remap]
-
-importer="texture"
-type="CompressedTexture2D"
-uid="uid://cxmfnqem4dufk"
-path="res://.godot/imported/Image_18.png-2ca943a9131b6927d8e93e62bb17f787.ctex"
-metadata={
-"vram_texture": false
-}
-
-[deps]
-
-source_file="res://models/envs/room1/textures/Image_18.png"
-dest_files=["res://.godot/imported/Image_18.png-2ca943a9131b6927d8e93e62bb17f787.ctex"]
-
-[params]
-
-compress/mode=0
-compress/high_quality=false
-compress/lossy_quality=0.7
-compress/hdr_compression=1
-compress/normal_map=0
-compress/channel_pack=0
-mipmaps/generate=false
-mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
-process/fix_alpha_border=true
-process/premult_alpha=false
-process/normal_map_invert_y=false
-process/hdr_as_srgb=false
-process/hdr_clamp_exposure=false
-process/size_limit=0
-detect_3d/compress_to=1
+version https://git-lfs.github.com/spec/v1
+oid sha256:4fbaba158812bd3c420512729df5d110ee2e4a739e77e80be4181a7ef8973490
+size 785

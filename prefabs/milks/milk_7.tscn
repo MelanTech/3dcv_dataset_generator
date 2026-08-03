@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://bwy0b3b0ompgp"]
-
-[ext_resource type="ArrayMesh" uid="uid://btxtgxcydenu1" path="res://prefabs/milks/milk_7_res/milk_7_mesh.res" id="1_k8re2"]
-[ext_resource type="Shape3D" uid="uid://dbiurvvvm6dwk" path="res://prefabs/milks/milk_7_res/milk_7_shape.res" id="2_cex08"]
-
-[node name="milk7" type="RigidBody3D" unique_id=279845647]
-
-[node name="milk-rigid" type="MeshInstance3D" parent="." unique_id=273563958]
-mesh = ExtResource("1_k8re2")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=401493215]
-shape = ExtResource("2_cex08")
+version https://git-lfs.github.com/spec/v1
+oid sha256:8c2915f4ea6e8f97fb7c4933ae9feef0c6adb406288a41b5cf31da656ea160d3
+size 607

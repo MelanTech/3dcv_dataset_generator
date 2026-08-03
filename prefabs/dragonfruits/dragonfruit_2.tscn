@@ -1,13 +1,3 @@
-[gd_scene format=3 uid="uid://b1j5nx8tmcst1"]
-
-[ext_resource type="ArrayMesh" uid="uid://eewtwrjv7a2i" path="res://prefabs/dragonfruits/dragonfruit_2_res/dragonfruit_2_mesh.res" id="1_b8hed"]
-[ext_resource type="Shape3D" uid="uid://bol2bf3yj7dk4" path="res://prefabs/dragonfruits/dragonfruit_2_res/dragonfruit_2_shape.res" id="2_i3a83"]
-
-[node name="dragonfruit2" type="RigidBody3D" unique_id=1691398808]
-
-[node name="dragonfruit-rigid" type="MeshInstance3D" parent="." unique_id=1628131803]
-mesh = ExtResource("1_b8hed")
-skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1127362094]
-shape = ExtResource("2_i3a83")
+version https://git-lfs.github.com/spec/v1
+oid sha256:dac3746e9d8c3762291d141313015718b91e660b56ac8c32bf9996247df278d3
+size 665
