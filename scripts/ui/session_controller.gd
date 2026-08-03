@@ -1,6 +1,7 @@
 extends Control
 
 const CaptureSettingsScript = preload("res://scripts/ui/capture_settings.gd")
+const ModelBrowserWindowScript = preload("res://scripts/ui/model_browser_window.gd")
 const SessionPanelBuilderScript = preload("res://scripts/ui/session_panel_builder.gd")
 
 ## 采集会话总控 + GUI 面板。
@@ -73,6 +74,7 @@ var _category_controls := {}
 
 var _output_dir := ""
 var _file_dialog: FileDialog
+var _model_browser_window: Window
 
 
 func _ready() -> void:
@@ -305,6 +307,7 @@ func _build_gui() -> void:
 			"save_enabled_toggled": _on_save_enabled_toggled,
 			"show_bbox_toggled": _on_show_bbox_toggled,
 			"rotate_light_toggled": _on_rotate_light_toggled,
+			"open_model_browser": _open_model_browser,
 			"start": _on_start_pressed,
 			"stop": _on_stop_pressed,
 			"save_config": _on_save_config_pressed,
@@ -479,3 +482,20 @@ func _open_dir_dialog() -> void:
 func _on_dir_selected(dir: String) -> void:
 	_output_dir = dir
 	_output_dir_value.text = dir
+
+
+func _open_model_browser() -> void:
+	if _model_browser_window == null or not is_instance_valid(_model_browser_window):
+		_model_browser_window = ModelBrowserWindowScript.new()
+		_model_browser_window.setup(object_catalog)
+		add_child(_model_browser_window)
+	elif _model_browser_window.has_method("setup"):
+		_model_browser_window.call("setup", object_catalog)
+
+	if _model_browser_window.has_method("sync_content_scale_from"):
+		_model_browser_window.call("sync_content_scale_from", get_window())
+
+	var popup_size := Vector2i(1120, 720)
+	if _model_browser_window.has_method("get_preferred_popup_size"):
+		popup_size = _model_browser_window.call("get_preferred_popup_size")
+	_model_browser_window.popup_centered(popup_size)

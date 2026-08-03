@@ -269,6 +269,14 @@ static func build(
 	controls["green_magenta_max"] = green_magenta_max
 
 	_add_title(categories_root, "Categories", "Enable classes and tune sampling weights.")
+	var browser_card := _add_card(categories_root)
+	var model_browser_btn := Button.new()
+	model_browser_btn.text = "Open Model Browser"
+	model_browser_btn.custom_minimum_size = Vector2(0, 34)
+	model_browser_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	model_browser_btn.pressed.connect(callbacks["open_model_browser"])
+	browser_card.add_child(model_browser_btn)
+
 	var cat_box := _add_card(categories_root)
 	var category_controls: Dictionary = controls["category_controls"]
 	if object_catalog != null:
